@@ -1,0 +1,3 @@
+[submodule ".skogai"]
+	path = .skogai
+	url = ../.skogai

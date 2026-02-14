@@ -1,4 +1,4 @@
 [submodule "claude-dot-skogai"]
 	path = .skogai
 	url = git@github.com:SkogAI/.skogai.git
-    branch = clraude-dot-skogai
+    branch = claude-dot-skogai

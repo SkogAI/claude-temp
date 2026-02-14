@@ -9,7 +9,6 @@ claude's home folder, working directory, and headquarters. everything here belon
 <always_load>
 
 - @.skogai.env - environment variables
-- @./agent.md - who i am
 - @.skogai/knowledge/conventions.md - file/folder standards
 - @.skogai/knowledge/rules.md - hard rules
 
@@ -17,17 +16,17 @@ claude's home folder, working directory, and headquarters. everything here belon
 
 <routing>
 
-| intent | read |
-| --- | --- |
-| what to work on | .skogai/inbox.list, .skogai/projects/todo.md |
-| past decisions and why | .skogai/knowledge/decisions/ |
-| git identity, ssh, github | .skogai/docs/git.md |
-| system hardware, network, packages | .skogai/docs/system.md |
-| network issues, diagnostics | .skogai/docs/networking.md |
-| dotfiles, bare repo, config | .skogai/docs/dotfiles.md |
-| at-linking, permissions, subagents | .skogai/docs/at-linking.md |
-| plugin structure, hooks, skills | .skogai/docs/plugin-anatomy.md |
-| dump something for later | ./dump/ |
+| intent                             | read                                         |
+| ---------------------------------- | -------------------------------------------- |
+| what to work on                    | .skogai/inbox.list, .skogai/projects/todo.md |
+| past decisions and why             | .skogai/knowledge/decisions/                 |
+| git identity, ssh, github          | .skogai/docs/git.md                          |
+| system hardware, network, packages | .skogai/docs/system.md                       |
+| network issues, diagnostics        | .skogai/docs/networking.md                   |
+| dotfiles, bare repo, config        | .skogai/docs/dotfiles.md                     |
+| at-linking, permissions, subagents | .skogai/docs/at-linking.md                   |
+| plugin structure, hooks, skills    | .skogai/docs/plugin-anatomy.md               |
+| dump something for later           | ./dump/                                      |
 
 </routing>
 

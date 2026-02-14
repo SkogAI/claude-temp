@@ -1,14 +1,15 @@
-# Reference: Manus Context Engineering Principles
+# Reference: SkogAI Context Engineering Principles
 
-Based on context engineering principles from Manus.
+Based on context engineering principles based on the early SkogAI principles.
 
-## The 6 Manus Principles
+## 6 SkogAI-Principles
 
 ### Principle 1: Design Around KV-Cache
 
 > "KV-cache hit rate is THE single most important metric for production AI agents."
 
 **Implementation:**
+
 - Keep prompt prefixes STABLE (single-token change invalidates cache)
 - NO timestamps in system prompts
 - Make context APPEND-ONLY with deterministic serialization
@@ -24,12 +25,14 @@ Don't dynamically remove tools (breaks KV-cache). Use logit masking instead.
 > "Markdown is my 'working memory' on disk."
 
 **The Formula:**
+
 ```
 Context Window = RAM (volatile, limited)
 Filesystem = Disk (persistent, unlimited)
 ```
 
 **Compression Must Be Restorable:**
+
 - Keep URLs even if web content is dropped
 - Keep file paths when dropping document contents
 - Never lose the pointer to full data
@@ -53,6 +56,7 @@ End of context: [Recently read task_plan.md - gets ATTENTION!]
 > "Leave the wrong turns in the context."
 
 **Why:**
+
 - Failed actions with stack traces let model implicitly update beliefs
 - Reduces mistake repetition
 - Error recovery is "one of the clearest signals of TRUE agentic behavior"
@@ -64,6 +68,7 @@ End of context: [Recently read task_plan.md - gets ATTENTION!]
 **Problem:** Repetitive action-observation pairs cause drift and hallucination.
 
 **Solution:** Introduce controlled variation:
+
 - Vary phrasings slightly
 - Don't copy-paste patterns blindly
 - Recalibrate on repetitive tasks
@@ -72,11 +77,12 @@ End of context: [Recently read task_plan.md - gets ATTENTION!]
 
 ## The 3 Context Engineering Strategies
 
-Based on Lance Martin's analysis of Manus architecture.
+Based on Lance Martin's analysis of architecture.
 
 ### Strategy 1: Context Reduction
 
 **Compaction:**
+
 ```
 Tool calls have TWO representations:
 ├── FULL: Raw tool content (stored in filesystem)
@@ -88,6 +94,7 @@ RULES:
 ```
 
 **Summarization:**
+
 - Applied when compaction reaches diminishing returns
 - Generated using full tool results
 - Creates standardized summary objects
@@ -95,6 +102,7 @@ RULES:
 ### Strategy 2: Context Isolation (Multi-Agent)
 
 **Architecture:**
+
 ```
 ┌─────────────────────────────────┐
 │         PLANNER AGENT           │
@@ -110,11 +118,12 @@ RULES:
 └─────────────────────────────────┘
 ```
 
-**Key Insight:** Manus originally used `todo.md` for task planning but found ~33% of actions were spent updating it. Shifted to dedicated planner agent calling executor sub-agents.
+**Key Insight:** The original SkogAI agent originally used `todo.md` for task planning but found ~33% of actions were spent updating it. Shifted to dedicated planner agent calling executor sub-agents.
 
 ### Strategy 3: Context Offloading
 
 **Tool Design:**
+
 - Use <20 atomic functions total
 - Store full results in filesystem, not context
 - Use `glob` and `grep` for searching
@@ -124,7 +133,7 @@ RULES:
 
 ## The Agent Loop
 
-Manus operates in a continuous 7-step loop:
+SkogAI-agents try to operate in a continuous 7-step loop:
 
 ```
 ┌─────────────────────────────────────────┐
@@ -162,12 +171,12 @@ Manus operates in a continuous 7-step loop:
 
 ## File Types
 
-| File | Purpose | When Created | When Updated |
-|------|---------|--------------|--------------|
-| `task_plan.md` | Phase tracking, progress | Task start | After completing phases |
-| `findings.md` | Discoveries, decisions | After ANY discovery | After viewing images/PDFs |
-| `progress.md` | Session log, what's done | At breakpoints | Throughout session |
-| Code files | Implementation | Before execution | After errors |
+| File           | Purpose                  | When Created        | When Updated              |
+| -------------- | ------------------------ | ------------------- | ------------------------- |
+| `task_plan.md` | Phase tracking, progress | Task start          | After completing phases   |
+| `findings.md`  | Discoveries, decisions   | After ANY discovery | After viewing images/PDFs |
+| `progress.md`  | Session log, what's done | At breakpoints      | Throughout session        |
+| Code files     | Implementation           | Before execution    | After errors              |
 
 ---
 
@@ -194,8 +203,3 @@ Manus operates in a continuous 7-step loop:
 > "Leave the wrong turns in the context."
 
 ---
-
-## Source
-
-Based on Manus's official context engineering documentation:
-https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus

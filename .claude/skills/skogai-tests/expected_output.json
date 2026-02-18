@@ -1,0 +1,24 @@
+{
+  "framework_installed": true,
+  "directories_created": [
+    "testing-framework/",
+    "tests/unit/",
+    "tests/integration/",
+    "tests/fixtures/"
+  ],
+  "test_files_generated": [
+    "tests/unit/deploy-tests.bats",
+    "tests/unit/setup-tests.bats"
+  ],
+  "bats_installed": true,
+  "example_test_pattern": {
+    "file": "tests/unit/deploy-tests.bats",
+    "structure": [
+      "load ../../testing-framework/test-helper",
+      "setup() { setup_test_dir; }",
+      "teardown() { teardown_test_dir; }",
+      "@test 'deploy succeeds with valid args' { run $SCRIPTS_DIR/deploy.sh prod; assert_success; }",
+      "@test 'deploy fails without args' { run $SCRIPTS_DIR/deploy.sh; assert_failure; }"
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+#!/usr/bin/env bats
+
+# load the test helper from testing-framework
+load ../testing-framework/test-helper
+
+setup() {
+    setup_test_dir
+    # add project-specific setup here
+}
+
+teardown() {
+    teardown_test_dir
+}
+
+@test "script handles missing arguments" {
+    run "$SCRIPTS_DIR/your-script.sh"
+    assert_failure
+    assert_output_contains "usage:"
+}
+
+@test "script succeeds with valid input" {
+    run "$SCRIPTS_DIR/your-script.sh" "valid-arg"
+    assert_success
+}
+
+@test "script produces expected output" {
+    run "$SCRIPTS_DIR/your-script.sh" "test"
+    assert_success
+    assert_output_contains "expected output"
+}

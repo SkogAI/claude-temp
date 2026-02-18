@@ -4,12 +4,14 @@
 # source this in your test files: load ../testing-framework/test-helper
 
 # get the project root directory
-export PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export PROJECT_ROOT
 export SCRIPTS_DIR="${SCRIPTS_DIR:-$PROJECT_ROOT/scripts}"
 
 # create a temporary directory for test files
 setup_test_dir() {
-  export TEST_DIR="$(mktemp -d -t test.XXXXXX)"
+  TEST_DIR="$(mktemp -d -t test.XXXXXX)"
+  export TEST_DIR
   cd "$TEST_DIR" || exit 1
 }
 
@@ -24,6 +26,7 @@ teardown_test_dir() {
 # usage: source_script "script-name.sh"
 source_script() {
   local script="$1"
+  # shellcheck disable=SC1090
   SOURCING_FOR_TESTS=1 source "$SCRIPTS_DIR/$script" "test-mode" 2>/dev/null || true
 }
 
@@ -36,6 +39,9 @@ setup_git_repo() {
   git add test.txt
   git commit -m "Initial commit" --quiet
 }
+
+# bats provides $status and $output after `run`
+# shellcheck disable=SC2154
 
 # assert that a command succeeds
 assert_success() {

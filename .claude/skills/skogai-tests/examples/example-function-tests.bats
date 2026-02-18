@@ -5,10 +5,10 @@
 load ../test-helper
 
 setup() {
-    setup_test_dir
+  setup_test_dir
 
-    # create a simple script with functions to test
-    cat > "$TEST_DIR/functions.sh" << 'EOF'
+  # create a simple script with functions to test
+  cat >"$TEST_DIR/functions.sh" <<'EOF'
 #!/bin/bash
 
 greet() {
@@ -27,27 +27,27 @@ add() {
 }
 EOF
 
-    source "$TEST_DIR/functions.sh"
+  source "$TEST_DIR/functions.sh"
 }
 
 teardown() {
-    teardown_test_dir
+  teardown_test_dir
 }
 
 @test "greet function requires name argument" {
-    run greet
-    assert_failure
-    assert_output_contains "ERROR: name required"
+  run greet
+  assert_failure
+  assert_output_contains "ERROR: name required"
 }
 
 @test "greet function produces greeting" {
-    run greet "world"
-    assert_success
-    assert_output_equals "hello, world!"
+  run greet "world"
+  assert_success
+  assert_output_equals "hello, world!"
 }
 
 @test "add function performs addition" {
-    run add 2 3
-    assert_success
-    assert_output_equals "5"
+  run add 2 3
+  assert_success
+  assert_output_equals "5"
 }

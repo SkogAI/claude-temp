@@ -1,9 +1,0 @@
-{
-  "project_path": "/path/to/bash-project",
-  "scripts_dir": "scripts",
-  "scripts_to_test": [
-    "deploy.sh",
-    "setup.sh"
-  ],
-  "test_type": "unit"
-}

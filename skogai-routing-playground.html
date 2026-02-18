@@ -146,6 +146,13 @@
 
     <h2>Comments <span class="comment-count" id="comment-count">(0)</span></h2>
     <div class="comments-list" id="comments-list"></div>
+
+    <h2>Data</h2>
+    <div style="display:flex;gap:6px">
+      <button class="preset-btn" id="save-btn" onclick="saveToServer()" style="flex:1">Save</button>
+      <button class="preset-btn" onclick="loadFromServer()" style="flex:1">Reload</button>
+    </div>
+    <div id="save-status" style="font-size:10px;color:#475569;margin-top:4px"></div>
   </div>
 
   <!-- Canvas -->
@@ -210,95 +217,14 @@
 
 <script>
 // ============================================================
-// DATA: Layers & Connection Types
+// DATA: Loaded from API (or fallback defaults)
 // ============================================================
-const LAYERS = {
-  global:      { label: 'Global Config',   color: '#fbbf24', fill: '#422006', border: '#854d0e' },
-  hq:          { label: 'Headquarters',     color: '#3b82f6', fill: '#172554', border: '#1d4ed8' },
-  framework:   { label: 'Framework Guard',  color: '#ef4444', fill: '#450a0a', border: '#b91c1c' },
-  routing:     { label: 'Routing / Agents', color: '#8b5cf6', fill: '#2e1065', border: '#6d28d9' },
-  memory:      { label: 'Memory System',    color: '#10b981', fill: '#022c22', border: '#047857' },
-  knowledge:   { label: 'Knowledge Base',   color: '#06b6d4', fill: '#083344', border: '#0e7490' },
-  tools:       { label: 'Tools & Scripts',  color: '#f97316', fill: '#431407', border: '#c2410c' },
-  tasks:       { label: 'Task System',      color: '#ec4899', fill: '#500724', border: '#be185d' },
-  docs:        { label: 'Documentation',    color: '#64748b', fill: '#1e293b', border: '#475569' },
-};
+let LAYERS = {};
+let CONN_TYPES = {};
 
-const CONN_TYPES = {
-  route:      { label: '@-route',      color: '#3b82f6', dash: '',     desc: 'CLAUDE.md routing reference' },
-  skill:      { label: 'skill/agent',  color: '#8b5cf6', dash: '8,4', desc: 'Agent or skill invocation' },
-  reads:      { label: 'reads from',   color: '#10b981', dash: '6,3', desc: 'Data read / context load' },
-  contains:   { label: 'contains',     color: '#64748b', dash: '3,3', desc: 'Parent-child containment' },
-  lifecycle:  { label: 'lifecycle',    color: '#ec4899', dash: '12,4',desc: 'Task lifecycle flow' },
-};
-
-// ============================================================
-// DATA: Nodes (mutable array)
-// ============================================================
-const nodes = [
-  { id: 'global-claude',   label: 'CLAUDE.md',         subtitle: '/skogai/config/claude/CLAUDE.md',   layer: 'global',    x: 500, y: 40,  w: 160, h: 50, desc: 'Absolute entrypoint. Every session loads this first. Routes to user identity, definitions, and headquarters.' },
-  { id: 'user-md',         label: 'user.md',           subtitle: '~/docs/skogix/user.md',             layer: 'global',    x: 180, y: 40,  w: 140, h: 50, desc: 'Who skogix is. Communication style, code preferences, knowledge sharing philosophy.' },
-  { id: 'definitions-md',  label: 'definitions.md',    subtitle: '~/docs/skogix/definitions.md',      layer: 'global',    x: 820, y: 40,  w: 150, h: 50, desc: 'Terminology context. Defines: task, todo, plan, goal, agent, branch-name, @-prefix, etc.' },
-  { id: 'hq-claude',       label: 'CLAUDE.md',         subtitle: '~/claude/CLAUDE.md',                layer: 'hq',        x: 500, y: 150, w: 160, h: 50, desc: 'Claude\'s home and working directory. Routes task work to task-manager agent, framework questions to .skogai.' },
-  { id: 'skogai-claude',   label: '.skogai/CLAUDE.md', subtitle: '~/claude/.skogai/CLAUDE.md',        layer: 'framework', x: 780, y: 150, w: 170, h: 50, desc: 'Guard rule: "when .skogai contents are unclear, ask the user directly." Prevents guessing.' },
-  { id: 'task-manager',    label: 'task-manager',      subtitle: '.claude/agents/task-manager.md',     layer: 'routing',   x: 280, y: 270, w: 160, h: 50, desc: 'Owns all skogai-todo interactions. Main claude instance delegates task work here. Full lifecycle: plan, setup, execute, done.' },
-  { id: 'todo-plan',       label: '/todo:plan',        subtitle: '.claude/commands/todo/plan.md',      layer: 'routing',   x: 80,  y: 380, w: 130, h: 44, desc: 'Big picture planning: review all tasks, set dependencies, priorities, ordering.' },
-  { id: 'todo-setup',      label: '/todo:setup',       subtitle: '.claude/commands/todo/setup.md',     layer: 'routing',   x: 230, y: 380, w: 130, h: 44, desc: 'Prepare a task: activate, lock, create worktree, write handover with context & acceptance criteria.' },
-  { id: 'todo-execute',    label: '/todo:execute',     subtitle: '.claude/commands/todo/execute.md',   layer: 'routing',   x: 380, y: 380, w: 140, h: 44, desc: 'Do the work: read handover, implement in worktree, commit as you go, verify acceptance criteria.' },
-  { id: 'todo-done',       label: '/todo:done',        subtitle: '.claude/commands/todo/done.md',      layer: 'routing',   x: 540, y: 380, w: 130, h: 44, desc: 'Close out: review, PR, unlock, set state done, sync GitHub, remove worktree.' },
-  { id: 'memory-skogai',   label: 'SKOGAI.md',        subtitle: '.skogai/memory/SKOGAI.md',           layer: 'memory',    x: 720, y: 270, w: 140, h: 50, desc: 'Memory system overview. Defines structure: context/, decisions.md, journal/.' },
-  { id: 'context-current', label: 'current.md',        subtitle: '.skogai/memory/context/current.md',  layer: 'memory',    x: 620, y: 380, w: 140, h: 44, desc: 'What we\'re actively working on. Read at session start, updated at session end.' },
-  { id: 'decisions-log',   label: 'decisions.md',      subtitle: '.skogai/memory/decisions.md',         layer: 'memory',    x: 780, y: 380, w: 140, h: 44, desc: 'Append-only quick decision log. During work, append quick notes here.' },
-  { id: 'journal',         label: 'journal/',          subtitle: '.skogai/memory/journal/*.md',         layer: 'memory',    x: 940, y: 380, w: 130, h: 44, desc: 'Timestamped session logs. Full history from 2025-03 through 2026-02.' },
-  { id: 'conventions',     label: 'conventions.md',    subtitle: '.skogai/knowledge/conventions.md',    layer: 'knowledge', x: 80,  y: 510, w: 150, h: 44, desc: 'File/folder naming rules. SKOGAI.md, CLAUDE.md, INBOX.list, README.md roles defined here.' },
-  { id: 'rules',           label: 'rules.md',          subtitle: '.skogai/knowledge/rules.md',          layer: 'knowledge', x: 250, y: 510, w: 130, h: 44, desc: 'Atomic rules: @ is not filesystem, .list files are append-only, inbox messaging protocol.' },
-  { id: 'at-linking',      label: 'at-linking.md',     subtitle: '.skogai/docs/at-linking.md',          layer: 'knowledge', x: 400, y: 510, w: 140, h: 44, desc: 'CRITICAL: How @ notation works. @ = permission + context. Works 6 levels deep. Subagents need @-links to read files.' },
-  { id: 'arch-decisions',  label: 'decisions/',        subtitle: '.skogai/knowledge/decisions/',         layer: 'knowledge', x: 560, y: 510, w: 150, h: 44, desc: 'Architecture Decision Records. Key dates: 2026-01-20 (conventions), 2026-02-06 (env), 2026-02-18 (task-manager).' },
-  { id: 'skogai-todo',     label: 'skogai-todo.md',    subtitle: '.skogai/tools/skogai-todo.md',        layer: 'tools',     x: 720, y: 510, w: 150, h: 44, desc: 'Complete CLI reference for task management. Used exclusively by task-manager agent.' },
-  { id: 'argcfile',        label: 'Argcfile.sh',       subtitle: '.skogai/Argcfile.sh',                 layer: 'tools',     x: 890, y: 510, w: 140, h: 44, desc: 'argc-based task runner framework. Shared automation scripts.' },
-  { id: 'context-scripts', label: 'context/*.sh',      subtitle: '.skogai/scripts/context/',             layer: 'tools',     x: 890, y: 270, w: 150, h: 50, desc: 'Context loading orchestrator: git, journal, memory, model, todo, workspace context loaders.' },
-  { id: 'task-files',      label: 'tasks/',            subtitle: '.skogai/tasks/*.md',                   layer: 'tasks',     x: 80,  y: 620, w: 130, h: 44, desc: '20+ task files with YAML frontmatter. Managed by skogai-todo CLI.' },
-  { id: 'state-locks',     label: 'state/locks/',      subtitle: '.skogai/state/locks/',                 layer: 'tasks',     x: 250, y: 620, w: 140, h: 44, desc: 'Multi-agent coordination. Lock files prevent concurrent task work.' },
-  { id: 'workflows-prep',  label: 'preparation.md',    subtitle: '.skogai/workflows/tasks/preparation.md',layer: 'tasks',    x: 420, y: 620, w: 150, h: 44, desc: 'How to prepare tasks: plan -> setup -> active. Worktree creation, handover writing.' },
-  { id: 'workflows-exec',  label: 'execution.md',      subtitle: '.skogai/workflows/tasks/execution.md', layer: 'tasks',     x: 590, y: 620, w: 140, h: 44, desc: 'How to execute tasks: read handover, do work in worktree, commit, verify.' },
-  { id: 'inbox',           label: 'inbox.list',        subtitle: '.skogai/inbox/inbox.list',              layer: 'tasks',     x: 760, y: 620, w: 130, h: 44, desc: 'Append-only message inbox. Cross-project communication channel.' },
-  { id: 'dotfiles',        label: 'dotfiles/',         subtitle: '.skogai/dotfiles/',                    layer: 'docs',      x: 920, y: 620, w: 130, h: 44, desc: 'Git hooks (pre-commit, pre-push), branch validation, worktree tracking. Safety infrastructure.' },
-  { id: 'nelson',          label: 'nelson/',           subtitle: '.skogai/projects/nelson/CLAUDE.md',    layer: 'routing',   x: 940, y: 150, w: 130, h: 50, desc: 'Sub-project with its own CLAUDE.md router. Royal Navy themed agent coordination skill.' },
-];
-
-// ============================================================
-// DATA: Connections (mutable array)
-// ============================================================
-const connections = [
-  { from: 'global-claude',  to: 'user-md',         type: 'route',    label: '@-ref' },
-  { from: 'global-claude',  to: 'definitions-md',  type: 'route',    label: '@-ref' },
-  { from: 'global-claude',  to: 'hq-claude',       type: 'route',    label: '@-ref' },
-  { from: 'hq-claude',      to: 'task-manager',    type: 'route',    label: 'delegates tasks' },
-  { from: 'hq-claude',      to: 'skogai-claude',   type: 'route',    label: 'framework ref' },
-  { from: 'skogai-claude',  to: 'nelson',          type: 'route',    label: 'sub-project' },
-  { from: 'task-manager',   to: 'todo-plan',       type: 'skill',    label: 'skill' },
-  { from: 'task-manager',   to: 'todo-setup',      type: 'skill',    label: 'skill' },
-  { from: 'task-manager',   to: 'todo-execute',    type: 'skill',    label: 'skill' },
-  { from: 'task-manager',   to: 'todo-done',       type: 'skill',    label: 'skill' },
-  { from: 'todo-plan',      to: 'todo-setup',      type: 'lifecycle', label: '1->2' },
-  { from: 'todo-setup',     to: 'todo-execute',    type: 'lifecycle', label: '2->3' },
-  { from: 'todo-execute',   to: 'todo-done',       type: 'lifecycle', label: '3->4' },
-  { from: 'todo-setup',     to: 'workflows-prep',  type: 'reads',    label: '@-reads' },
-  { from: 'todo-execute',   to: 'workflows-exec',  type: 'reads',    label: '@-reads' },
-  { from: 'task-manager',   to: 'skogai-todo',     type: 'reads',    label: 'CLI ref' },
-  { from: 'memory-skogai',  to: 'context-current',  type: 'contains' },
-  { from: 'memory-skogai',  to: 'decisions-log',    type: 'contains' },
-  { from: 'memory-skogai',  to: 'journal',           type: 'contains' },
-  { from: 'context-scripts', to: 'memory-skogai',   type: 'reads',    label: 'loads' },
-  { from: 'context-scripts', to: 'context-current',  type: 'reads',   label: 'loads' },
-  { from: 'todo-plan',      to: 'task-files',       type: 'reads',    label: 'reads tasks' },
-  { from: 'todo-setup',     to: 'state-locks',      type: 'reads',    label: 'acquires lock' },
-  { from: 'todo-done',      to: 'state-locks',      type: 'reads',    label: 'releases lock' },
-  { from: 'skogai-todo',    to: 'task-files',       type: 'reads',    label: 'manages' },
-  { from: 'at-linking',     to: 'rules',            type: 'reads',    label: 'defines' },
-  { from: 'conventions',    to: 'rules',            type: 'reads',    label: 'extends' },
-  { from: 'todo-done',      to: 'inbox',            type: 'reads',    label: 'notifies' },
-];
+let nodes = [];
+let connections = [];
+let PRESETS = {};
 
 // ============================================================
 // STATE
@@ -317,6 +243,7 @@ const state = {
   addClickPos: null,       // {x, y} where user clicked to add node
   userNodes: [],            // ids of user-added nodes
   userConnections: [],      // indices into connections[] for user-added
+  removedConnections: [],   // indices of built-in connections marked for removal
   dragNode: null,           // node being dragged
   dragOffsetX: 0,
   dragOffsetY: 0,
@@ -328,14 +255,7 @@ Object.keys(CONN_TYPES).forEach(k => state.connTypes[k] = true);
 // ============================================================
 // PRESETS
 // ============================================================
-const PRESETS = {
-  full:       { label: 'Full System',     layers: Object.keys(LAYERS), desc: 'Everything visible' },
-  routing:    { label: 'Routing Flow',    layers: ['global','hq','framework','routing'], desc: 'How CLAUDE.md files route to each other' },
-  tasks:      { label: 'Task Lifecycle',  layers: ['routing','tasks','tools'], desc: 'plan -> setup -> execute -> done' },
-  memory:     { label: 'Memory System',   layers: ['memory','tools','knowledge'], desc: 'How state persists across sessions' },
-  knowledge:  { label: 'Knowledge Base',  layers: ['knowledge','docs'], desc: 'Rules, conventions, docs' },
-  discovery:  { label: 'Agent Discovery', layers: ['global','hq','framework','routing','knowledge'], desc: 'How an agent finds what it needs' },
-};
+// PRESETS loaded from API data
 
 // ============================================================
 // MODE MANAGEMENT
@@ -356,7 +276,7 @@ function setMode(mode) {
   // Update hint
   const hints = {
     view: 'Click nodes to comment. Drag nodes to reposition. Scroll to zoom, drag canvas to pan.',
-    connect: 'Click a source node, then click a target node to create a connection.',
+    connect: 'Click source, then target to toggle a connection. Same pair + type = remove.',
     add: 'Click anywhere on the canvas to place a new node.',
   };
   document.getElementById('mode-hint').textContent = hints[mode];
@@ -428,7 +348,7 @@ function renderComments() {
 
 function renderAdditions() {
   const el = document.getElementById('additions-list');
-  const total = state.userNodes.length + state.userConnections.length;
+  const total = state.userNodes.length + state.userConnections.length + state.removedConnections.length;
   document.getElementById('additions-count').textContent = `(${total})`;
   if (!total) {
     el.innerHTML = '<div style="font-size:11px;color:#475569;padding:4px 0">Use Connect or Add Node mode to build routes</div>';
@@ -445,7 +365,7 @@ function renderAdditions() {
       <div class="text">${n.subtitle}</div>
     </div>`;
   });
-  // User connections
+  // User connections (added)
   state.userConnections.forEach(idx => {
     const c = connections[idx];
     if (!c) return;
@@ -454,8 +374,21 @@ function renderAdditions() {
     if (!fromN || !toN) return;
     html += `<div class="user-item">
       <span class="delete-btn" onclick="deleteUserConnection(${idx})">&#10005;</span>
-      <div class="target">${fromN.label} &rarr; ${toN.label}</div>
+      <div class="target">+ ${fromN.label} &rarr; ${toN.label}</div>
       <div class="text">${CONN_TYPES[c.type].label}${c.label ? ': ' + c.label : ''}</div>
+    </div>`;
+  });
+  // Removed connections (proposed removals)
+  state.removedConnections.forEach(idx => {
+    const c = connections[idx];
+    if (!c) return;
+    const fromN = nodes.find(n => n.id === c.from);
+    const toN = nodes.find(n => n.id === c.to);
+    if (!fromN || !toN) return;
+    html += `<div class="user-item" style="border-color:#ef4444">
+      <span class="delete-btn" onclick="restoreConnection(${idx})" title="Restore">&#8635;</span>
+      <div class="target" style="color:#ef4444">&#10005; ${fromN.label} &rarr; ${toN.label}</div>
+      <div class="text">${CONN_TYPES[c.type].label} (remove)</div>
     </div>`;
   });
   el.innerHTML = html;
@@ -518,12 +451,22 @@ function renderDiagram() {
     const midY = (sy + ey) / 2;
     const d = `M ${sx} ${sy} C ${sx} ${midY}, ${ex} ${midY}, ${ex} ${ey}`;
     const isUser = state.userConnections.includes(idx);
+    const isRemoved = state.removedConnections.includes(idx);
 
-    html += `<path d="${d}" fill="none" stroke="${ct.color}" stroke-width="${isUser ? 2.5 : 1.5}" stroke-opacity="${isUser ? 0.9 : 0.5}"
-      stroke-dasharray="${ct.dash}" marker-end="url(#arrow-${c.type})"/>`;
+    if (isRemoved) {
+      // Removed: red, low opacity, with X marks along the path
+      html += `<path d="${d}" fill="none" stroke="#ef4444" stroke-width="2" stroke-opacity="0.4"
+        stroke-dasharray="4,4" marker-end="url(#arrow-${c.type})"/>`;
+      // Strikethrough X at midpoint
+      const mx = (sx + ex) / 2, my = (sy + ey) / 2;
+      html += `<text x="${mx}" y="${my + 4}" text-anchor="middle" fill="#ef4444" font-size="12" font-weight="700" opacity="0.7">&#10005;</text>`;
+    } else {
+      html += `<path d="${d}" fill="none" stroke="${ct.color}" stroke-width="${isUser ? 2.5 : 1.5}" stroke-opacity="${isUser ? 0.9 : 0.5}"
+        stroke-dasharray="${ct.dash}" marker-end="url(#arrow-${c.type})"/>`;
+    }
 
     // Label for user connections
-    if (isUser && c.label) {
+    if (isUser && c.label && !isRemoved) {
       const lx = (sx + ex) / 2;
       const ly = (sy + ey) / 2 - 6;
       html += `<text x="${lx}" y="${ly}" text-anchor="middle" fill="${ct.color}" font-size="9" font-family="system-ui" opacity="0.8">${c.label}</text>`;
@@ -552,9 +495,13 @@ function renderDiagram() {
     html += `<g class="node" data-id="${n.id}" style="cursor:${state.mode === 'view' ? 'pointer' : state.mode === 'connect' ? 'crosshair' : 'pointer'}"
       onmouseenter="showTooltip(event, '${n.id}')" onmouseleave="hideTooltip()">`;
 
-    // Background
-    html += `<rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="6" ry="6"
-      fill="${layer.fill}" stroke="${borderStroke}" stroke-width="${borderWidth}" ${isUser ? 'stroke-dasharray="4,2"' : ''} />`;
+    // Background — pill shape for endpoints, rounded rect for everything else
+    const isEndpoint = layer.shape === 'pill';
+    const rx = isEndpoint ? n.h / 2 : 6;
+    const fillAttr = isEndpoint ? 'fill="#13151f"' : `fill="${layer.fill}"`;
+    const dashAttr = isUser ? 'stroke-dasharray="4,2"' : isEndpoint ? 'stroke-dasharray="6,3"' : '';
+    html += `<rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="${rx}" ry="${rx}"
+      ${fillAttr} stroke="${borderStroke}" stroke-width="${borderWidth}" ${dashAttr} />`;
 
     // User-added badge
     if (isUser) {
@@ -602,8 +549,14 @@ function renderLegend() {
       ${v.label}
     </div>`;
   });
+  if (state.layers.endpoint) {
+    html += '<div class="legend-item" style="margin-top:4px;color:#e879f9"><svg width="24" height="8"><rect x="2" y="0" width="20" height="8" rx="4" fill="none" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="6,3"/></svg> endpoint</div>';
+  }
   if (state.userNodes.length || state.userConnections.length) {
-    html += '<div class="legend-item" style="margin-top:4px;color:#10b981"><svg width="24" height="8"><rect x="2" y="0" width="20" height="8" rx="2" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4,2"/></svg> your additions</div>';
+    html += '<div class="legend-item" style="margin-top:4px;color:#10b981"><svg width="24" height="8"><rect x="2" y="0" width="20" height="8" rx="2" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4,2"/></svg> added</div>';
+  }
+  if (state.removedConnections.length) {
+    html += '<div class="legend-item" style="color:#ef4444"><svg width="24" height="8"><line x1="0" y1="4" x2="24" y2="4" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4" opacity="0.5"/><text x="12" y="7" text-anchor="middle" fill="#ef4444" font-size="8" font-weight="700">&#10005;</text></svg> removed</div>';
   }
   el.innerHTML = html;
 }
@@ -711,13 +664,13 @@ document.getElementById('canvas-area').addEventListener('mousedown', e => {
         document.getElementById('info-bar').classList.add('highlight');
         renderDiagram();
       } else if (hitNode.id !== state.connectFrom) {
-        // Second click: create connection
-        createUserConnection(state.connectFrom, hitNode.id);
+        // Second click: toggle connection
+        const result = toggleConnection(state.connectFrom, hitNode.id);
         state.connectFrom = null;
         document.getElementById('connect-pill').classList.remove('show');
-        document.getElementById('info-bar').textContent = 'Connection created! Click another source node.';
+        document.getElementById('info-bar').textContent = result + ' Click another source node.';
         setTimeout(() => {
-          document.getElementById('info-bar').textContent = 'Click a source node, then click a target node to create a connection.';
+          document.getElementById('info-bar').textContent = 'Click source, then target to toggle a connection. Same pair + type = remove.';
           document.getElementById('info-bar').classList.remove('highlight');
         }, 2000);
       } else {
@@ -793,19 +746,83 @@ document.getElementById('canvas-area').addEventListener('wheel', e => {
 }, { passive: false });
 
 // ============================================================
-// CONNECT: Create user connection
+// CONNECT: Toggle connection (create or remove)
 // ============================================================
-function createUserConnection(fromId, toId) {
+function toggleConnection(fromId, toId) {
+  const type = state.connectType;
+
+  // Check if this exact connection already exists
+  const existingIdx = connections.findIndex(c =>
+    c.from === fromId && c.to === toId && c.type === type
+  );
+
+  if (existingIdx >= 0) {
+    const isUserAdded = state.userConnections.includes(existingIdx);
+    const isRemoved = state.removedConnections.includes(existingIdx);
+
+    if (isRemoved) {
+      // Was marked for removal — restore it
+      state.removedConnections = state.removedConnections.filter(i => i !== existingIdx);
+      updateAll();
+      return 'Connection restored!';
+    } else if (isUserAdded) {
+      // User-added — just delete it
+      connections.splice(existingIdx, 1);
+      state.userConnections = state.userConnections
+        .filter(i => i !== existingIdx)
+        .map(i => i > existingIdx ? i - 1 : i);
+      state.removedConnections = state.removedConnections
+        .map(i => i > existingIdx ? i - 1 : i);
+      updateAll();
+      return 'Connection removed!';
+    } else {
+      // Built-in — mark for removal (proposed change)
+      state.removedConnections.push(existingIdx);
+      updateAll();
+      return 'Connection marked for removal!';
+    }
+  }
+
+  // Also check reverse direction with same type
+  const reverseIdx = connections.findIndex(c =>
+    c.from === toId && c.to === fromId && c.type === type
+  );
+  if (reverseIdx >= 0) {
+    const isUserAdded = state.userConnections.includes(reverseIdx);
+    const isRemoved = state.removedConnections.includes(reverseIdx);
+
+    if (isRemoved) {
+      state.removedConnections = state.removedConnections.filter(i => i !== reverseIdx);
+      updateAll();
+      return 'Connection restored!';
+    } else if (isUserAdded) {
+      connections.splice(reverseIdx, 1);
+      state.userConnections = state.userConnections
+        .filter(i => i !== reverseIdx)
+        .map(i => i > reverseIdx ? i - 1 : i);
+      state.removedConnections = state.removedConnections
+        .map(i => i > reverseIdx ? i - 1 : i);
+      updateAll();
+      return 'Connection removed!';
+    } else {
+      state.removedConnections.push(reverseIdx);
+      updateAll();
+      return 'Connection marked for removal!';
+    }
+  }
+
+  // No existing connection — create new one
   const c = {
     from: fromId,
     to: toId,
-    type: state.connectType,
-    label: CONN_TYPES[state.connectType].label,
+    type: type,
+    label: CONN_TYPES[type].label,
     userAdded: true,
   };
   connections.push(c);
   state.userConnections.push(connections.length - 1);
   updateAll();
+  return 'Connection created!';
 }
 
 // ============================================================
@@ -894,6 +911,13 @@ function deleteUserConnection(idx) {
   state.userConnections = state.userConnections
     .filter(i => i !== idx)
     .map(i => i > idx ? i - 1 : i);
+  state.removedConnections = state.removedConnections
+    .map(i => i > idx ? i - 1 : i);
+  updateAll();
+}
+
+function restoreConnection(idx) {
+  state.removedConnections = state.removedConnections.filter(i => i !== idx);
   updateAll();
 }
 
@@ -993,14 +1017,17 @@ function updatePrompt() {
     parts.push('\nThe memory system: SKOGAI.md is the overview. context/current.md tracks active work (read at start, updated at end). decisions.md is append-only quick notes. journal/ has timestamped session history. Context scripts load this at session start.');
   } else if (state.preset === 'discovery') {
     parts.push('\nAgent discovery pattern: load ~/claude/CLAUDE.md -> see "use task-manager" -> read .claude/agents/task-manager.md -> see skills -> read commands -> find @-linked workflows -> find tool references. No guessing, every step is explicitly linked.');
+  } else if (state.preset === 'boundary') {
+    parts.push('\nSystem boundary view: internal routing components and the external tools/services they execute. Endpoints (pill-shaped) are the outer edge — CLI tools (skogai-todo, gh, git, argc), the terminal, GitHub remote, ollama, and the filesystem. "executes" connections show which internal component runs which tool. "I/O" connections show data flow to external systems.');
   }
 
-  // User additions
-  if (state.userNodes.length || state.userConnections.length) {
-    parts.push('\n--- Proposed additions to the routing architecture ---');
+  // User changes (additions + removals)
+  const hasChanges = state.userNodes.length || state.userConnections.length || state.removedConnections.length;
+  if (hasChanges) {
+    parts.push('\n--- Proposed changes to the routing architecture ---');
 
     if (state.userNodes.length) {
-      parts.push('\nNew components:');
+      parts.push('\nAdd components:');
       state.userNodes.forEach(id => {
         const n = nodes.find(n => n.id === id);
         if (!n) return;
@@ -1009,8 +1036,20 @@ function updatePrompt() {
     }
 
     if (state.userConnections.length) {
-      parts.push('\nNew connections:');
+      parts.push('\nAdd connections:');
       state.userConnections.forEach(idx => {
+        const c = connections[idx];
+        if (!c) return;
+        const fromN = nodes.find(n => n.id === c.from);
+        const toN = nodes.find(n => n.id === c.to);
+        if (!fromN || !toN) return;
+        parts.push(`- ${fromN.label} -> ${toN.label} (${CONN_TYPES[c.type].label})`);
+      });
+    }
+
+    if (state.removedConnections.length) {
+      parts.push('\nRemove connections:');
+      state.removedConnections.forEach(idx => {
         const c = connections[idx];
         if (!c) return;
         const fromN = nodes.find(n => n.id === c.from);
@@ -1061,8 +1100,106 @@ function updateAll() {
   updatePrompt();
 }
 
-// Init
-updateAll();
+// ============================================================
+// API: Load / Save
+// ============================================================
+function loadData(data) {
+  LAYERS = data.layers || {};
+  CONN_TYPES = data.connTypes || {};
+  nodes.length = 0;
+  connections.length = 0;
+  (data.nodes || []).forEach(n => nodes.push(n));
+  (data.connections || []).forEach(c => connections.push(c));
+  PRESETS = data.presets || {};
+
+  // Reset user state
+  state.userNodes = [];
+  state.userConnections = [];
+  state.removedConnections = [];
+  state.comments = [];
+  state.connectFrom = null;
+
+  // Init layer/conn visibility
+  Object.keys(LAYERS).forEach(k => state.layers[k] = true);
+  Object.keys(CONN_TYPES).forEach(k => state.connTypes[k] = true);
+  state.preset = 'full';
+
+  updateAll();
+}
+
+function buildSavePayload() {
+  // Merge user additions into the base data for saving
+  return {
+    layers: LAYERS,
+    connTypes: CONN_TYPES,
+    nodes: nodes.map(n => {
+      const { userAdded, ...rest } = n;
+      return rest;
+    }),
+    connections: connections
+      .filter((_, i) => !state.removedConnections.includes(i))
+      .map(c => {
+        const { userAdded, ...rest } = c;
+        return rest;
+      }),
+    presets: PRESETS,
+  };
+}
+
+async function loadFromServer() {
+  const status = document.getElementById('save-status');
+  try {
+    const res = await fetch('/api/data');
+    if (!res.ok) throw new Error(`${res.status}`);
+    const data = await res.json();
+    loadData(data);
+    status.textContent = 'Loaded from server';
+    status.style.color = '#10b981';
+  } catch (e) {
+    status.textContent = 'Load failed: ' + e.message;
+    status.style.color = '#ef4444';
+  }
+  setTimeout(() => { status.textContent = ''; }, 3000);
+}
+
+async function saveToServer() {
+  const status = document.getElementById('save-status');
+  const btn = document.getElementById('save-btn');
+  try {
+    const res = await fetch('/api/data', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(buildSavePayload()),
+    });
+    if (!res.ok) throw new Error(`${res.status}`);
+    btn.textContent = 'Saved!';
+    btn.style.background = '#10b981';
+    btn.style.borderColor = '#10b981';
+    btn.style.color = '#fff';
+    status.textContent = 'Saved to skogai-routing-data.json';
+    status.style.color = '#10b981';
+
+    // After save, user additions become part of the base
+    state.userNodes = [];
+    state.userConnections = [];
+    state.removedConnections = [];
+    renderAdditions();
+    renderLegend();
+  } catch (e) {
+    status.textContent = 'Save failed: ' + e.message;
+    status.style.color = '#ef4444';
+  }
+  setTimeout(() => {
+    btn.textContent = 'Save';
+    btn.style.background = '';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+    status.textContent = '';
+  }, 2000);
+}
+
+// Init: load from API, fall back to empty
+loadFromServer();
 window.addEventListener('resize', () => renderDiagram());
 </script>
 

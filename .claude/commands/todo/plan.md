@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(skogai-todo:*)
+allowed-tools: Bash(skogai-todo:*), Bash(git:*), Bash(gh:*), Read, Write, Edit
 description: Big picture planning - review all tasks, set dependencies, priorities, and ordering.
 ---
 

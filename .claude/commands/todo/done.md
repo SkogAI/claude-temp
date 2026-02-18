@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(skogai-todo:*), Bash(git log:*), Bash(git diff:*), Bash(gh:*)
+allowed-tools: Bash(skogai-todo:*), Bash(git:*), Bash(gh:*), Read, Write, Edit
 argument-hint: <task-id>
 description: Close out a task - review, PR, unlock, sync, and remove worktree.
 ---

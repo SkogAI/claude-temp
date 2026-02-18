@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(skogai-todo:*), Bash(git add:*), Bash(git commit:*), Bash(git status:*), Bash(git diff:*)
+allowed-tools: Bash(skogai-todo:*), Bash(git:*), Bash(gh:*), Read, Write, Edit
 argument-hint: <task-id>
 description: Execute a task in its worktree - do the work described in the handover.
 ---

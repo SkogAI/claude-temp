@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(skogai-todo:*)
+allowed-tools: Bash(skogai-todo:*), Bash(git:*), Bash(gh:*), Read, Write, Edit
 argument-hint: <task-id>
 description: Prepare a task for execution - activate, lock, create worktree, enrich task file.
 ---

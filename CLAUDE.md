@@ -19,3 +19,28 @@ for anything task-related — planning, creating, executing, reviewing, closing 
 - `uvx` isolates env — always use full paths or export PATH in start scripts
 
 </skogapi>
+
+## Project Structure
+
+- @.claude-plugin/ - Plugin configuration (plugin.json, marketplace.json)
+- @commands/ - Custom slash commands (plugin component)
+- @docs/claude-code/ - Extensive Claude Code documentation
+- @docs/skogix/ - User documentation (definitions.md, user.md)
+- @skills/ - Custom skills for Claude Code (plugin component)
+  - @skills/claude-code-modifications/SKILL.md - main project skill
+  - @skills/claude-code-modifications/scripts/update-plugins.sh - plugin update/reload
+- @lessons/ - Keyword-triggered behavioral lessons (gptme format, injected via hooks)
+- @JOINK/ - Reference implementation of lesson system from gptme
+
+## Tools
+
+- NEVER use sed or awk -- use proper tools (yq, jq, etc.)
+- `yq --front-matter=extract '<query>' file.md` -- parse YAML frontmatter from markdown
+- when a tool version is wrong, ask skogix to install the correct one
+
+## Lessons System
+
+- @lessons/ contains keyword-triggered behavioral lessons (gptme format)
+- lessons are NOT skills -- they are small contextual injections ("hey remember this")
+- @JOINK/ has the reference implementation (python lesson system from gptme)
+- don't touch lesson content, don't reorganize lessons -- build the injection mechanism

@@ -1,0 +1,756 @@
+{"type":"meta","localId":1,"cliSessionId":"7ad30fd4-0b11-4c60-9df1-33106cae4aed","title":"testing testing","createdAt":1771477573065}
+{"type":"user_message","text":"testing testing"}
+{"type":"delta","text":"\n\n"}
+{"type":"message_uuid","uuid":"9eaf6a59-cab8-4631-a46f-7651f2a1b77c","messageType":"user"}
+{"type":"thinking_start"}
+{"type":"thinking_delta","text":"The user is just"}
+{"type":"thinking_delta","text":" testing"}
+{"type":"thinking_delta","text":"."}
+{"type":"thinking_delta","text":" I"}
+{"type":"thinking_delta","text":"'ll"}
+{"type":"thinking_delta","text":" respond cas"}
+{"type":"thinking_delta","text":"ually and directly,"}
+{"type":"thinking_delta","text":" matching"}
+{"type":"thinking_delta","text":" sk"}
+{"type":"thinking_delta","text":"ogix's communication"}
+{"type":"thinking_delta","text":" style."}
+{"type":"thinking_delta","text":""}
+{"type":"message_uuid","uuid":"3da2209d-4eed-4e20-9725-e810a1071830","messageType":"assistant"}
+{"type":"thinking_stop"}
+{"type":"delta","text":"loud"}
+{"type":"delta","text":" and clear,"}
+{"type":"delta","text":" sk"}
+{"type":"delta","text":"ogix "}
+{"type":"delta","text":"👋\n\neverything"}
+{"type":"delta","text":"'s"}
+{"type":"delta","text":" loaded"}
+{"type":"delta","text":" —"}
+{"type":"delta","text":" global"}
+{"type":"delta","text":" instructions, definitions"}
+{"type":"delta","text":", claude"}
+{"type":"delta","text":" H"}
+{"type":"delta","text":"Q"}
+{"type":"delta","text":"."}
+{"type":"delta","text":" ready"}
+{"type":"delta","text":" when"}
+{"type":"delta","text":" you are."}
+{"type":"message_uuid","uuid":"a979fc64-71dc-4d39-a801-0ab57147d28a","messageType":"assistant"}
+{"type":"result","cost":0.03558575,"duration":3971,"usage":{"input_tokens":3,"cache_creation_input_tokens":3649,"cache_read_input_tokens":20905,"output_tokens":70,"server_tool_use":{"web_search_requests":0,"web_fetch_requests":0},"service_tier":"standard","cache_creation":{"ephemeral_1h_input_tokens":3649,"ephemeral_5m_input_tokens":0},"inference_geo":"","iterations":[],"speed":"standard"},"sessionId":"7ad30fd4-0b11-4c60-9df1-33106cae4aed"}
+{"type":"done","code":0}
+{"type":"user_message","text":"now i would like you to help me out by essentially write \"objective reviews\" of tools and commands i have a lot of and try to help me see use-cases and how we can best take them into our workflow"}
+{"type":"delta","text":"\n\n"}
+{"type":"message_uuid","uuid":"b3ce24f1-edd8-4da6-b88d-7598ca72d67c","messageType":"user"}
+{"type":"thinking_start"}
+{"type":"thinking_delta","text":"The user wants me to help"}
+{"type":"thinking_delta","text":" review"}
+{"type":"thinking_delta","text":" tools and commands they have,"}
+{"type":"thinking_delta","text":" writing"}
+{"type":"thinking_delta","text":" objective"}
+{"type":"thinking_delta","text":" reviews and"}
+{"type":"thinking_delta","text":" identifying"}
+{"type":"thinking_delta","text":" use-cases and"}
+{"type":"thinking_delta","text":" how"}
+{"type":"thinking_delta","text":" they"}
+{"type":"thinking_delta","text":" fit"}
+{"type":"thinking_delta","text":" into the"}
+{"type":"thinking_delta","text":" sk"}
+{"type":"thinking_delta","text":"ogai"}
+{"type":"thinking_delta","text":" workflow."}
+{"type":"thinking_delta","text":"\n\nI"}
+{"type":"thinking_delta","text":" need"}
+{"type":"thinking_delta","text":" to first"}
+{"type":"thinking_delta","text":" understand"}
+{"type":"thinking_delta","text":" what"}
+{"type":"thinking_delta","text":" tools"}
+{"type":"thinking_delta","text":" and commands they have."}
+{"type":"thinking_delta","text":" Let me explore"}
+{"type":"thinking_delta","text":" their"}
+{"type":"thinking_delta","text":" system"}
+{"type":"thinking_delta","text":" to"}
+{"type":"thinking_delta","text":" find"}
+{"type":"thinking_delta","text":" what"}
+{"type":"thinking_delta","text":"'s"}
+{"type":"thinking_delta","text":" available -"}
+{"type":"thinking_delta","text":" looking"}
+{"type":"thinking_delta","text":" at things"}
+{"type":"thinking_delta","text":" like:"}
+{"type":"thinking_delta","text":"\n- CLI"}
+{"type":"thinking_delta","text":" tools installed"}
+{"type":"thinking_delta","text":"\n- Custom"}
+{"type":"thinking_delta","text":" scripts\n- Aliases"}
+{"type":"thinking_delta","text":"\n- Shell"}
+{"type":"thinking_delta","text":" functions\n- Installed"}
+{"type":"thinking_delta","text":" packages\n- M"}
+{"type":"thinking_delta","text":"CP servers\n- Claude"}
+{"type":"thinking_delta","text":" skills"}
+{"type":"thinking_delta","text":"\n- etc"}
+{"type":"thinking_delta","text":".\n\nLet me start by exploring"}
+{"type":"thinking_delta","text":" to"}
+{"type":"thinking_delta","text":" understand the"}
+{"type":"thinking_delta","text":" scope"}
+{"type":"thinking_delta","text":" of what"}
+{"type":"thinking_delta","text":" they have."}
+{"type":"thinking_delta","text":""}
+{"type":"message_uuid","uuid":"59383b27-1c06-4a80-a3a4-a5e776e883e3","messageType":"assistant"}
+{"type":"thinking_stop"}
+{"type":"delta","text":"sounds"}
+{"type":"delta","text":" like"}
+{"type":"delta","text":" a solid"}
+{"type":"delta","text":" audit"}
+{"type":"delta","text":"."}
+{"type":"delta","text":" let me"}
+{"type":"delta","text":" first"}
+{"type":"delta","text":" get"}
+{"type":"delta","text":" a picture"}
+{"type":"delta","text":" of what we"}
+{"type":"delta","text":"'re working with —"}
+{"type":"delta","text":" i"}
+{"type":"delta","text":"'ll scan"}
+{"type":"delta","text":" multiple"}
+{"type":"delta","text":" sources"}
+{"type":"delta","text":" in"}
+{"type":"delta","text":" parallel to find"}
+{"type":"delta","text":" your"}
+{"type":"delta","text":" tools,"}
+{"type":"delta","text":" commands"}
+{"type":"delta","text":", scripts"}
+{"type":"delta","text":", aliases"}
+{"type":"delta","text":", and anything"}
+{"type":"delta","text":" else that"}
+{"type":"delta","text":" qual"}
+{"type":"delta","text":"ifies."}
+{"type":"message_uuid","uuid":"188ba3b3-ee81-4453-9a5b-80e4c8cf965d","messageType":"assistant"}
+{"type":"tool_start","id":"toolu_01FLstch5iDgwQ9Wkuoo4gpF","name":"AskUserQuestion"}
+{"type":"message_uuid","uuid":"057ab8d7-eeed-41f2-a096-610dd3369846","messageType":"assistant"}
+{"type":"tool_executing","id":"toolu_01FLstch5iDgwQ9Wkuoo4gpF","name":"AskUserQuestion","input":{"questions":[{"question":"What's the scope of this review? Which categories of tools do you want me to look at?","header":"Scope","options":[{"label":"Everything","description":"CLI tools, scripts, aliases, shell functions, installed packages, MCP servers, skills — the full picture"},{"label":"CLI tools & scripts","description":"Focus on custom scripts, installed CLIs, and shell aliases/functions"},{"label":"Claude ecosystem","description":"Skills, agents, MCP servers, hooks, and Claude-specific tooling"},{"label":"Package managers","description":"Installed packages via apt, brew, cargo, pip, npm, etc."}],"multiSelect":true}]}}
+{"type":"info","text":"Interrupted · What should Claude do instead?"}
+{"type":"done","code":0}
+{"type":"user_message","text":"cnt sat ant rnt lnt snt vnt znt bp int knt cpnt svnt ncp qps cad"}
+{"type":"delta","text":"\n\n"}
+{"type":"message_uuid","uuid":"58783623-743d-4c55-99d4-1a38ca7332dc","messageType":"user"}
+{"type":"thinking_start"}
+{"type":"thinking_delta","text":"The user just"}
+{"type":"thinking_delta","text":" sent"}
+{"type":"thinking_delta","text":" what"}
+{"type":"thinking_delta","text":" looks"}
+{"type":"thinking_delta","text":" like a list"}
+{"type":"thinking_delta","text":" of short"}
+{"type":"thinking_delta","text":" command"}
+{"type":"thinking_delta","text":"/"}
+{"type":"thinking_delta","text":"tool"}
+{"type":"thinking_delta","text":" names. These"}
+{"type":"thinking_delta","text":" are"}
+{"type":"thinking_delta","text":" probably"}
+{"type":"thinking_delta","text":" commands"}
+{"type":"thinking_delta","text":" or"}
+{"type":"thinking_delta","text":" aliases"}
+{"type":"thinking_delta","text":" they"}
+{"type":"thinking_delta","text":" have"}
+{"type":"thinking_delta","text":" installed"}
+{"type":"thinking_delta","text":" and"}
+{"type":"thinking_delta","text":" want me to review"}
+{"type":"thinking_delta","text":"."}
+{"type":"thinking_delta","text":" Let me explore"}
+{"type":"thinking_delta","text":" their"}
+{"type":"thinking_delta","text":" system to"}
+{"type":"thinking_delta","text":" find"}
+{"type":"thinking_delta","text":" out"}
+{"type":"thinking_delta","text":" what these"}
+{"type":"thinking_delta","text":" actually"}
+{"type":"thinking_delta","text":" are -"}
+{"type":"thinking_delta","text":" they"}
+{"type":"thinking_delta","text":" could"}
+{"type":"thinking_delta","text":" be aliases"}
+{"type":"thinking_delta","text":", scripts"}
+{"type":"thinking_delta","text":", bin"}
+{"type":"thinking_delta","text":"aries, or"}
+{"type":"thinking_delta","text":" shell"}
+{"type":"thinking_delta","text":" functions"}
+{"type":"thinking_delta","text":".\n\nLet"}
+{"type":"thinking_delta","text":" me look them"}
+{"type":"thinking_delta","text":" up in"}
+{"type":"thinking_delta","text":" parallel"}
+{"type":"thinking_delta","text":"."}
+{"type":"thinking_delta","text":""}
+{"type":"message_uuid","uuid":"74bf11a0-33b9-4e04-ae4a-c16a785c70b0","messageType":"assistant"}
+{"type":"thinking_stop"}
+{"type":"delta","text":"got"}
+{"type":"delta","text":" it —"}
+{"type":"delta","text":" those"}
+{"type":"delta","text":" look"}
+{"type":"delta","text":" like short"}
+{"type":"delta","text":" commands"}
+{"type":"delta","text":"/aliases"}
+{"type":"delta","text":". let"}
+{"type":"delta","text":" me figure"}
+{"type":"delta","text":" out what each"}
+{"type":"delta","text":" one"}
+{"type":"delta","text":" actually"}
+{"type":"delta","text":" is first"}
+{"type":"delta","text":"."}
+{"type":"message_uuid","uuid":"3d7ef9c5-2283-46a9-82dc-a3260fa6c026","messageType":"assistant"}
+{"type":"tool_start","id":"toolu_014mVF6UKFnYvANaMaZQxi3a","name":"Bash"}
+{"type":"message_uuid","uuid":"896790c8-dd62-4a24-96bb-0a93ca6c1b55","messageType":"assistant"}
+{"type":"tool_executing","id":"toolu_014mVF6UKFnYvANaMaZQxi3a","name":"Bash","input":{"command":"for cmd in cnt sat ant rnt lnt snt vnt znt bp int knt cpnt svnt ncp qps cad; do echo \"=== $cmd ===\"; type \"$cmd\" 2>/dev/null || echo \"not found\"; which \"$cmd\" 2>/dev/null; echo; done","description":"Check what each command is (alias, function, binary)"}}
+{"type":"tool_start","id":"toolu_01SQ4XTKRfrSGKHsH979PK5j","name":"Bash"}
+{"type":"message_uuid","uuid":"ccbeebe0-6a5d-4cc3-9202-384011410285","messageType":"assistant"}
+{"type":"tool_executing","id":"toolu_01SQ4XTKRfrSGKHsH979PK5j","name":"Bash","input":{"command":"for cmd in cnt sat ant rnt lnt snt vnt znt bp int knt cpnt svnt ncp qps cad; do path=$(which \"$cmd\" 2>/dev/null); if [ -n \"$path\" ]; then echo \"=== $cmd ($path) ===\"; file \"$path\"; head -5 \"$path\" 2>/dev/null; echo; fi; done","description":"Get file type and first lines of each command"}}
+{"type":"permission_request","requestId":"63efc07d-60f7-45b5-92e1-c202547fc3cc","toolName":"Bash","toolInput":{"command":"for cmd in cnt sat ant rnt lnt snt vnt znt bp int knt cpnt svnt ncp qps cad; do echo \"=== $cmd ===\"; type \"$cmd\" 2>/dev/null || echo \"not found\"; which \"$cmd\" 2>/dev/null; echo; done","description":"Check what each command is (alias, function, binary)"},"toolUseId":"toolu_014mVF6UKFnYvANaMaZQxi3a","decisionReason":""}
+{"type":"permission_resolved","requestId":"63efc07d-60f7-45b5-92e1-c202547fc3cc","decision":"allow"}
+{"type":"message_uuid","uuid":"3715ec5f-b09a-4218-8ac3-60701dae248e","messageType":"user"}
+{"type":"tool_result","id":"toolu_014mVF6UKFnYvANaMaZQxi3a","content":"=== cnt ===\ncnt is an alias for ntm create\ncnt: aliased to ntm create\n\n=== sat ===\nsat is an alias for ntm spawn\nsat: aliased to ntm spawn\n\n=== ant ===\nant is an alias for ntm add\nant: aliased to ntm add\n\n=== rnt ===\nrnt is an alias for ntm attach\nrnt: aliased to ntm attach\n\n=== lnt ===\nlnt is an alias for ntm list\nlnt: aliased to ntm list\n\n=== snt ===\nsnt is an alias for ntm status\nsnt: aliased to ntm status\n\n=== vnt ===\nvnt is an alias for ntm view\nvnt: aliased to ntm view\n\n=== znt ===\nznt is an alias for ntm zoom\nznt: aliased to ntm zoom\n\n=== bp ===\nbp is an alias for ntm send\nbp: aliased to ntm send\n\n=== int ===\nint is an alias for ntm interrupt\nint: aliased to ntm interrupt\n\n=== knt ===\nknt is an alias for ntm kill\nknt: aliased to ntm kill\n\n=== cpnt ===\ncpnt is an alias for ntm copy\ncpnt: aliased to ntm copy\n\n=== svnt ===\nsvnt is an alias for ntm save\nsvnt: aliased to ntm save\n\n=== ncp ===\nncp is an alias for ntm palette\nncp: aliased to ntm palette\n\n=== qps ===\nqps is an alias for ntm quick\nqps: aliased to ntm quick\n\n=== cad ===\ncad not found\nnot found\ncad not found","is_error":false}
+{"type":"permission_request","requestId":"2b838b78-490a-4d16-b431-ad7ea9a80f28","toolName":"Bash","toolInput":{"command":"for cmd in cnt sat ant rnt lnt snt vnt znt bp int knt cpnt svnt ncp qps cad; do path=$(which \"$cmd\" 2>/dev/null); if [ -n \"$path\" ]; then echo \"=== $cmd ($path) ===\"; file \"$path\"; head -5 \"$path\" 2>/dev/null; echo; fi; done","description":"Get file type and first lines of each command"},"toolUseId":"toolu_01SQ4XTKRfrSGKHsH979PK5j","decisionReason":"Command contains $() command substitution"}
+{"type":"permission_resolved","requestId":"2b838b78-490a-4d16-b431-ad7ea9a80f28","decision":"allow_always"}
+{"type":"message_uuid","uuid":"c48a4308-9920-48fa-8e81-e5dcd47cdbc7","messageType":"user"}
+{"type":"tool_result","id":"toolu_01SQ4XTKRfrSGKHsH979PK5j","content":"=== cnt (cnt: aliased to ntm create) ===\n\n=== sat (sat: aliased to ntm spawn) ===\n\n=== ant (ant: aliased to ntm add) ===\n\n=== rnt (rnt: aliased to ntm attach) ===\n\n=== lnt (lnt: aliased to ntm list) ===\n\n=== snt (snt: aliased to ntm status) ===\n\n=== vnt (vnt: aliased to ntm view) ===\n\n=== znt (znt: aliased to ntm zoom) ===\n\n=== bp (bp: aliased to ntm send) ===\n\n=== int (int: aliased to ntm interrupt) ===\n\n=== knt (knt: aliased to ntm kill) ===\n\n=== cpnt (cpnt: aliased to ntm copy) ===\n\n=== svnt (svnt: aliased to ntm save) ===\n\n=== ncp (ncp: aliased to ntm palette) ===\n\n=== qps (qps: aliased to ntm quick) ===\n\n=== cad (cad not found) ===","is_error":false}
+{"type":"delta","text":"all"}
+{"type":"delta","text":" of them are aliases to"}
+{"type":"delta","text":" `"}
+{"type":"delta","text":"ntm`"}
+{"type":"delta","text":" sub"}
+{"type":"delta","text":"commands."}
+{"type":"delta","text":" let"}
+{"type":"delta","text":" me dig"}
+{"type":"delta","text":" into"}
+{"type":"delta","text":" what `"}
+{"type":"delta","text":"ntm` actually"}
+{"type":"delta","text":" is"}
+{"type":"delta","text":" and"}
+{"type":"delta","text":" get"}
+{"type":"delta","text":" the full picture."}
+{"type":"message_uuid","uuid":"11bb2a84-edb9-4bc6-a546-be7aca405d9f","messageType":"assistant"}
+{"type":"tool_start","id":"toolu_012bjSC1LyD9NDcmmZgxi736","name":"Bash"}
+{"type":"message_uuid","uuid":"d5f03483-1560-41ee-8820-c33e92155a4e","messageType":"assistant"}
+{"type":"tool_executing","id":"toolu_012bjSC1LyD9NDcmmZgxi736","name":"Bash","input":{"command":"type ntm 2>/dev/null; which ntm 2>/dev/null","description":"Find what ntm is"}}
+{"type":"tool_start","id":"toolu_01DYCPC5pCKvZHj8QmY46DDh","name":"Bash"}
+{"type":"message_uuid","uuid":"574a6550-e979-42d3-a225-92cd3c752cc0","messageType":"user"}
+{"type":"tool_result","id":"toolu_012bjSC1LyD9NDcmmZgxi736","content":"ntm is /mnt/sda2/nvm/versions/node/v24.13.0/bin/ntm\n/mnt/sda2/nvm/versions/node/v24.13.0/bin/ntm","is_error":false}
+{"type":"message_uuid","uuid":"3b3ec006-1bb6-4278-ade9-c73568b31733","messageType":"assistant"}
+{"type":"tool_executing","id":"toolu_01DYCPC5pCKvZHj8QmY46DDh","name":"Bash","input":{"command":"ntm --help 2>&1 || ntm -h 2>&1 || ntm 2>&1 | head -80","description":"Get ntm help output"}}
+{"type":"tool_start","id":"toolu_01KegcaXDjeza8aQRyYjLs2N","name":"Bash"}
+{"type":"message_uuid","uuid":"f498f9e5-2ea0-4315-afef-7fcba909445e","messageType":"assistant"}
+{"type":"tool_executing","id":"toolu_01KegcaXDjeza8aQRyYjLs2N","name":"Bash","input":{"command":"alias | grep -E '(cnt|sat|ant|rnt|lnt|snt|vnt|znt|bp|int|knt|cpnt|svnt|ncp|qps|cad|ntm)' 2>/dev/null","description":"Get all related aliases"}}
+{"type":"message_uuid","uuid":"80466b24-f013-4846-bc3c-9f178982b346","messageType":"user"}
+{"type":"tool_result","id":"toolu_01DYCPC5pCKvZHj8QmY46DDh","content":"<persisted-output>\nOutput too large (36.8KB). Full output saved to: /skogai/config/claude/projects/-home-skogix-claude/7ad30fd4-0b11-4c60-9df1-33106cae4aed/tool-results/b132ed4.txt\n\nPreview (first 2KB):\nNTM (Named Tmux Manager) helps you create and manage tmux sessions\nwith multiple AI coding agents (Claude, Codex, Gemini) in separate panes.\n\nQuick Start:\n  ntm spawn myproject --cc=2 --cod=2    # Create session with 4 agents\n  ntm attach myproject                   # Attach to session\n  ntm palette                            # Open command palette (TUI)\n  ntm send myproject --all \"fix bugs\"   # Broadcast prompt to all agents\n\nShell Integration:\n  Add to your .zshrc:  eval \"$(ntm shell zsh)\"\n  Add to your .bashrc: eval \"$(ntm shell bash)\"\n\nUsage:\n  ntm [flags]\n  ntm [command]\n\nAvailable Commands:\n  activity             Show agent activity states in a session\n  add                  Add more agents to an existing session\n  adopt                Adopt an external tmux session for NTM management\n  agents               Manage agent profiles and capabilities\n  analytics            View session analytics and statistics\n  approve              Manage approval requests for dangerous operations\n  assign               Intelligently assign work to agents based on BV triage\n  attach               Attach to a tmux session\n  beads                Manage the beads (bd) daemon for issue tracking sync\n  bind                 Set up tmux keybinding for command palette\n  bugs                 View and manage UBS (Ultimate Bug Scanner) findings\n  cass                 Interact with CASS (Coding Agent Session Search)\n  changes              Show recent file changes attributed to agents\n  checkpoint           Manage session checkpoints\n  cleanup              Clean up stale NTM temporary files and directories\n  completion           Generate shell completion script\n  config               Manage configuration\n  conflicts            Show potential file conflicts between agents\n  context              Manage context packs for agent tasks\n  controller           Launch a dedicated controller agent in pane 1\n  coordinator          Manage session coordination for multi-agent workflows\n...\n</persisted-output>","is_error":false}
+{"type":"message_uuid","uuid":"31369b5b-b5ad-4260-853e-4f2013d8d44d","messageType":"user"}
+{"type":"tool_result","id":"toolu_01KegcaXDjeza8aQRyYjLs2N","content":"ant='ntm add'\nbp='ntm send'\ncnt='ntm create'\ncpnt='ntm copy'\ndnt='ntm deps'\nint='ntm interrupt'\nknt='ntm kill'\nlnt='ntm list'\nmcp-cli='/home/skogix/.npm/_npx/f6ff960d1cc726b6/node_modules/\\@anthropic-ai/claude-agent-sdk/cli.js --mcp-cli'\nncp='ntm palette'\nqps='ntm quick'\nrnt='ntm attach'\nsat='ntm spawn'\nsnt='ntm status'\nsvnt='ntm save'\nvnt='ntm view'\nznt='ntm zoom'","is_error":false}
+{"type":"tool_start","id":"toolu_01GbBoG4UDrQtLkB46JHKxva","name":"Read"}
+{"type":"message_uuid","uuid":"74311381-6604-45f8-b6db-8971e3292666","messageType":"assistant"}
+{"type":"tool_executing","id":"toolu_01GbBoG4UDrQtLkB46JHKxva","name":"Read","input":{"file_path":"/skogai/config/claude/projects/-home-skogix-claude/7ad30fd4-0b11-4c60-9df1-33106cae4aed/tool-results/b132ed4.txt"}}
+{"type":"message_uuid","uuid":"f29e36ef-f152-4949-821a-0a7d963dd940","messageType":"user"}
+{"type":"tool_result","id":"toolu_01GbBoG4UDrQtLkB46JHKxva","content":"     1→NTM (Named Tmux Manager) helps you create and manage tmux sessions\n     2→with multiple AI coding agents (Claude, Codex, Gemini) in separate panes.\n     3→\n     4→Quick Start:\n     5→  ntm spawn myproject --cc=2 --cod=2    # Create session with 4 agents\n     6→  ntm attach myproject                   # Attach to session\n     7→  ntm palette                            # Open command palette (TUI)\n     8→  ntm send myproject --all \"fix bugs\"   # Broadcast prompt to all agents\n     9→\n    10→Shell Integration:\n    11→  Add to your .zshrc:  eval \"$(ntm shell zsh)\"\n    12→  Add to your .bashrc: eval \"$(ntm shell bash)\"\n    13→\n    14→Usage:\n    15→  ntm [flags]\n    16→  ntm [command]\n    17→\n    18→Available Commands:\n    19→  activity             Show agent activity states in a session\n    20→  add                  Add more agents to an existing session\n    21→  adopt                Adopt an external tmux session for NTM management\n    22→  agents               Manage agent profiles and capabilities\n    23→  analytics            View session analytics and statistics\n    24→  approve              Manage approval requests for dangerous operations\n    25→  assign               Intelligently assign work to agents based on BV triage\n    26→  attach               Attach to a tmux session\n    27→  beads                Manage the beads (bd) daemon for issue tracking sync\n    28→  bind                 Set up tmux keybinding for command palette\n    29→  bugs                 View and manage UBS (Ultimate Bug Scanner) findings\n    30→  cass                 Interact with CASS (Coding Agent Session Search)\n    31→  changes              Show recent file changes attributed to agents\n    32→  checkpoint           Manage session checkpoints\n    33→  cleanup              Clean up stale NTM temporary files and directories\n    34→  completion           Generate shell completion script\n    35→  config               Manage configuration\n    36→  conflicts            Show potential file conflicts between agents\n    37→  context              Manage context packs for agent tasks\n    38→  controller           Launch a dedicated controller agent in pane 1\n    39→  coordinator          Manage session coordination for multi-agent workflows\n    40→  copy                 Copy pane output to clipboard\n    41→  create               Create a new tmux session with multiple panes\n    42→  dashboard            Open interactive session dashboard\n    43→  deps                 Check for required dependencies and agent CLIs\n    44→  diff                 Compare output from two agent panes\n    45→  doctor               Validate the NTM ecosystem health\n    46→  ensemble             Manage reasoning ensembles\n    47→  errors               Show only error output from agents\n    48→  extract              Extract code blocks from agent output\n    49→  get-all-session-text Get text from all panes across all sessions as markdown table\n    50→  git                  Git coordination commands\n    51→  grep                 Search pane output with regex\n    52→  guards               Manage Agent Mail pre-commit guards\n    53→  handoff              Create or manage session handoffs\n    54→  health               Check health status of agents in a session\n    55→  help                 Help about any command\n    56→  history              View prompt history\n    57→  hooks                Manage git hooks for quality checks and coordination\n    58→  init                 Initialize NTM for a project directory\n    59→  interrupt            Send Ctrl+C to all agent panes\n    60→  kernel               Inspect the command kernel registry\n    61→  kill                 Kill a tmux session\n    62→  level                View and change CLI proficiency tier\n    63→  list                 List all tmux sessions\n    64→  lock                 Reserve files for editing via Agent Mail\n    65→  locks                Manage file reservations\n    66→  logs                 Aggregate and filter logs from all agents\n    67→  mail                 Human Overseer messaging to agents\n    68→  memory               Interact with CASS Memory (cm) system\n    69→  message              Unified messaging (Agent Mail + BD)\n    70→  metrics              View and manage success metrics\n    71→  modes                Browse and explore reasoning modes\n    72→  openapi              OpenAPI specification management\n    73→  palette              Open the interactive command palette\n    74→  personas             Manage agent personas\n    75→  personas             Manage agent personas\n    76→  pipeline             Run and manage workflow pipelines\n    77→  plugins              Manage and list installed plugins\n    78→  policy               Manage NTM policy configuration\n    79→  preflight            Validate a prompt before sending\n    80→  profiles             Manage agent profiles (alias for 'personas')\n    81→  quick                Quick project setup with git, VSCode, and Claude config\n    82→  quota                Check agent quota usage\n    83→  recipes              Manage session recipes (presets)\n    84→  replay               Replay a prompt from history\n    85→  repo                 Repo management commands\n    86→  respawn              Kill and restart worker agents in a session\n    87→  resume               Resume work from a handoff\n    88→  rollback             Restore session to a checkpoint state\n    89→  rotate               Rotate to a different account when rate limited\n    90→  safety               Manage destructive command protection\n    91→  save                 Save pane outputs to files\n    92→  scan                 Run UBS (Ultimate Bug Scanner) on your codebase\n    93→  scrub                Scan NTM artifacts for leaked secrets (read-only)\n    94→  search               Search archived agent output via CASS\n    95→  send                 Send a prompt to agent panes\n    96→  serve                Start HTTP server with REST API and event streaming\n    97→  session-templates    Manage session templates (multi-agent configurations)\n    98→  sessions             Manage saved session states\n    99→  setup                Initialize NTM for a project\n   100→  shell                Generate shell integration script\n   101→  spawn                Create session and spawn AI agents in panes\n   102→  status               Show detailed status of a session\n   103→  summary              Show activity summary for agents in a session\n   104→  support-bundle       Generate a support bundle for debugging\n   105→  swarm                Orchestrate weighted multi-project agent swarm\n   106→  template             Manage prompt templates\n   107→  tutorial             Start the interactive NTM tutorial\n   108→  unlock               Release file reservations\n   109→  upgrade              Upgrade NTM to the latest version\n   110→  version              Print version information\n   111→  view                 View all panes in a session (unzoom, tile, attach)\n   112→  wait                 Wait until agents reach a desired state\n   113→  watch                Stream agent output or watch files to trigger commands\n   114→  work                 Intelligent work distribution commands\n   115→  workflows            Manage workflow templates (orchestration patterns)\n   116→  worktree             Manage git worktrees for agent isolation\n   117→  worktrees            Manage Git worktrees for agent isolation\n   118→  zoom                 Zoom a specific pane in a session\n   119→\n   120→Flags:\n   121→      --activity-type string            Filter by agent type: claude, codex, gemini. Optional with --robot-activity. Example: --activity-type=claude\n   122→      --agent string                    Filter by agent type: claude, codex, gemini, cursor, etc.\n   123→      --agents string                   Agent mix for ensemble spawn (e.g., cc=2,cod=1,gmi=1)\n   124→      --alert-threshold string          Provider usage % for ALERT level. Optional with --robot-monitor. Example: --alert-threshold=80 (default 80)\n   125→      --all                             Include user pane (default: agents only). Optional with --robot-send, --robot-interrupt\n   126→      --allocation string               Explicit pane->bead allocation JSON. Alternative to --from-bv. Example: --allocation='{\"2\":\"bd-abc\"}'\n   127→      --allow-advanced                  Allow advanced/experimental modes with --robot-ensemble-spawn\n   128→      --allow-secret                    Bypass 'block' mode for this invocation (use with caution)\n   129→      --any                             Match ANY instead of ALL\n   130→      --assignee string                 Filter by assignee\n   131→      --assignment string               Assignment strategy for ensemble spawn: round-robin, affinity, category, explicit (default \"affinity\")\n   132→      --background                      Run in background\n   133→      --bead-assignee string            Assignee for claim. Optional with --robot-bead-claim\n   134→      --bead-close-reason string        Reason for closing. Optional with --robot-bead-close\n   135→      --bead-depends-on string          Comma-separated dependency bead IDs. Optional with --robot-bead-create\n   136→      --bead-description string         Description for new bead. Optional with --robot-bead-create\n   137→      --bead-labels string              Comma-separated labels. Optional with --robot-bead-create. Example: --bead-labels=backend,api\n   138→      --bead-priority int               Priority 0-4 (0=critical, 4=backlog). Optional with --robot-bead-create (default 2)\n   139→      --bead-title string               Title for new bead. Required with --robot-bead-create\n   140→      --bead-type string                Type: task, bug, feature, epic, chore. Optional with --robot-bead-create (default \"task\")\n   141→      --beads string                    Specific bead IDs to assign (comma-separated). Optional with --robot-assign. Example: --beads=ntm-abc,ntm-xyz\n   142→      --brief                           Minimal output (summary only)\n   143→      --budget-per-agent int            Override per-agent token cap for ensemble spawn\n   144→      --budget-total int                Override total token budget for ensemble spawn\n   145→      --bundle-format string            Archive format: zip or tar.gz. Optional with --robot-support-bundle (default \"zip\")\n   146→      --bundle-lines int                Max scrollback lines per pane. Optional with --robot-support-bundle. Example: --bundle-lines=500 (default 1000)\n   147→      --bundle-max-size int             Max bundle size in MB. Optional with --robot-support-bundle. Example: --bundle-max-size=50 (default 100)\n   148→      --bundle-output string            Output file path for bundle. Optional with --robot-support-bundle. Example: --bundle-output=/tmp/debug.zip\n   149→      --bundle-redact string            Redaction mode: off, warn, redact, block. Optional with --robot-support-bundle (default \"redact\")\n   150→      --bundle-since string             Include content from duration ago. Optional with --robot-support-bundle. Example: --bundle-since=1h\n   151→      --category string                 Filter by category\n   152→      --cmd string                      DEPRECATED: use --command\n   153→      --code                            Parse code blocks from output\n   154→      --command string                  Command to preflight with --robot-dcg-check / --robot-guard (no execution). Example: --command='rm -rf /tmp'\n   155→      --compact                         Ultra-compact output format\n   156→      --condition string                Alias for --wait-until. Wait condition: idle, complete, generating, healthy (default \"idle\")\n   157→      --config string                   config file (default ~/.config/ntm/config.toml)\n   158→      --controller-agent-type string    Agent type for controller: cc, cod, gmi. Use with --robot-controller-spawn (default \"cc\")\n   159→      --controller-no-prompt            Skip initial prompt. Use with --robot-controller-spawn\n   160→      --controller-prompt string        Custom prompt file. Use with --robot-controller-spawn\n   161→      --crit-threshold string           Context % for CRITICAL level. Optional with --robot-monitor. Example: --crit-threshold=15 (default 15)\n   162→      --days int                        Number of days to analyze (default 30)\n   163→      --delay-ms int                    Delay between sends (ms). Optional with --robot-send. Example: --delay-ms=500 for 0.5s between panes\n   164→      --dry-run                         Preview mode: show what would happen without executing. Use with --robot-send, --robot-interrupt, --robot-spawn, --robot-restore, --robot-restart-pane\n   165→      --enter                           Send Enter after pasting message (default: true). Use --enter=false to paste without submitting (default true)\n   166→      --errors-since string             Filter to errors from last duration. Optional with --robot-errors. Example: --errors-since=5m\n   167→      --exclude string                  Exclude pane indices (comma-separated). Optional with --robot-send. Example: --exclude=0,3\n   168→      --exit-on-error                   Alias for --wait-exit-on-error. Exit immediately if ERROR state detected\n   169→      --fix                             Attempt auto-fix for fixable issues\n   170→      --force                           DANGEROUS: Force restart even if agent is working. Optional with --robot-smart-restart. Use with extreme caution!\n   171→      --from-bv                         Use bv triage for bead selection. Use with --robot-bulk-assign\n   172→      --full                            Show full help with all commands (default behavior)\n   173→      --group-by string                 Grouping: agent, model, day, week, month (default \"agent\")\n   174→  -h, --help                            help for ntm\n   175→      --id string                       Entry ID for replay\n   176→      --include-bodies                  Include full message bodies. Optional with --robot-mail-check\n   177→      --include-caut                    Query caut for provider usage data. Optional with --robot-monitor\n   178→      --index int                       Pane index to inspect\n   179→      --info-threshold string           Context % for INFO level. Optional with --robot-monitor. Example: --info-threshold=40 (default 40)\n   180→      --interval string                 Polling interval for --robot-monitor. Example: --interval=30s (default 30s)\n   181→      --json                            Output in JSON format (machine-readable)\n   182→      --last int                        Show last N entries\n   183→      --limit int                       Max results to return (default varies by command) (default 10)\n   184→      --lines int                       Lines to capture per pane. Optional with --robot-tail, --robot-errors. Example: --lines=100 (default 20)\n   185→      --logs-limit int                  Max lines per pane. Use with --robot-logs. Example: --logs-limit=50 (default 100)\n   186→      --logs-panes string               Filter to specific pane indices (comma-separated). Use with --robot-logs. Example: --logs-panes=1,2,3\n   187→      --mail-agent string               Filter to specific agent inbox. Optional with --robot-mail-check. Example: --mail-agent=cc_1\n   188→      --mail-offset int                 Skip first N messages for pagination. Optional with --robot-mail-check. Example: --mail-offset=20\n   189→      --mail-project string             Project for mail check. Required with --robot-mail-check. Example: --mail-project=myproject\n   190→      --mail-status string              Filter by read status: read, unread, all. Optional with --robot-mail-check. Example: --mail-status=unread\n   191→      --mail-until string               Filter to messages before date (YYYY-MM-DD). Optional with --robot-mail-check. Example: --mail-until=2025-12-31\n   192→      --mail-verbose                    Include extra details in output. Optional with --robot-mail-check\n   193→      --max-alerts int                  Max alerts to show\n   194→      --max-beads int                   Max beads to show\n   195→      --minimal                         Show minimal help with essential commands only (spawn, send, status, kill, help)\n   196→      --modes string                    Explicit mode IDs or codes (comma-separated). Used with --robot-ensemble-spawn\n   197→      --msg string                      Message content to send. Required with --robot-send unless --msg-file is set. Optional with --robot-ack (enables echo detection)\n   198→      --msg-file string                 Read message content from file (use with --robot-send)\n   199→      --no-cache                        Bypass context cache for ensemble spawn\n   200→      --no-caut                         Skip caut provider query for faster local-only health check. Optional with --robot-agent-health\n   201→      --no-color                        Disable colored output\n   202→      --no-questions                    Skip targeted questions during ensemble spawn (future)\n   203→      --no-wait                         Return immediately without waiting\n   204→      --offset int                      Pagination offset (default 0)\n   205→      --output string                   Output file path for JSONL. Optional with --robot-monitor. Example: --output=/tmp/monitor.jsonl\n   206→      --pane string                     Filter by pane ID. Optional with --robot-history and --robot-switch-account\n   207→      --panes string                    Filter to specific pane indices. Optional with --robot-tail, --robot-errors, --robot-send, --robot-ack, --robot-interrupt, --robot-is-working. Example: --panes=1,2\n   208→      --period string                   Time period: 1h, 24h, 7d, all (default \"24h\")\n   209→      --poll string                     Polling interval (default \"2s\")\n   210→      --preset string                   Ensemble preset name. Required with --robot-ensemble-spawn unless --modes is set\n   211→      --priority string                 Filter by priority: 0-4 or P0-P4\n   212→      --probe-aggressive                Fallback to interrupt_test if keystroke_echo fails (used with --robot-probe)\n   213→      --probe-method string             Probe method: keystroke_echo, interrupt_test (used with --robot-probe)\n   214→      --probe-timeout int               Probe timeout in ms (100-60000, used with --robot-probe)\n   215→      --profile-startup                 Enable startup profiling (outputs timing data)\n   216→      --project string                  Project directory override for ensemble spawn\n   217→      --prompt string                   Send this prompt to the agent after restart. Optional with --robot-smart-restart\n   218→      --provider string                 Filter by provider: claude, openai, google\n   219→      --question string                 Question for ensemble spawn. Required with --robot-ensemble-spawn\n   220→      --rano-window string              Time window for --robot-rano-stats (e.g., 5m, 1h) (default \"5m\")\n   221→      --redact string                   Redaction mode override: off, warn, redact, block\n   222→      --restart-bead string             Assign bead to agent after restart. Fetches info via br show --json, sends prompt. Use with --robot-restart-pane. Example: --restart-bead=bd-abc12\n   223→      --restart-prompt string           Custom prompt to send after restart. Overrides --restart-bead template. Use with --robot-restart-pane\n   224→      --robot-account-status            Show CAAM account status per provider. JSON output. Example: ntm --robot-account-status\n   225→      --robot-accounts-list             List all CAAM accounts. JSON output. Example: ntm --robot-accounts-list\n   226→      --robot-ack string                Watch for agent responses after send. Required: SESSION. Example: ntm --robot-ack=proj --ack-timeout=30s\n   227→      --robot-activity string           Get agent activity state (idle/busy/error). Required: SESSION. Example: ntm --robot-activity=myproject\n   228→      --robot-agent-health string       Comprehensive agent health check combining local state and provider usage. Required: SESSION. Example: ntm --robot-agent-health=myproject --panes=2,3\n   229→      --robot-alerts                    List active alerts with filtering. TUI parity for Alerts panel. Example: ntm --robot-alerts --alerts-severity=critical\n   230→      --robot-assign string             Get work distribution recommendations. Required: SESSION. Example: ntm --robot-assign=proj --strategy=speed\n   231→      --robot-bead-claim string         Claim a bead by ID. Example: ntm --robot-bead-claim=ntm-abc123\n   232→      --robot-bead-close string         Close a bead by ID. Example: ntm --robot-bead-close=ntm-abc123\n   233→      --robot-bead-create               Create a new bead. Requires --bead-title. Example: ntm --robot-bead-create --bead-title='Fix bug'\n   234→      --robot-bead-show string          Show bead details. Example: ntm --robot-bead-show=ntm-abc123\n   235→      --robot-beads-list                List beads with filtering. TUI parity for Beads panel. Example: ntm --robot-beads-list --beads-status=open\n   236→      --robot-bulk-assign string        Bulk assign beads to all idle agents. Required: SESSION. Example: ntm --robot-bulk-assign=proj --from-bv\n   237→      --robot-capabilities              Get all available robot commands with parameters and descriptions (JSON). Machine-discoverable API\n   238→      --robot-cass-context string       Get relevant past context for a task. Example: ntm --robot-cass-context='how to implement auth'\n   239→      --robot-cass-insights             Get CASS aggregated insights: topics, patterns, agent activity (JSON)\n   240→      --robot-cass-search string        Search past agent conversations. Required: QUERY. Example: ntm --robot-cass-search='authentication error'\n   241→      --robot-cass-status               Get CASS health: index status, message counts, freshness (JSON)\n   242→      --robot-context string            Get context window usage for all agents in a session. Required: SESSION. Example: ntm --robot-context=myproject\n   243→      --robot-controller-spawn string   Launch controller agent in session. Required: SESSION. Example: ntm --robot-controller-spawn=proj\n   244→      --robot-dashboard                 Get dashboard summary as markdown (or JSON with --json). Token-efficient overview\n   245→      --robot-dcg-check                 Preflight a shell command via dcg (no execution). JSON output. Requires --command.\n   246→      --robot-dcg-status                Show DCG status and configuration. JSON output. Example: ntm --robot-dcg-status\n   247→      --robot-diagnose string           Comprehensive health check with fix recommendations. Required: SESSION. Example: ntm --robot-diagnose=myproject\n   248→      --robot-diff string               Compare agent activity and file changes. Required: SESSION. Example: ntm --robot-diff=myproject --diff-since=10m\n   249→      --robot-dismiss-alert string      Dismiss an alert by ID. Example: ntm --robot-dismiss-alert=alert-abc123\n   250→      --robot-docs string               Get documentation for a topic (JSON). Topics: quickstart, commands, examples, exit-codes. Example: ntm --robot-docs=quickstart\n   251→      --robot-ensemble string           Get ensemble state for a session. Required: SESSION. Example: ntm --robot-ensemble=myproject\n   252→      --robot-ensemble-modes            List reasoning modes (JSON). Optional: --tier, --category, --limit, --offset\n   253→      --robot-ensemble-presets          List ensemble presets (JSON). Example: ntm --robot-ensemble-presets\n   254→      --robot-ensemble-spawn string     Spawn a reasoning ensemble. Required: SESSION. Example: ntm --robot-ensemble-spawn=myproject --preset=project-diagnosis --question='...'\n   255→      --robot-ensemble-stop string      Stop an ensemble and save partial state. Required: SESSION. Example: ntm --robot-ensemble-stop=myproject\n   256→      --robot-ensemble-suggest string   Suggest best ensemble preset for a question. Example: ntm --robot-ensemble-suggest=\"What security issues exist?\"\n   257→      --robot-env string                Environment info for agent operation. Pass session name or 'global'. JSON output. Example: ntm --robot-env=myproject\n   258→      --robot-errors string             Filter pane output to show only errors. Required: SESSION. Example: ntm --robot-errors=myproject --lines=100\n   259→      --robot-file-beads string         Get beads that touched a file path. Required: FILE_PATH. Example: ntm --robot-file-beads=src/main.go\n   260→      --robot-file-hotspots             Get files touched by most beads (quality hotspots) (JSON)\n   261→      --robot-file-relations string     Get files that co-change with given file. Required: FILE_PATH. Example: ntm --robot-file-relations=src/api.go\n   262→      --robot-files string              Get file changes with agent attribution. Optional SESSION filter. Example: ntm --robot-files=myproject --files-window=15m\n   263→      --robot-forecast string           Get ETA predictions. Use 'all' or specific ID. Example: ntm --robot-forecast=br-123\n   264→      --robot-format string             Output format for robot commands: json (default), toon (token-efficient), or auto. Env: NTM_ROBOT_FORMAT, NTM_OUTPUT_FORMAT, TOON_DEFAULT_FORMAT\n   265→      --robot-graph                     Get bv dependency graph insights: PageRank, critical path, cycles (JSON)\n   266→      --robot-guard                     DEPRECATED: use --robot-dcg-check\n   267→      --robot-health string             Get session or project health (JSON). SESSION for per-agent health, empty for project health. Example: ntm --robot-health=myproject\n   268→      --robot-health-oauth string       Get per-agent OAuth and rate-limit status (JSON). Required: SESSION. Example: ntm --robot-health-oauth=myproject\n   269→      --robot-help                      Show comprehensive AI agent integration guide with examples (JSON)\n   270→      --robot-history string            Get command history for a session (JSON). Required: SESSION. Example: ntm --robot-history=myproject\n   271→      --robot-impact string             Get file impact analysis. Required: FILE_PATH. Example: ntm --robot-impact=src/main.go\n   272→      --robot-inspect-pane string       Detailed pane inspection. Required: SESSION. Example: ntm --robot-inspect-pane=myproject --inspect-index=1\n   273→      --robot-interrupt string          Send Ctrl+C to stop agents, optionally send new task. Required: SESSION. Example: ntm --robot-interrupt=proj --interrupt-msg='Stop and fix bug'\n   274→      --robot-is-working string         Check if agents are working. Returns work state with recommendations. Required: SESSION. Example: ntm --robot-is-working=myproject --panes=2,3\n   275→      --robot-jfp-bundles               List all prompt bundles (JSON)\n   276→      --robot-jfp-categories            List all prompt categories with counts (JSON)\n   277→      --robot-jfp-installed             List installed Claude Code skills (JSON)\n   278→      --robot-jfp-list                  List all prompts from JeffreysPrompts registry (JSON)\n   279→      --robot-jfp-search string         Search prompts. Required: QUERY. Example: ntm --robot-jfp-search='debugging'\n   280→      --robot-jfp-show string           Show prompt details. Required: ID. Example: ntm --robot-jfp-show='prompt-123'\n   281→      --robot-jfp-status                Get JFP health: installation status, registry connectivity (JSON)\n   282→      --robot-jfp-suggest string        Get prompt suggestions for a task. Required: TASK. Example: ntm --robot-jfp-suggest='build a REST API'\n   283→      --robot-jfp-tags                  List all prompt tags with counts (JSON)\n   284→      --robot-label-attention           Get attention-ranked labels by impact and urgency (JSON)\n   285→      --robot-label-flow                Get cross-label dependency flow matrix and bottleneck analysis (JSON)\n   286→      --robot-label-health              Get per-label health analysis: velocity, staleness, blocked count (JSON)\n   287→      --robot-limit int                 Max items to return for robot list outputs (status, snapshot, history). Example: --robot-limit=10\n   288→      --robot-logs string               Get aggregated logs from all agent panes (JSON). Required: SESSION. Example: ntm --robot-logs=myproject\n   289→      --robot-mail                      Get Agent Mail inbox/outbox state (JSON). Shows pending messages and coordination status\n   290→      --robot-mail-check                Check agent inboxes via Agent Mail. Requires --mail-project. JSON output. Example: ntm --robot-mail-check --mail-project=myproject\n   291→      --robot-markdown                  System state as markdown tables. LLM-friendly, ~50% fewer tokens than JSON\n   292→      --robot-metrics string            Session metrics export. Optional SESSION. Example: ntm --robot-metrics=myproject --metrics-period=24h\n   293→      --robot-monitor string            Start proactive monitoring for usage limits. Emits JSONL warnings. Required: SESSION. Example: ntm --robot-monitor=myproject --interval=30s\n   294→      --robot-ms-search string          Search Meta Skill catalog. Required: QUERY. Example: ntm --robot-ms-search='commit workflow'\n   295→      --robot-ms-show string            Show Meta Skill details. Required: ID. Example: ntm --robot-ms-show='commit-and-release'\n   296→      --robot-offset int                Pagination offset for robot list outputs (status, snapshot, history). Example: --robot-offset=20\n   297→      --robot-palette                   Query palette commands. Example: ntm --robot-palette --palette-category=quick\n   298→      --robot-pipeline string           Get pipeline status. Required: RUN_ID. Example: ntm --robot-pipeline=run-20241230-123456-abcd\n   299→      --robot-pipeline-cancel string    Cancel a running pipeline. Required: RUN_ID. Example: ntm --robot-pipeline-cancel=run-20241230-123456-abcd\n   300→      --robot-pipeline-list             List all tracked pipelines. Example: ntm --robot-pipeline-list\n   301→      --robot-pipeline-run string       Run a workflow. Required: WORKFLOW_FILE, --pipeline-session. Example: ntm --robot-pipeline-run=workflow.yaml --pipeline-session=proj\n   302→      --robot-plan                      Get bv execution plan with parallelizable tracks (JSON). Example: ntm --robot-plan\n   303→      --robot-probe string              Probe pane responsiveness. Required: SESSION. Example: ntm --robot-probe=proj --panes=1,2\n   304→      --robot-quota-check               Check quota for specific provider. JSON output. Example: ntm --robot-quota-check --quota-check-provider=claude\n   305→      --robot-quota-status              Show caut quota status for all providers. JSON output. Example: ntm --robot-quota-status\n   306→      --robot-rano-stats                Get per-agent network stats via rano. JSON output. Example: ntm --robot-rano-stats\n   307→      --robot-rch-status                Get RCH status summary (JSON). Example: ntm --robot-rch-status\n   308→      --robot-rch-workers               List RCH workers (JSON). Example: ntm --robot-rch-workers\n   309→      --robot-recipes                   List available spawn recipes/presets (JSON). Use with --robot-spawn --spawn-preset\n   310→      --robot-replay string             Replay command from history. Required: SESSION. Use with --replay-id. Example: ntm --robot-replay=myproject --replay-id=1735830245123-a1b2c3d4\n   311→      --robot-restart-pane string       Restart pane process (kill and respawn). Required: SESSION. Example: ntm --robot-restart-pane=proj --panes=1,2\n   312→      --robot-restore string            Restore session from saved state. Required: path to save file. Example: ntm --robot-restore=backup.json\n   313→      --robot-route string              Get routing recommendation. Required: SESSION. Example: ntm --robot-route=myproject --route-strategy=least-loaded\n   314→      --robot-ru-sync                   Run ru sync with JSON output. Optional with --dry-run. Example: ntm --robot-ru-sync\n   315→      --robot-save string               Save session state for later restore. Required: SESSION. Example: ntm --robot-save=proj --save-output=backup.json\n   316→      --robot-schema string             Generate JSON Schema for response types. Required: TYPE (status, send, spawn, interrupt, tail, ack, snapshot, ensemble, ensemble_spawn, all)\n   317→      --robot-search string             Semantic vector search. Required: QUERY. Example: ntm --robot-search='authentication bug'\n   318→      --robot-send string               Send message to panes atomically. Required: SESSION, --msg or --msg-file. Example: ntm --robot-send=proj --msg='Fix auth'\n   319→      --robot-smart-restart string      SAFE restart: checks --robot-is-working first, refuses to interrupt working agents. Required: SESSION. Example: ntm --robot-smart-restart=myproject --panes=2,3\n   320→      --robot-snapshot                  Unified state: sessions + beads + alerts + mail. Use --since for delta. Example: ntm --robot-snapshot\n   321→      --robot-spawn string              Create session with agents. Required: SESSION name. Example: ntm --robot-spawn=myproject --spawn-cc=2\n   322→      --robot-status                    Get tmux sessions, panes, agent states. Start here. Example: ntm --robot-status\n   323→      --robot-suggest                   Get hygiene suggestions: duplicates, missing deps, label suggestions (JSON)\n   324→      --robot-summary string            Get session activity summary with agent metrics. Required: SESSION. Example: ntm --robot-summary=myproject --summary-since=30m\n   325→      --robot-support-bundle string     Generate support bundle with diagnostic info. Optional: SESSION. Example: ntm --robot-support-bundle=myproject\n   326→      --robot-switch-account string     Switch CAAM account for provider. Format: provider or provider:account. Example: ntm --robot-switch-account=claude\n   327→      --robot-tail string               Capture recent pane output. Required: SESSION. Example: ntm --robot-tail=myproject --lines=50\n   328→      --robot-terse                     Single-line state: S:session|A:ready/total|W:working|I:idle|B:beads|M:mail|!:alerts. Minimal tokens\n   329→      --robot-tokens                    Get token usage statistics (JSON). Group by agent, model, or time period\n   330→      --robot-tools                     Get tool inventory with health status (JSON). Shows all registered flywheel tools\n   331→      --robot-triage                    Get bv triage analysis with recommendations, quick wins, blockers (JSON). Example: ntm --robot-triage --triage-limit=20\n   332→      --robot-verbosity string          Robot verbosity profile for JSON/TOON: terse, default, or debug. Env: NTM_ROBOT_VERBOSITY\n   333→      --robot-version                   Get ntm version, commit, build info (JSON). Example: ntm --robot-version\n   334→      --robot-wait string               Wait for agents to reach state. Required: SESSION. Example: ntm --robot-wait=myproject --wait-until=idle\n   335→      --schema string                   Alias for --robot-schema. Generate JSON Schema for response types\n   336→      --search string                   Search query for palette commands\n   337→      --sections string                 Include only specific sections\n   338→      --severity string                 Filter by severity: info, warning, error, critical\n   339→      --since string                    RFC3339 timestamp for delta snapshot. Optional with --robot-snapshot. Example: --since=2025-12-15T10:00:00Z\n   340→      --skip string                     Pane indices to skip (comma-separated)\n   341→      --spawn-assign-work               Enable orchestrator work assignment: get bv triage, claim beads, send work prompts to agents\n   342→      --spawn-cc int                    Claude Code agents to spawn. Use with --robot-spawn. Example: --spawn-cc=2\n   343→      --spawn-cod int                   Codex CLI agents to spawn. Use with --robot-spawn. Example: --spawn-cod=1\n   344→      --spawn-dir string                Working directory for spawned session. Use with --robot-spawn. Example: --spawn-dir=/path/to/project\n   345→      --spawn-gmi int                   Gemini CLI agents to spawn. Use with --robot-spawn. Example: --spawn-gmi=1\n   346→      --spawn-no-user                   Skip user pane creation. Optional with --robot-spawn. For headless/automation\n   347→      --spawn-preset string             Use recipe preset instead of counts. See --robot-recipes. Example: --spawn-preset=standard\n   348→      --spawn-safety                    Fail if session already exists. Prevents accidental reuse of existing sessions\n   349→      --spawn-wait                      Wait for agents to show ready state before returning. Recommended for automation\n   350→      --ssh string                      Remote host for SSH execution (e.g. user@host)\n   351→      --stats                           Show statistics instead of entries\n   352→      --status string                   Filter by status: open, in_progress, closed, blocked\n   353→      --stop-force                      Force kill without graceful shutdown. Optional with --robot-ensemble-stop\n   354→      --stop-no-collect                 Skip partial output collection. Optional with --robot-ensemble-stop\n   355→      --strategy string                 Assignment strategy: balanced (default), speed, quality, dependency. Optional with --robot-assign (default \"balanced\")\n   356→      --submit                          Alias for --enter (default true)\n   357→      --suggest-id-only                 Output only preset name with --robot-ensemble-suggest\n   358→      --tag string                      Filter by tag\n   359→      --template string                 Custom prompt template file\n   360→      --thread string                   Filter to specific thread. Optional with --robot-mail-check. Example: --thread=TKT-api-design\n   361→      --threshold float                 Correlation threshold (0.0-1.0) (default 0.5)\n   362→      --tier string                     Filter by tier: core, advanced, experimental, all (used with --robot-ensemble-modes)\n   363→      --timeout string                  Maximum wait/operation timeout (default \"5m\")\n   364→      --track                           Combined send+ack: send --msg and wait for response. Use with --robot-send. Example: ntm --robot-send=proj --msg='hello' --track\n   365→      --transition                      Alias for --wait-transition\n   366→      --type string                     Filter by agent type: claude|cc, codex|cod, gemini|gmi, cursor, windsurf, aider. Works with --robot-send, --robot-ack, --robot-interrupt\n   367→      --urgent-only                     Only show urgent/high-priority messages. Optional with --robot-mail-check\n   368→      --vars string                     JSON variables for pipeline\n   369→      --verbose                         Include detailed/verbose output\n   370→      --wait-exit-on-error              Exit immediately if ERROR state detected. Optional with --robot-wait\n   371→      --wait-transition                 Require state transition: agents must leave then return to target state. Use after sending prompts to wait for complete processing cycle. Optional with --robot-wait\n   372→      --wait-until string               Wait condition: idle, complete, generating, healthy. Optional with --robot-wait. Example: --wait-until=idle (default \"idle\")\n   373→      --warn-threshold string           Context % for WARNING level. Optional with --robot-monitor. Example: --warn-threshold=25 (default 25)\n   374→      --window string                   Time window: 5m, 15m, 1h, all (default \"15m\")\n   375→      --worker string                   Filter to a specific RCH worker by name. Optional with --robot-rch-workers\n   376→      --workspace string                Filter by workspace/project path\n   377→\n   378→Use \"ntm [command] --help\" for more information about a command.\n   379→","is_error":false}
+{"type":"thinking_start"}
+{"type":"thinking_delta","text":"Now I have"}
+{"type":"thinking_delta","text":" a clear picture"}
+{"type":"thinking_delta","text":"."}
+{"type":"thinking_delta","text":" All"}
+{"type":"thinking_delta","text":" "}
+{"type":"thinking_delta","text":"16"}
+{"type":"thinking_delta","text":" commands are aliases"}
+{"type":"thinking_delta","text":" for `"}
+{"type":"thinking_delta","text":"ntm`"}
+{"type":"thinking_delta","text":" ("}
+{"type":"thinking_delta","text":"Named"}
+{"type":"thinking_delta","text":" Tm"}
+{"type":"thinking_delta","text":"ux Manager"}
+{"type":"thinking_delta","text":")"}
+{"type":"thinking_delta","text":" sub"}
+{"type":"thinking_delta","text":"commands."}
+{"type":"thinking_delta","text":" `"}
+{"type":"thinking_delta","text":"ntm` is a"}
+{"type":"thinking_delta","text":" massive"}
+{"type":"thinking_delta","text":" multi"}
+{"type":"thinking_delta","text":"-agent"}
+{"type":"thinking_delta","text":" orchest"}
+{"type":"thinking_delta","text":"ration tool for"}
+{"type":"thinking_delta","text":" managing"}
+{"type":"thinking_delta","text":" AI"}
+{"type":"thinking_delta","text":" coding"}
+{"type":"thinking_delta","text":" agents ("}
+{"type":"thinking_delta","text":"Claude"}
+{"type":"thinking_delta","text":", Codex, Gemini"}
+{"type":"thinking_delta","text":")"}
+{"type":"thinking_delta","text":" in"}
+{"type":"thinking_delta","text":" tmux sessions"}
+{"type":"thinking_delta","text":".\n\nLet"}
+{"type":"thinking_delta","text":" me also"}
+{"type":"thinking_delta","text":" check what"}
+{"type":"thinking_delta","text":" `"}
+{"type":"thinking_delta","text":"c"}
+{"type":"thinking_delta","text":"ad"}
+{"type":"thinking_delta","text":"` might"}
+{"type":"thinking_delta","text":" be since"}
+{"type":"thinking_delta","text":" it wasn"}
+{"type":"thinking_delta","text":"'t found"}
+{"type":"thinking_delta","text":"."}
+{"type":"thinking_delta","text":"\n\nLet"}
+{"type":"thinking_delta","text":" me now"}
+{"type":"thinking_delta","text":" write"}
+{"type":"thinking_delta","text":" a comprehensive objective"}
+{"type":"thinking_delta","text":" review"}
+{"type":"thinking_delta","text":" of these"}
+{"type":"thinking_delta","text":" commands and"}
+{"type":"thinking_delta","text":" how"}
+{"type":"thinking_delta","text":" they fit"}
+{"type":"thinking_delta","text":" into sk"}
+{"type":"thinking_delta","text":"og"}
+{"type":"thinking_delta","text":"ix"}
+{"type":"thinking_delta","text":"'s workflow"}
+{"type":"thinking_delta","text":"."}
+{"type":"message_uuid","uuid":"e17a8b1d-7717-41c7-bd3b-975779f9f16e","messageType":"assistant"}
+{"type":"thinking_stop"}
+{"type":"delta","text":"now"}
+{"type":"delta","text":" i"}
+{"type":"delta","text":" have"}
+{"type":"delta","text":" the"}
+{"type":"delta","text":" full picture."}
+{"type":"delta","text":" all"}
+{"type":"delta","text":" 15"}
+{"type":"delta","text":" found"}
+{"type":"delta","text":" commands are aliases"}
+{"type":"delta","text":" for **"}
+{"type":"delta","text":"N"}
+{"type":"delta","text":"TM** (Named Tmux"}
+{"type":"delta","text":" Manager) —"}
+{"type":"delta","text":" a multi"}
+{"type":"delta","text":"-agent tm"}
+{"type":"delta","text":"ux orchestrator"}
+{"type":"delta","text":" for"}
+{"type":"delta","text":" Claude"}
+{"type":"delta","text":", Codex, and Gem"}
+{"type":"delta","text":"ini."}
+{"type":"delta","text":" `"}
+{"type":"delta","text":"c"}
+{"type":"delta","text":"ad` was"}
+{"type":"delta","text":" not found."}
+{"type":"delta","text":" let me also"}
+{"type":"delta","text":" quickly"}
+{"type":"delta","text":" check if"}
+{"type":"delta","text":" it"}
+{"type":"delta","text":"'s a ty"}
+{"type":"delta","text":"po or something"}
+{"type":"delta","text":" else."}
+{"type":"message_uuid","uuid":"0d1c2c32-9672-4124-b9a0-cadd79eea67d","messageType":"assistant"}
+{"type":"tool_start","id":"toolu_01Hbi8QAhN35AUFkzACqRWTU","name":"Bash"}
+{"type":"message_uuid","uuid":"0c54d7ce-a4a3-45e0-8c7d-c62c84c7f653","messageType":"assistant"}
+{"type":"tool_executing","id":"toolu_01Hbi8QAhN35AUFkzACqRWTU","name":"Bash","input":{"command":"compgen -ac | grep -i '^cad' 2>/dev/null | head -10","description":"Find any commands starting with cad"}}
+{"type":"tool_start","id":"toolu_01K1jcKEz81mUgf2qh4hjHpN","name":"Bash"}
+{"type":"message_uuid","uuid":"17a61a34-dc90-4c9f-b1fa-3ece2349e924","messageType":"assistant"}
+{"type":"tool_executing","id":"toolu_01K1jcKEz81mUgf2qh4hjHpN","name":"Bash","input":{"command":"alias | grep -i cad 2>/dev/null","description":"Check for cad alias"}}
+{"type":"message_uuid","uuid":"d95dc3ff-6c99-496a-a6db-82e24990076f","messageType":"user"}
+{"type":"tool_result","id":"toolu_01Hbi8QAhN35AUFkzACqRWTU","content":"","is_error":false}
+{"type":"message_uuid","uuid":"dad64237-f764-4d55-8426-115d013775f7","messageType":"user"}
+{"type":"tool_result","id":"toolu_01K1jcKEz81mUgf2qh4hjHpN","content":"","is_error":false}
+{"type":"delta","text":"`"}
+{"type":"delta","text":"cad` doesn"}
+{"type":"delta","text":"'t exist"}
+{"type":"delta","text":" anywhere"}
+{"type":"delta","text":" —"}
+{"type":"delta","text":" no"}
+{"type":"delta","text":" alias"}
+{"type":"delta","text":","}
+{"type":"delta","text":" no binary"}
+{"type":"delta","text":", nothing"}
+{"type":"delta","text":". might"}
+{"type":"delta","text":" be aspir"}
+{"type":"delta","text":"ational or"}
+{"type":"delta","text":" a"}
+{"type":"delta","text":" typo."}
+{"type":"delta","text":"\n\n---"}
+{"type":"delta","text":"\n\nhere"}
+{"type":"delta","text":"'s the"}
+{"type":"delta","text":" objective"}
+{"type":"delta","text":" review of all 16"}
+{"type":"delta","text":" commands:\n\n## N"}
+{"type":"delta","text":"TM alias"}
+{"type":"delta","text":" audit"}
+{"type":"delta","text":"\n\nall"}
+{"type":"delta","text":" aliases"}
+{"type":"delta","text":" map"}
+{"type":"delta","text":" to `"}
+{"type":"delta","text":"ntm` (Named Tmux"}
+{"type":"delta","text":" Manager) —"}
+{"type":"delta","text":" a node"}
+{"type":"delta","text":".js tool"}
+{"type":"delta","text":" for orchest"}
+{"type":"delta","text":"rating multiple"}
+{"type":"delta","text":" AI agents"}
+{"type":"delta","text":" in tmux p"}
+{"type":"delta","text":"anes. it's a **"}
+{"type":"delta","text":"beast"}
+{"type":"delta","text":"** —"}
+{"type":"delta","text":" "}
+{"type":"delta","text":"100"}
+{"type":"delta","text":"+"}
+{"type":"delta","text":" sub"}
+{"type":"delta","text":"commands,"}
+{"type":"delta","text":" robot"}
+{"type":"delta","text":" API"}
+{"type":"delta","text":", ensemble"}
+{"type":"delta","text":" reasoning"}
+{"type":"delta","text":", be"}
+{"type":"delta","text":"ads"}
+{"type":"delta","text":" integration"}
+{"type":"delta","text":", agent"}
+{"type":"delta","text":" mail"}
+{"type":"delta","text":", file"}
+{"type":"delta","text":" l"}
+{"type":"delta","text":"ocking, pip"}
+{"type":"delta","text":"elines, and more.\n\n### the"}
+{"type":"delta","text":" aliases"}
+{"type":"delta","text":" and"}
+{"type":"delta","text":" their roles"}
+{"type":"delta","text":"\n\n|"}
+{"type":"delta","text":" alias"}
+{"type":"delta","text":" | maps"}
+{"type":"delta","text":" to | category"}
+{"type":"delta","text":" | what"}
+{"type":"delta","text":" it does |\n|"}
+{"type":"delta","text":"-------|---------|----------|-------------|"}
+{"type":"delta","text":"\n| `cnt"}
+{"type":"delta","text":"` | `ntm create"}
+{"type":"delta","text":"` | **"}
+{"type":"delta","text":"session"}
+{"type":"delta","text":" lifecycle"}
+{"type":"delta","text":"** | create a"}
+{"type":"delta","text":" new tmux session with"}
+{"type":"delta","text":" multiple"}
+{"type":"delta","text":" p"}
+{"type":"delta","text":"anes |\n| `sat"}
+{"type":"delta","text":"` | `ntm spawn"}
+{"type":"delta","text":"` | **session lifecycle"}
+{"type":"delta","text":"** | create"}
+{"type":"delta","text":" session"}
+{"type":"delta","text":" AND"}
+{"type":"delta","text":" spawn AI"}
+{"type":"delta","text":" agents into"}
+{"type":"delta","text":" p"}
+{"type":"delta","text":"anes |\n| `r"}
+{"type":"delta","text":"nt"}
+{"type":"delta","text":"` | `ntm attach"}
+{"type":"delta","text":"` | **session lifecycle** | attach"}
+{"type":"delta","text":" to an"}
+{"type":"delta","text":" existing session |\n| `k"}
+{"type":"delta","text":"nt"}
+{"type":"delta","text":"` | `ntm kill` |"}
+{"type":"delta","text":" **session lifecycle** | kill/"}
+{"type":"delta","text":"destroy a"}
+{"type":"delta","text":" session |\n| `ant"}
+{"type":"delta","text":"` | `ntm add"}
+{"type":"delta","text":"` | **scaling"}
+{"type":"delta","text":"** | add more"}
+{"type":"delta","text":" agents"}
+{"type":"delta","text":" to an"}
+{"type":"delta","text":" existing session |\n| `bp"}
+{"type":"delta","text":"` | `ntm send"}
+{"type":"delta","text":"` | **communication"}
+{"type":"delta","text":"** | send prom"}
+{"type":"delta","text":"pts to agent"}
+{"type":"delta","text":" p"}
+{"type":"delta","text":"anes |\n| `int"}
+{"type":"delta","text":"` | `ntm interrupt` |"}
+{"type":"delta","text":" **communication** | ctrl"}
+{"type":"delta","text":"+c all"}
+{"type":"delta","text":" agents |"}
+{"type":"delta","text":"\n| `l"}
+{"type":"delta","text":"nt"}
+{"type":"delta","text":"` | `ntm list` |"}
+{"type":"delta","text":" **visibility"}
+{"type":"delta","text":"** | list all"}
+{"type":"delta","text":" tm"}
+{"type":"delta","text":"ux sessions |\n| `s"}
+{"type":"delta","text":"nt` | `ntm status"}
+{"type":"delta","text":"` | **visibility** | detailed"}
+{"type":"delta","text":" status of a"}
+{"type":"delta","text":" session |\n| `v"}
+{"type":"delta","text":"nt` | `ntm view`"}
+{"type":"delta","text":" | **visibility** | un"}
+{"type":"delta","text":"z"}
+{"type":"delta","text":"oom,"}
+{"type":"delta","text":" tile"}
+{"type":"delta","text":", and"}
+{"type":"delta","text":" attach"}
+{"type":"delta","text":" to view"}
+{"type":"delta","text":" all"}
+{"type":"delta","text":" panes |\n| `z"}
+{"type":"delta","text":"nt` | `ntm zoom`"}
+{"type":"delta","text":" | **visibility** | zoom into a"}
+{"type":"delta","text":" specific"}
+{"type":"delta","text":" pane |\n| `cp"}
+{"type":"delta","text":"nt"}
+{"type":"delta","text":"` | `ntm copy` |"}
+{"type":"delta","text":" **data"}
+{"type":"delta","text":" extraction"}
+{"type":"delta","text":"** | copy p"}
+{"type":"delta","text":"ane output"}
+{"type":"delta","text":" to clipboard |\n| `sv"}
+{"type":"delta","text":"nt` | `ntm save"}
+{"type":"delta","text":"` | **data extraction** | save"}
+{"type":"delta","text":" pane outputs"}
+{"type":"delta","text":" to files"}
+{"type":"delta","text":" |\n| `n"}
+{"type":"delta","text":"cp"}
+{"type":"delta","text":"` | `ntm palette"}
+{"type":"delta","text":"` | **T"}
+{"type":"delta","text":"UI** | interactive"}
+{"type":"delta","text":" command"}
+{"type":"delta","text":" palette |\n| `q"}
+{"type":"delta","text":"ps"}
+{"type":"delta","text":"` | `ntm quick"}
+{"type":"delta","text":"` | **setup"}
+{"type":"delta","text":"** | quick project"}
+{"type":"delta","text":" setup with"}
+{"type":"delta","text":" git"}
+{"type":"delta","text":"/"}
+{"type":"delta","text":"v"}
+{"type":"delta","text":"scode/"}
+{"type":"delta","text":"claude"}
+{"type":"delta","text":" config"}
+{"type":"delta","text":" |\n| `c"}
+{"type":"delta","text":"ad` | "}
+{"type":"delta","text":"??? | **missing"}
+{"type":"delta","text":"** | does"}
+{"type":"delta","text":" not exist |\n\n### objective"}
+{"type":"delta","text":" assessment"}
+{"type":"delta","text":"\n\n**strengths:**\n- covers"}
+{"type":"delta","text":" the"}
+{"type":"delta","text":" full lifecycle:"}
+{"type":"delta","text":" create →"}
+{"type":"delta","text":" work"}
+{"type":"delta","text":" → observe"}
+{"type":"delta","text":" → extract"}
+{"type":"delta","text":" → destroy"}
+{"type":"delta","text":"\n- the"}
+{"type":"delta","text":" naming"}
+{"type":"delta","text":" convention is consistent"}
+{"type":"delta","text":":"}
+{"type":"delta","text":" `*"}
+{"type":"delta","text":"nt`"}
+{"type":"delta","text":" ="}
+{"type":"delta","text":" nt"}
+{"type":"delta","text":"m operation"}
+{"type":"delta","text":"\n- `"}
+{"type":"delta","text":"bp"}
+{"type":"delta","text":"` ("}
+{"type":"delta","text":"broadcast"}
+{"type":"delta","text":" prompt"}
+{"type":"delta","text":") and"}
+{"type":"delta","text":" `int` (interrupt) are the"}
+{"type":"delta","text":" daily"}
+{"type":"delta","text":" drivers"}
+{"type":"delta","text":" —"}
+{"type":"delta","text":" sending"}
+{"type":"delta","text":" work"}
+{"type":"delta","text":" to agents and"}
+{"type":"delta","text":" stopping"}
+{"type":"delta","text":" them"}
+{"type":"delta","text":"\n\n**weaknesses /"}
+{"type":"delta","text":" concerns"}
+{"type":"delta","text":":**\n- **"}
+{"type":"delta","text":"naming"}
+{"type":"delta","text":" is"}
+{"type":"delta","text":" op"}
+{"type":"delta","text":"aque** — `"}
+{"type":"delta","text":"sat"}
+{"type":"delta","text":"`,"}
+{"type":"delta","text":" `bp"}
+{"type":"delta","text":"`, `n"}
+{"type":"delta","text":"cp`, `qps`"}
+{"type":"delta","text":" break"}
+{"type":"delta","text":" the `"}
+{"type":"delta","text":"*"}
+{"type":"delta","text":"nt` pattern and"}
+{"type":"delta","text":" are hard"}
+{"type":"delta","text":" to remember"}
+{"type":"delta","text":" without"}
+{"type":"delta","text":" muscle"}
+{"type":"delta","text":" memory\n- `"}
+{"type":"delta","text":"bp"}
+{"type":"delta","text":"` maps"}
+{"type":"delta","text":" to `ntm send`,"}
+{"type":"delta","text":" but \""}
+{"type":"delta","text":"bp"}
+{"type":"delta","text":"\" suggests"}
+{"type":"delta","text":" \"broadcast prompt\" —"}
+{"type":"delta","text":" could cause"}
+{"type":"delta","text":" confusion since"}
+{"type":"delta","text":" `--"}
+{"type":"delta","text":"all"}
+{"type":"delta","text":"` is needed"}
+{"type":"delta","text":" for actual"}
+{"type":"delta","text":" broadcast\n- `cnt"}
+{"type":"delta","text":"` ("}
+{"type":"delta","text":"create) vs"}
+{"type":"delta","text":" `sat"}
+{"type":"delta","text":"` (spawn) — **"}
+{"type":"delta","text":"significant"}
+{"type":"delta","text":" overlap"}
+{"type":"delta","text":"**"}
+{"type":"delta","text":"."}
+{"type":"delta","text":" `spawn"}
+{"type":"delta","text":"` ="}
+{"type":"delta","text":" create"}
+{"type":"delta","text":" + start"}
+{"type":"delta","text":" agents"}
+{"type":"delta","text":"."}
+{"type":"delta","text":" `create` is"}
+{"type":"delta","text":" just"}
+{"type":"delta","text":" the session shell"}
+{"type":"delta","text":"."}
+{"type":"delta","text":" in"}
+{"type":"delta","text":" practice"}
+{"type":"delta","text":", you"}
+{"type":"delta","text":" almost"}
+{"type":"delta","text":" always want `"}
+{"type":"delta","text":"sat"}
+{"type":"delta","text":"`"}
+{"type":"delta","text":"\n- `n"}
+{"type":"delta","text":"cp` for"}
+{"type":"delta","text":" `"}
+{"type":"delta","text":"palette"}
+{"type":"delta","text":"` is"}
+{"type":"delta","text":" the"}
+{"type":"delta","text":" odd"}
+{"type":"delta","text":" one out — no"}
+{"type":"delta","text":" m"}
+{"type":"delta","text":"nemonic connection"}
+{"type":"delta","text":"\n\n**what"}
+{"type":"delta","text":"'s"}
+{"type":"delta","text":" missing from"}
+{"type":"delta","text":" your"}
+{"type":"delta","text":" aliases"}
+{"type":"delta","text":":**"}
+{"type":"delta","text":"\n- `nt"}
+{"type":"delta","text":"m dashboard"}
+{"type":"delta","text":"` — interactive"}
+{"type":"delta","text":" overview"}
+{"type":"delta","text":","}
+{"type":"delta","text":" arguably"}
+{"type":"delta","text":" more useful than `"}
+{"type":"delta","text":"s"}
+{"type":"delta","text":"nt`"}
+{"type":"delta","text":" for daily"}
+{"type":"delta","text":" monitoring"}
+{"type":"delta","text":"\n- `ntm health"}
+{"type":"delta","text":"` — quick"}
+{"type":"delta","text":" agent"}
+{"type":"delta","text":" health check\n- `ntm send"}
+{"type":"delta","text":" --"}
+{"type":"delta","text":"all` — no"}
+{"type":"delta","text":" alias"}
+{"type":"delta","text":" for broadcast"}
+{"type":"delta","text":" specifically"}
+{"type":"delta","text":"\n- `ntm logs"}
+{"type":"delta","text":"` — aggreg"}
+{"type":"delta","text":"ated agent"}
+{"type":"delta","text":" logs\n- `ntm wor"}
+{"type":"delta","text":"kt"}
+{"type":"delta","text":"ree` — git"}
+{"type":"delta","text":" isolation"}
+{"type":"delta","text":" per"}
+{"type":"delta","text":" agent,"}
+{"type":"delta","text":" critical"}
+{"type":"delta","text":" for multi"}
+{"type":"delta","text":"-agent workflows"}
+{"type":"delta","text":"\n\n### workflow"}
+{"type":"delta","text":" fit"}
+{"type":"delta","text":" for"}
+{"type":"delta","text":" skogai"}
+{"type":"delta","text":"\n\n**"}
+{"type":"delta","text":"daily"}
+{"type":"delta","text":" flow"}
+{"type":"delta","text":" would"}
+{"type":"delta","text":" be:**\n1. `sat"}
+{"type":"delta","text":" my"}
+{"type":"delta","text":"project"}
+{"type":"delta","text":" --"}
+{"type":"delta","text":"cc"}
+{"type":"delta","text":"="}
+{"type":"delta","text":"2"}
+{"type":"delta","text":"`"}
+{"type":"delta","text":" —"}
+{"type":"delta","text":" spawn a"}
+{"type":"delta","text":" session with"}
+{"type":"delta","text":" "}
+{"type":"delta","text":"2 claude"}
+{"type":"delta","text":" agents\n2. `bp myproject"}
+{"type":"delta","text":" --all"}
+{"type":"delta","text":" \""}
+{"type":"delta","text":"implement"}
+{"type":"delta","text":" X"}
+{"type":"delta","text":"\"` — send work to agents"}
+{"type":"delta","text":"\n3. `s"}
+{"type":"delta","text":"nt myproject`"}
+{"type":"delta","text":" or"}
+{"type":"delta","text":" `v"}
+{"type":"delta","text":"nt myproject` — check"}
+{"type":"delta","text":" progress"}
+{"type":"delta","text":"\n4. `z"}
+{"type":"delta","text":"nt myproject "}
+{"type":"delta","text":"2"}
+{"type":"delta","text":"` — zoom into"}
+{"type":"delta","text":" agent"}
+{"type":"delta","text":" 2's"}
+{"type":"delta","text":" pane\n5. `int"}
+{"type":"delta","text":" myproject` — interrupt if"}
+{"type":"delta","text":" needed"}
+{"type":"delta","text":"\n6. `cp"}
+{"type":"delta","text":"nt myproject` /"}
+{"type":"delta","text":" `svnt myproject` — extract"}
+{"type":"delta","text":" results"}
+{"type":"delta","text":"\n7. `k"}
+{"type":"delta","text":"nt myproject` — clean"}
+{"type":"delta","text":" up"}
+{"type":"delta","text":"\n\n**verdict"}
+{"type":"delta","text":":** the alias"}
+{"type":"delta","text":" set"}
+{"type":"delta","text":" covers"}
+{"type":"delta","text":" the core loop"}
+{"type":"delta","text":" well"}
+{"type":"delta","text":"."}
+{"type":"delta","text":" `cnt` is likely"}
+{"type":"delta","text":" dead"}
+{"type":"delta","text":" weight"}
+{"type":"delta","text":" since"}
+{"type":"delta","text":" `"}
+{"type":"delta","text":"sat` supers"}
+{"type":"delta","text":"edes it. `c"}
+{"type":"delta","text":"ad` needs"}
+{"type":"delta","text":" to either"}
+{"type":"delta","text":" be created"}
+{"type":"delta","text":" or dropped"}
+{"type":"delta","text":". the"}
+{"type":"delta","text":" naming"}
+{"type":"delta","text":" scheme"}
+{"type":"delta","text":" could"}
+{"type":"delta","text":" be t"}
+{"type":"delta","text":"ighter"}
+{"type":"delta","text":" but works"}
+{"type":"delta","text":" if"}
+{"type":"delta","text":" you've"}
+{"type":"delta","text":" intern"}
+{"type":"delta","text":"alized it.\n\nwant"}
+{"type":"delta","text":" me"}
+{"type":"delta","text":" to:"}
+{"type":"delta","text":"\n-"}
+{"type":"delta","text":" suggest"}
+{"type":"delta","text":" a revised"}
+{"type":"delta","text":" alias set with"}
+{"type":"delta","text":" better naming?"}
+{"type":"delta","text":"\n- deep"}
+{"type":"delta","text":"-dive into any"}
+{"type":"delta","text":" specific nt"}
+{"type":"delta","text":"m feature"}
+{"type":"delta","text":"?\n- check"}
+{"type":"delta","text":" what"}
+{"type":"delta","text":" `"}
+{"type":"delta","text":"cad` was"}
+{"type":"delta","text":" supposed to be?\n- look"}
+{"type":"delta","text":" at"}
+{"type":"delta","text":" the next"}
+{"type":"delta","text":" batch"}
+{"type":"delta","text":" of tools"}
+{"type":"delta","text":"?"}
+{"type":"message_uuid","uuid":"a25d0960-03a6-40ce-867b-5ed7bd3d433f","messageType":"assistant"}
+{"type":"result","cost":0.26250100000000004,"duration":72114,"usage":{"input_tokens":7,"cache_creation_input_tokens":17704,"cache_read_input_tokens":139335,"output_tokens":2294,"server_tool_use":{"web_search_requests":0,"web_fetch_requests":0},"service_tier":"standard","cache_creation":{"ephemeral_1h_input_tokens":17704,"ephemeral_5m_input_tokens":0},"inference_geo":"","iterations":[],"speed":"standard"},"sessionId":"7ad30fd4-0b11-4c60-9df1-33106cae4aed"}
+{"type":"done","code":0}

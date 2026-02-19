@@ -8,8 +8,14 @@ for anything task-related — planning, creating, executing, reviewing, closing 
 
 </skogai_todo>
 
-<dot_skogai_submodule>
+<skogapi>
 
-the @.skogai folder is a git submodule that contains parts of the SkogAI-framework to help every project with global, shared and things useable for every project. @.skogai/CLAUDE.md works as the router for you to find what you need overall.
+- skogapi: FastAPI service at localhost:9999 — wraps skogcli, skogparse, agents, config, scripts
+- service: `systemctl --user restart skogai-skogapi` — start script at `~/.config/systemd/skogai-skogapi-start.sh`
+- code: `projects/skogapi/main.py`
+- systemd services follow pattern: `skogai-*.service` + `~/.config/systemd/skogai-*-start.sh`
+- env needed in service: `SKOGAI_CONFIG_DIR=/skogai/config`, `PATH="$HOME/.local/bin:$PATH"`
+- agents via `skogcli agent list/read/create`, NOT file directories
+- `uvx` isolates env — always use full paths or export PATH in start scripts
 
-</dot_skogai_submodule>
+</skogapi>

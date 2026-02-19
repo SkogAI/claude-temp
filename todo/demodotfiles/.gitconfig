@@ -1,0 +1,11 @@
+[user]
+	email = emil@skogsund.se
+	name = Emil Skogsund
+[core]
+	pager = nvim -R
+[diff]
+	tool = nvimdiff
+[merge]
+	tool = nvimdiff3
+[mergetool]
+	keepBackup = false

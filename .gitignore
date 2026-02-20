@@ -1,9 +1,10 @@
 __pycache__/
 /.env
-.claude-relay/
+/.claude-relay
 
 # bv (beads viewer) local config and caches
-.bv/
+/.bv
 /.skogai.env
 /.aider.tags.cache.v4
 /.worktrees
+/tmp

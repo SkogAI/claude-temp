@@ -8,5 +8,10 @@
     "skogai-tools",
     "skogai-nushell",
     "skogai-mcp"
-  ]
+  ],
+  "permissions": {
+    "allow": [
+      "Bash(./scripts/clog.sh:*)"
+    ]
+  }
 }

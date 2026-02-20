@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 __pycache__/
 /.env
 .claude-relay/
@@ -7,7 +6,6 @@ __pycache__/
 .bv/
 /.aider.tags.cache.v4
 /.worktrees
-||||||| 8641863
-=======
 /.skogai.env
->>>>>>> claude-dot-skogai
+/.beads
+/.worktrees

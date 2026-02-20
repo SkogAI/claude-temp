@@ -13,26 +13,34 @@ consolidated report at the end.
 
 ## phase 1: ship it
 
+**beads sync:**
+
+1. run `br sync --flush-only` to export any dirty issues to JSONL
+2. run `br list -s in_progress` to check for stale in-progress issues —
+   close completed ones with `br close <id>`, update others as needed
+
 **commit:**
 
-1. run `git status` in each repo directory that was touched during the session
-2. if uncommitted changes exist, auto-commit to main with a descriptive message
-3. push to remote
+3. run `git status` in each repo directory that was touched during the session
+4. if uncommitted changes exist (including .beads/), auto-commit with a
+   descriptive message
+5. push to remote
 
-**file placement check:** 4. if any files were created or saved during this session:
+**file placement check:**
 
-- verify they follow your naming convention
-- auto-fix naming violations (rename the file)
-- verify they're in the correct subfolder per your project structure
-- auto-move misplaced files to their correct location
+6. if any files were created or saved during this session:
+   - verify they follow the project naming convention
+   - auto-fix naming violations (rename the file)
+   - could this file be merged into an existing one instead?
+   - if it's a document-type file (.md, .docx, etc.) and NOT a
+     `{AGENT,SKOGAI,CLAUDE}.md` file, it should live inside `./docs/`
+     unless the user explicitly placed it elsewhere
+   - auto-move misplaced files to their correct location
 
-5. if any document-type files (.md, .docx, .pdf, .xlsx, .pptx) were created
-   at the workspace root or in code directories, move them to the docs folder
-   if they belong there
+**task cleanup:**
 
-**deploy:** 6. check if the project has a deploy skill or script 7. if one exists, run it 8. if not, skip deployment entirely — do not ask about manual deployment
-
-**task cleanup:** 9. check the task list for in-progress or stale items 10. mark completed tasks as done, flag orphaned ones
+7. check your internal task list (TaskList) for in-progress or stale items
+8. mark completed tasks as done, flag orphaned ones
 
 ## phase 2: remember it
 
@@ -42,8 +50,7 @@ knowledge belongs in the memory hierarchy:
 **memory placement guide:**
 
 - **auto memory** (claude writes for itself) — debugging insights, patterns
-  discovered during the session, project quirks. tell claude to save these:
-  "remember that..." or "save to memory that..."
+  discovered during the session, project quirks
 - **claude.md** (instructions for claude) — permanent project rules,
   conventions, commands, architecture decisions that should guide all future
   sessions
@@ -55,6 +62,10 @@ knowledge belongs in the memory hierarchy:
   committed
 - **`@import` references** — when a claude.md would benefit from referencing
   another file rather than duplicating its content
+- **beads issue** (`br q "description"`) — use for "remember to do this in
+  the future" when the task would extend outside the current context: needs
+  extra research, has dependencies, or is more complex than "write this to
+  file". set appropriate priority and type.
 
 **decision framework:**
 
@@ -64,6 +75,7 @@ knowledge belongs in the memory hierarchy:
 - is it a pattern or insight claude discovered? → auto memory
 - is it personal/ephemeral context? → `claude.local.md`
 - is it duplicating content from another file? → use `@import` instead
+- is it future work that needs research/dependencies/complexity? → beads issue
 
 note anything important in the appropriate location.
 
@@ -93,7 +105,10 @@ was done.
 - **claude.md** — edit the relevant project or global claude.md
 - **rules** — create or update a `.claude/rules/` file
 - **auto memory** — save an insight for future sessions
-- **skill / hook** — document a new skill or hook spec for implementation
+- **beads issue** — for skill/hook specs, complex improvements, or anything
+  needing a dedicated session to implement properly. prefer this over
+  inline implementation when the fix would need research, testing, or
+  multi-file changes beyond the current session's scope.
 - **claude.local.md** — create or update per-project local memory
 
 present a summary after applying, in two sections — applied items first,
@@ -101,14 +116,14 @@ then no-action items:
 
 findings (applied):
 
-1. ✅ skill gap: cost estimates were wrong multiple times
+1. skill gap: cost estimates were wrong multiple times
    → [claude.md] added token counting reference table
 
-2. ✅ knowledge: worker crashes on 429/400 instead of retrying
+2. knowledge: worker crashes on 429/400 instead of retrying
    → [rules] added error-handling rules for worker
 
-3. ✅ automation: checking service health after deploy is manual
-   → [skill] created post-deploy health check skill spec
+3. automation: checking service health after deploy is manual
+   → [beads] br-xyz: create post-deploy health check skill
 
 ---
 
@@ -117,38 +132,27 @@ no action needed:
 4. knowledge: discovered x works this way
    already documented in claude.md
 
-## phase 4: publish it
+## phase 4: journal it
 
 after all other phases are complete, review the full conversation for material
-that could be published. look for:
+worth preserving. look for:
 
 - interesting technical solutions or debugging stories
-- community-relevant announcements or updates
 - educational content (how-tos, tips, lessons learned)
 - project milestones or feature launches
+- architectural decisions and their reasoning
 
-**if publishable material exists:**
+**if journal-worthy material exists:**
 
-draft the article(s) for the appropriate platform and save to a drafts folder.
-present suggestions with the draft:
+draft the entry and save to `!`echo $SKOGAI_CLAUDE_HOME`/journal/yyyy-mm-dd/<description>.md`
 
-all wrap-up steps complete. i also found potential content to publish:
+present the draft location in the report:
 
-1. "title of post" — 1-2 sentence description of the content angle.
-   platform: reddit
-   draft saved to: drafts/title-of-post/reddit.md
+all wrap-up steps complete. journal entry saved:
 
-wait for the user to respond. if they approve, post or prepare per platform.
-if they decline, the drafts remain for later.
+1. "title" — 1-2 sentence description.
+   saved to: journal/2026-02-20/sniffing-claudes-context-window.md
 
-**if no publishable material exists:**
+**if nothing journal-worthy:**
 
-say "nothing worth publishing from this session" and you're done.
-
-**scheduling considerations:**
-
-- if the session produced multiple publishable items, do not post them all
-  at once
-- space posts at least a few hours apart per platform
-- if multiple posts are needed, post the most time-sensitive one now and
-  present a schedule for the rest
+say "nothing worth journaling from this session" and you're done.

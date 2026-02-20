@@ -4,3 +4,4 @@ __pycache__/
 
 # bv (beads viewer) local config and caches
 .bv/
+/.aider.tags.cache.v4

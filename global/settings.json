@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/home/skogix/claude/scripts/git-sync-global.sh"
+            "command": "./scripts/csync.sh"
           }
         ]
       }

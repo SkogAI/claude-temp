@@ -3,6 +3,9 @@
 
 TS="$(date +%H:%M:%S)"
 
+# sync important dirs to ./global/
+rsync -a --delete ~/.claude/projects/ ./global/projects/
+
 # bare repo: everything in ~/.claude/
 ./scripts/cgit.sh add ~/.claude/
 ./scripts/cgit.sh commit -m "auto-sync $TS" --no-verify || true

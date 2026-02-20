@@ -6,6 +6,5 @@ __pycache__/
 .bv/
 /.aider.tags.cache.v4
 /.worktrees
-/.skogai.env
 /.beads
 /.worktrees

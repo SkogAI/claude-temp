@@ -1,14 +1,1 @@
-{
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "./scripts/csync.sh"
-          }
-        ]
-      }
-    ]
-  }
-}
+/home/skogix/.claude/settings.json

@@ -1,0 +1,15 @@
+# Local Maildir Store
+MaildirStore gmail-local
+Path /home/skogix/.local/share/mail/gmail/
+Inbox /home/skogix/.local/share/mail/gmail/INBOX
+SubFolders Verbatim
+
+# Sync Channel - All folders
+Channel gmail-all
+Far :gmail-remote:
+Near :gmail-local:
+Patterns *
+Create Both
+Sync All
+Expunge Both
+SyncState *

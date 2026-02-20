@@ -21,3 +21,15 @@ Goal: can both tools write to the same directory via a symlink, and can Claude C
 Running `git worktree remove` manually while the session's cwd was inside the worktree deleted the directory under Claude Code's feet. Every subsequent Bash call failed with "Path does not exist." The session recovered when the directory was recreated at the same path (lazy cwd resolution), but the internal `EnterWorktree` flag persisted, preventing re-entry.
 
 Rule: never manually `git worktree remove` — always use the tools.
+
+## Subagent experiment
+
+Tested spawning a subagent to create a PR from a worktree. The subagent prompt included `git push -u origin <branch>` which the user didn't ask for — treating the prompt as "instructions plus my helpful additions" instead of "commands to execute."
+
+**Consequences:** The push created a remote branch, tracking config in `.git/config`, and `FETCH_HEAD` in the worktree's git dir. After the PR was merged and the remote branch auto-deleted, the local tracking config and worktree artifacts persisted as zombies requiring manual cleanup.
+
+**Rules established:**
+1. Prompts to subagents are commands — don't add steps
+2. Worktree agents commit and create PRs only — no `git push`, no origin manipulation
+3. `gh pr create` handles push implicitly — no separate push step exists
+4. Worktree lifecycle cleanup is outside the subagent's scope

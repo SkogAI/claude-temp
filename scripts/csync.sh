@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
-# Auto-commit tracked changes in both claude repos
-# Runs silently — exits 0 even if nothing to commit
+# Auto-commit changes in both claude repos
 
 TS="$(date +%H:%M:%S)"
 
-# bare repo: tracked files only, new files added manually
-./scripts/cgit.sh add -u 2>/dev/null
-./scripts/cgit.sh commit -m "auto-sync $TS" --no-verify 2>/dev/null || true
+# bare repo: everything in ~/.claude/
+./scripts/cgit.sh add ~/.claude/
+./scripts/cgit.sh commit -m "auto-sync $TS" --no-verify || true
 
 # home repo
-git add -A 2>/dev/null
-git commit -m "auto-sync $TS" --no-verify 2>/dev/null || true
+git add -A
+git commit -m "auto-sync $TS" --no-verify || true

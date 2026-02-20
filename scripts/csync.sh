@@ -4,7 +4,7 @@
 
 TS="$(date +%H:%M:%S)"
 
-# bare repo: ~/.claude/ tracked files
+# bare repo: tracked files only, new files added manually
 ./scripts/cgit.sh add -u 2>/dev/null
 ./scripts/cgit.sh commit -m "auto-sync $TS" --no-verify 2>/dev/null || true
 

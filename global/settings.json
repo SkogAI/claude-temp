@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/skogix/claude/scripts/git-sync-global.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

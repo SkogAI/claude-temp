@@ -1,0 +1,50 @@
+{
+  "mcpServers": {
+    "skogai-think": {
+      "command": "uvx",
+      "args": [
+        "mcp-think-tool"
+      ]
+    },
+    "skogai-arch-linux": {
+      "command": "uvx",
+      "args": [
+        "arch-ops-server"
+      ]
+    },
+    "skogai-claude-ssh": {
+      "command": "node",
+      "args": [
+        "--",
+        "/home/skogix/.local/src/ssh-mcp/build/index.js",
+        "--host=skogix-workstation",
+        "--port=22",
+        "--user=claude",
+        "--password=claude",
+        "--timeout=60000"
+      ]
+    },
+    "skogai-tools": {
+      "command": "node",
+      "args": [
+        "/home/skogix/dev/tools/mcp/server/index.js",
+        "/home/skogix/dev/tools"
+      ]
+    },
+    "skogai-nushell": {
+      "command": "/home/skogix/dev/nushell/nu-mcp/target/release/nu-mcp",
+      "args": [
+        "--transport=stdio",
+        "--scope=skogix",
+        "-env=SEARXNG_URL=http://127.0.0.1:8888",
+        "-env=APPLY_API_KEY=ollama",
+        "-env=APPLY_API_URL=http://localhost:11434/v1",
+        "-env=APPLY_MODEL=morph-v3-fast"
+      ]
+    },
+    "skogai-mcp": {
+      "type": "sse",
+      "url": "https://mcp.skogix.se/mcp"
+    }
+  }
+}

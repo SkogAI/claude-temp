@@ -22,6 +22,10 @@
 - Never pipe to /dev/null without reason — errors are information
 - Use existing wrapper scripts, don't inline git commands with raw flags
 - `./global/settings.json` is a symlink to `~/.claude/settings.json` — the CLI owns the file
+- Symlinks in git are stored as symlink files, not followed — use rsync in csync.sh for dirs needing real tracking
+- `./global/projects/` is rsync'd (real files), other `./global/` entries are symlinks (read-only convenience)
+- Project settings go in `.claude/settings.json`, global/CLI settings stay in `~/.claude/settings.json`
+- `defaultMode: plan` is set in project settings
 
 ## User Preferences
 

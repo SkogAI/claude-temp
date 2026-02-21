@@ -8,3 +8,8 @@ __pycache__/
 /.aider.tags.cache.v4
 /.worktrees
 /tmp
+
+# Gas Town (added by gt)
+.runtime/
+.claude/commands/
+.logs/

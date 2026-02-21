@@ -35,3 +35,11 @@
 - Scripts use relative paths from git root
 - Don't brute-force explore — read context first (journal, beads, docs)
 - Git diffs are first-class knowledge artifacts, not just change tracking
+- When user shows you a tool, USE it — don't ask what they want to do with it
+- `rtk` prefix for git log/status/diff/find — documented in CLAUDE.md
+
+## Tools Discovery
+
+- `ms` (Meta Skill CLI) — skill management, search, suggest, lint, dedup. ~814 skills indexed system-wide
+- `rtk` (Rust Token Killer) — token-optimized command wrapper, installed at `/usr/local/bin/rtk`
+- `.todo/` directory is a curated reference library of hooks, skills, templates from prior systems

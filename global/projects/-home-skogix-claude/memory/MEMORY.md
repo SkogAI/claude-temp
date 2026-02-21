@@ -24,6 +24,7 @@
 - `./global/settings.json` is a symlink to `~/.claude/settings.json` — the CLI owns the file
 - Symlinks in git are stored as symlink files, not followed — use rsync in csync.sh for dirs needing real tracking
 - `./global/projects/` is rsync'd (real files), other `./global/` entries are symlinks (read-only convenience)
+- csync.sh rsyncs these dirs from ~/.claude/ to ./global/: projects, memories, teams, tasks, transcripts, session-env, usage-data
 - Project settings go in `.claude/settings.json`, global/CLI settings stay in `~/.claude/settings.json`
 - `defaultMode: plan` is set in project settings
 

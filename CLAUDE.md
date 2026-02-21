@@ -39,6 +39,35 @@ for anything task-related — planning, creating, executing, reviewing, closing 
 - `yq --front-matter=extract '<query>' file.md` -- parse YAML frontmatter from markdown
 - when a tool version is wrong, ask skogix to install the correct one
 
+### RTK (Rust Token Killer)
+
+Token-optimized command wrapper. Use `rtk` prefix for high-verbosity commands:
+
+- `rtk git log` (92% reduction), `rtk git status` (76%), `rtk git diff` (56%), `rtk find` (76%)
+- Do NOT use for: `ls` (-274% worse), `grep` (buggy in v0.2.0)
+- Skip when using native Claude tools (Grep/Read/Glob) or for small outputs
+- Reference: @todo/rtk-optimized.md, @.todo/skills/rtk-optimizer/SKILL.md
+
+### ms (Meta Skill)
+
+Skill management CLI. 800+ skills indexed across the system.
+
+```bash
+ms suggest --explain         # context-aware skill recommendations with scoring
+ms search "query"            # hybrid BM25 + semantic search
+ms load <skill> --level full # load skill with progressive disclosure
+ms lint                      # validate skill files
+ms dedup scan                # find duplicate skills
+ms doctor                    # health check
+ms list                      # list indexed skills (local index ~54, full scan ~814)
+ms index --all /home/skogix  # re-index everything
+```
+
+- All commands support `-O json` for machine-readable output
+- MCP server available: `ms mcp serve` (stdio for Claude Code)
+- Config: `.ms/config.toml` per project, `~/.config/ms/config.toml` global
+- Reference: @SKILL.md (ms skill definition at repo root)
+
 ## Lessons System
 
 - @lessons/ contains keyword-triggered behavioral lessons (gptme format)

@@ -1,49 +1,24 @@
 # Post-Archinstall Setup Steps
 
 ## 1. Verify network
-```bash
-ping www.av.com
-```
-Nothing works without internet. Confirm connectivity first.
+`ping www.av.com`
 
-## 2. Try to install Chrome (fails)
-```bash
-sudo pacman -S google-chrome-stable
-```
-AUR-only package — fails because no AUR helper is installed.
+## 2. PROBLEM: No AUR helper → no Chrome → fallback to Firefox
+Wanted Chrome (`pacman -S google-chrome-stable`) but it's AUR-only.
+Tried `yay` — not installed. Ended up with `sudo pacman -S firefox` as fallback.
+**Needs:** AUR helper installed early so AUR packages are available from the start.
 
-## 3. Try AUR helper (fails)
-```bash
-yay
-```
-Not installed. No way to get AUR packages yet.
+## 3. System upgrade
+`sudo pacman -Syu`
 
-## 4. System upgrade
-```bash
-sudo pacman -Syu
-```
-Update system before installing anything else.
+## 4. Install GitHub CLI
+`sudo pacman -S github-cli`
 
-## 5. Install Firefox
-```bash
-sudo pacman -S firefox
-```
-Fallback browser since Chrome needs AUR.
+## 5. Authenticate with GitHub
+`gh auth login`
+`gh auth setup-git`
 
-## 6. Install GitHub CLI
-```bash
-sudo pacman -S github-cli
-```
-Need authenticated access to private GitHub repos.
-
-## 7. Authenticate with GitHub
-```bash
-gh auth login
-gh auth setup-git
-```
-Authenticate so cloning private repos works.
-
-## 8. Clone SSH keys
+## 6. PROBLEM: SSH key setup is too manual
 ```bash
 gh repo clone SkogAI/secrets
 mv secrets/ .ssh
@@ -52,53 +27,41 @@ rmdir secrets/
 ./fix-ssh-permissions.sh
 ssh-add .ssh/id_rsa
 ```
-Private repo with SSH keys. Move contents into `~/.ssh/`, fix permissions, add to agent. Multiple attempts with wrong org name capitalization before finding `SkogAI`.
+Took multiple attempts to get the org name right (`skogai`, `skogix`, `Skogix` → `SkogAI`).
+Then clone, move contents into `~/.ssh/`, remove nested dir, fix perms, add key.
+**Needs:** A single script that handles all of this.
 
-## 9. Clone workspace
-```bash
-gh repo clone SkogAI/claude-temp
-mv claude-temp/ claude
-```
-Clone the workspace repo, rename to `~/claude`.
+## 7. Clone workspace
+`gh repo clone SkogAI/claude ~/claude`
+(Was `claude-temp` renamed to `claude` — real setup will clone directly.)
 
-## 10. Clone ansible
-```bash
-gh repo clone SkogAI/skogansible .ansible
-```
-Ansible playbooks to `~/.ansible`.
+## 8. Clone ansible
+`gh repo clone SkogAI/skogansible .ansible`
 
-## 11. Install Claude Code
+## 9. Install Claude Code
 ```bash
 curl -fsSL https://claude.ai/install.sh > install.sh
 chmod +x install.sh
 ./install.sh
 ```
-Install the Claude Code CLI.
+Will be scripted.
 
-## 12. Install chezmoi
-```bash
-sudo pacman -S chezmoi
-```
-Dotfiles manager.
+## 10. Install chezmoi
+`sudo pacman -S chezmoi`
 
-## 13. Clone and apply dotfiles
+## 11. PROBLEM: Chezmoi workflow unclear
 ```bash
 cd ~/.local/share/
 gh repo clone SkogAI/dotfiles chezmoi
 chezmoi init
 chezmoi apply
 ```
-Clone dotfiles repo directly as chezmoi source directory, then deploy.
+First time using chezmoi. Cloned directly into source dir, ran init and apply.
+**Needs:** Figure out the proper chezmoi init workflow.
 
-## 14. Install zsh
-```bash
-sudo pacman -S zsh
-```
-Preferred shell.
+## 12. Install zsh
+`sudo pacman -S zsh`
 
-## 15. Switch shell and reboot
-```bash
-chsh
-sudo reboot now
-```
-Set zsh as default login shell, reboot to apply.
+## 13. Switch shell and reboot
+`chsh`
+`sudo reboot now`

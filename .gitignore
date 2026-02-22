@@ -13,3 +13,4 @@ __pycache__/
 .runtime/
 .claude/commands/
 .logs/
+config/claude/

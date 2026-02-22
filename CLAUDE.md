@@ -32,6 +32,8 @@ for anything task-related — planning, creating, executing, reviewing, closing 
   - @skills/claude-code-modifications/scripts/update-plugins.sh - plugin update/reload
 - @lessons/ - Keyword-triggered behavioral lessons (gptme format, injected via hooks)
 - @JOINK/ - Reference implementation of lesson system from gptme
+- @.todo/ - Curated reference collection (hooks, skills, demodotfiles, templates)
+- @todo/ - Active review items (rtk-optimized.md)
 
 ## Tools
 

@@ -1,0 +1,48 @@
+use CLAUDE;
+checkout master ;
+checkout master;
+help ;
+help;
+;
+\help
+branch list ;
+branch list;
+\help
+\help checkout
+\help
+\branch
+\branch list
+\branch -h
+\branch -a
+\branch --list
+\branch 
+\branch -h
+\branch --help
+\branch -l
+\branch --list
+\branch -d list
+\branch -d create
+\branch -a
+\branch --checkout master
+\branch checkout master
+\branch -a
+\branch
+\branch --help
+\branch --list
+\branch --
+\branch -m master
+\branch main -m master
+\branch checkout master
+\branch master
+\branch 
+\branch checkout master
+\branch 
+\branch -d checkout
+\branch master
+\branch 
+\branch -h
+\checkout master
+\help
+\show
+\status
+;

@@ -119,16 +119,16 @@
 <body>
   <div class="container">
     <h1>Claude Code Insights</h1>
-    <p class="subtitle">147 messages across 14 sessions (168 total) | 2026-02-20 to 2026-02-27</p>
+    <p class="subtitle">184 messages across 8 sessions (376 total) | 2026-02-20 to 2026-02-22</p>
 
     
     <div class="at-a-glance">
       <div class="glance-title">At a Glance</div>
       <div class="glance-sections">
-        <div class="glance-section"><strong>What's working:</strong> You've built a genuinely impressive multi-agent system (Mayor, Deacon) with patrol loops, hook checks, and wisp creation — and when the infrastructure cooperates, it works beautifully, like the session where Deacon completed two full patrol cycles and correctly escalated an anomaly. You also showed strong architectural instincts driving a 300+ line bootstrap script down to a minimal pacman→ansible→gh flow, consistently overruling Claude's over-engineered suggestions to keep things lean. <a href="#section-wins" class="see-more">Impressive Things You Did →</a></div>
-        <div class="glance-section"><strong>What's hindering you:</strong> On Claude's side, it repeatedly charged ahead with wrong assumptions (plaintext vault passwords, unnecessary venvs, brute-force file exploration) and leaned on running commands instead of reasoning through your questions — leading to long, frustrating debugging spirals. On your side, the recurring Dolt/beads database corruption consumed entire sessions because there's no self-healing or pre-flight validation layer, so Claude keeps rediscovering the same broken state every time you kick off a patrol. <a href="#section-friction" class="see-more">Where Things Go Wrong →</a></div>
-        <div class="glance-section"><strong>Quick wins to try:</strong> Try setting up <strong>hooks</strong> to auto-run a quick infrastructure health check (Dolt server running, beads DB initialized) before every session or tool invocation — this alone could prevent the recurring patrol failures. You could also create <strong>custom slash commands</strong> (like `/patrol` or `/bootstrap-check`) as markdown skill files that encode your architectural constraints and preferred approaches, so Claude doesn't start from scratch each time. <a href="#section-features" class="see-more">Features to Try →</a></div>
-        <div class="glance-section"><strong>Ambitious workflows:</strong> As models get more capable, consider building a parallel pre-flight agent that validates all infrastructure dependencies before your patrol agents even start — eliminating the pattern where most of your session is spent on repairs. Even more powerful: your bootstrap rewrite workflow could become fully autonomous, with Claude writing the script, running it in a clean container, checking postconditions, and iterating until everything passes without needing you to catch obvious architectural mistakes. <a href="#section-horizon" class="see-more">On the Horizon →</a></div>
+        <div class="glance-section"><strong>What's working:</strong> You're pushing Claude into genuinely ambitious territory — running autonomous agent personas (Deacon, Mayor) through extended patrol loops and using Claude as real system orchestration, not just a code assistant. You're also disciplined about infrastructure: migrating your config into a tracked bare git repo and systematically replacing hard-coded paths shows you treat your AI tooling setup as proper infrastructure worth maintaining. <a href="#section-wins" class="see-more">Impressive Things You Did →</a></div>
+        <div class="glance-section"><strong>What's hindering you:</strong> On Claude's side, it repeatedly jumps into action without verifying the actual state of your system first — making wrong assumptions about SSH security, breaking hard links with Write instead of in-place edits, and botching symlink directions. On your side, recurring SQLite bugs and vapor-phase wisp issues keep resurfacing across agent sessions because there's no persistent documentation of known issues, so each patrol session rediscovers the same problems from scratch. <a href="#section-friction" class="see-more">Where Things Go Wrong →</a></div>
+        <div class="glance-section"><strong>Quick wins to try:</strong> Set up a CLAUDE.md file that documents your agent system's known bugs (the empty-ID SQLite rows, vapor-phase wisp limitations) and includes a rule like &quot;always read and verify current state before modifying files&quot; — this alone would cut down the biggest friction patterns you're hitting. Also try custom slash commands via Skills for your patrol startup sequence, so you don't have to re-explain the Deacon/Mayor workflow each session. <a href="#section-features" class="see-more">Features to Try →</a></div>
+        <div class="glance-section"><strong>Ambitious workflows:</strong> As models get more capable, your multi-agent patrol system is perfectly positioned for parallel sub-agents — one handling patrol cycles, another monitoring database integrity, and a third managing token refresh, so a single SQLite corruption or OAuth expiry doesn't block everything. Start documenting your agent protocols and known failure modes now so that when spawning resilient, self-healing agent networks becomes practical, you'll have the foundation ready to go. <a href="#section-horizon" class="see-more">On the Horizon →</a></div>
       </div>
     </div>
     
@@ -145,11 +145,11 @@
     </nav>
 
     <div class="stats-row">
-      <div class="stat"><div class="stat-value">147</div><div class="stat-label">Messages</div></div>
-      <div class="stat"><div class="stat-value">+353/-26</div><div class="stat-label">Lines</div></div>
-      <div class="stat"><div class="stat-value">13</div><div class="stat-label">Files</div></div>
-      <div class="stat"><div class="stat-value">4</div><div class="stat-label">Days</div></div>
-      <div class="stat"><div class="stat-value">36.8</div><div class="stat-label">Msgs/Day</div></div>
+      <div class="stat"><div class="stat-value">184</div><div class="stat-label">Messages</div></div>
+      <div class="stat"><div class="stat-value">+2,393/-33</div><div class="stat-label">Lines</div></div>
+      <div class="stat"><div class="stat-value">18</div><div class="stat-label">Files</div></div>
+      <div class="stat"><div class="stat-value">3</div><div class="stat-label">Days</div></div>
+      <div class="stat"><div class="stat-value">61.3</div><div class="stat-label">Msgs/Day</div></div>
     </div>
 
     
@@ -158,42 +158,42 @@
       
         <div class="project-area">
           <div class="area-header">
-            <span class="area-name">Gas Town Patrol &amp; Daemon Operations</span>
-            <span class="area-count">~7 sessions</span>
-          </div>
-          <div class="area-desc">Repeated attempts to run a &quot;Deacon&quot; patrol routine involving heartbeats, hook checks, and wisp creation/execution within a Gas Town system. Claude was heavily blocked by Dolt database corruption, beads database initialization failures, and version mismatches, spending most sessions debugging infrastructure rather than completing patrols. Only one session achieved a successful multi-cycle patrol with proper event escalation.</div>
-        </div>
-      
-        <div class="project-area">
-          <div class="area-header">
-            <span class="area-name">Hook &amp; Mail Checking (Mayor Agent)</span>
+            <span class="area-name">Agent Patrol &amp; Task Automation (Deacon/Mayor)</span>
             <span class="area-count">~3 sessions</span>
           </div>
-          <div class="area-desc">Sessions where a &quot;mayor&quot; agent checked hooked work and mail within the Gas Town system. Claude generally completed the checks but provided confidently wrong explanations about directory behavior and tool semantics, frustrating the user. These sessions also surfaced infrastructure issues like expired OAuth tokens and uninitialized databases.</div>
+          <div class="area-desc">Claude was used as an autonomous agent (&quot;Deacon&quot; and &quot;Mayor&quot;) to check hooks, process mail, and run extended patrol cycles monitoring town health. Sessions involved heavy Bash usage across dozens of patrol iterations, though persistent SQLite bugs with wisp management and OAuth token expiration caused friction. This appears to be a custom multi-agent system where Claude operates semi-autonomously within a game or simulation framework.</div>
         </div>
       
         <div class="project-area">
           <div class="area-header">
-            <span class="area-name">Arch Linux Bootstrap Simplification</span>
+            <span class="area-name">Barbie-Themed Web UI Creation</span>
             <span class="area-count">~2 sessions</span>
           </div>
-          <div class="area-desc">The user wanted to radically simplify a 300+ line Arch Linux bootstrap script down to a minimal pacman→ansible→gh flow. Claude made repeated wrong architectural assumptions—writing vault passwords to plaintext, using venvs instead of uv tools, misconfiguring git credentials—requiring many user corrections across rounds of iteration.</div>
+          <div class="area-desc">The user requested over-the-top Barbie-pink themed web pages including a quiz front page playground and a full Barbie webshop. Claude delivered HTML/CSS builds, though one session was interrupted before completion and another hit output token limits requiring a retry. The work was primarily front-end HTML creation with heavy visual styling.</div>
         </div>
       
         <div class="project-area">
           <div class="area-header">
-            <span class="area-name">Ansible &amp; System Configuration</span>
-            <span class="area-count">~2 sessions</span>
-          </div>
-          <div class="area-desc">Work on Ansible configuration and system administration tasks including fstab mount entries and PATH settings in Claude configuration files. One session was blocked by usage limits, while another successfully identified and fixed missing PATH entries across multiple settings files and hooks.</div>
-        </div>
-      
-        <div class="project-area">
-          <div class="area-header">
-            <span class="area-name">Claude Configuration &amp; File Migration Planning</span>
+            <span class="area-name">Infrastructure &amp; SSH/Tunnel Configuration</span>
             <span class="area-count">~1 sessions</span>
           </div>
-          <div class="area-desc">Planning the migration of important files from ~/.claude/ to ~/claude/ with symlinks to maintain compatibility. Claude initially took a brute-force exploration approach instead of thinking through the problem, requiring user redirection. A strategy was agreed upon but the session ended before implementation.</div>
+          <div class="area-desc">Claude helped fix cloudflared and SSH authentication configuration, working through tunnel setup with JWT validation. There was significant friction as Claude made incorrect assumptions about token security and open SSH access without verifying, requiring multiple user corrections before the tunnel was successfully configured.</div>
+        </div>
+      
+        <div class="project-area">
+          <div class="area-header">
+            <span class="area-name">Dotfiles &amp; Config Repository Management</span>
+            <span class="area-count">~1 sessions</span>
+          </div>
+          <div class="area-desc">The user migrated their ~/.claude/ configuration into a tracked project folder using a bare git repo with sync scripts and symlinks/copies. Claude struggled considerably with symlink direction, gitignore patterns, hard link preservation, and file operations — repeatedly requiring user correction. The migration was mostly achieved despite the high friction.</div>
+        </div>
+      
+        <div class="project-area">
+          <div class="area-header">
+            <span class="area-name">Codebase Refactoring (Path Hardcoding)</span>
+            <span class="area-count">~1 sessions</span>
+          </div>
+          <div class="area-desc">Claude identified and replaced all hard-coded paths across the repository with configurable alternatives. This was a clean, fully achieved session where Claude searched the codebase, found hard-coded paths in two files, and replaced them efficiently with minimal friction.</div>
         </div>
       
     </div>
@@ -203,34 +203,34 @@
       <div class="chart-card">
         <div class="chart-title">What You Wanted</div>
         <div class="bar-row">
-        <div class="bar-label">Simplify And Rewrite Bootstrap</div>
+        <div class="bar-label">Web App Creation</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#2563eb"></div></div>
-        <div class="bar-value">3</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">Run And Test Bootstrap</div>
-        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#2563eb"></div></div>
-        <div class="bar-value">3</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">Fix Runtime Issues</div>
-        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#2563eb"></div></div>
-        <div class="bar-value">3</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">System Administration</div>
-        <div class="bar-track"><div class="bar-fill" style="width:66.66666666666666%;background:#2563eb"></div></div>
         <div class="bar-value">2</div>
       </div>
 <div class="bar-row">
-        <div class="bar-label">Create Helper Scripts</div>
-        <div class="bar-track"><div class="bar-fill" style="width:66.66666666666666%;background:#2563eb"></div></div>
-        <div class="bar-value">2</div>
+        <div class="bar-label">Automated Agent Execution</div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#2563eb"></div></div>
+        <div class="bar-value">1</div>
       </div>
 <div class="bar-row">
-        <div class="bar-label">Configure Ansible</div>
-        <div class="bar-track"><div class="bar-fill" style="width:66.66666666666666%;background:#2563eb"></div></div>
-        <div class="bar-value">2</div>
+        <div class="bar-label">Iterative Refinement</div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#2563eb"></div></div>
+        <div class="bar-value">1</div>
+      </div>
+<div class="bar-row">
+        <div class="bar-label">Ui Design Creation</div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#2563eb"></div></div>
+        <div class="bar-value">1</div>
+      </div>
+<div class="bar-row">
+        <div class="bar-label">Refactoring</div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#2563eb"></div></div>
+        <div class="bar-value">1</div>
+      </div>
+<div class="bar-row">
+        <div class="bar-label">System Automation Execution</div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#2563eb"></div></div>
+        <div class="bar-value">1</div>
       </div>
       </div>
       <div class="chart-card">
@@ -238,31 +238,31 @@
         <div class="bar-row">
         <div class="bar-label">Bash</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#0891b2"></div></div>
-        <div class="bar-value">442</div>
+        <div class="bar-value">510</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Read</div>
-        <div class="bar-track"><div class="bar-fill" style="width:8.823529411764707%;background:#0891b2"></div></div>
-        <div class="bar-value">39</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">Edit</div>
-        <div class="bar-track"><div class="bar-fill" style="width:6.334841628959276%;background:#0891b2"></div></div>
-        <div class="bar-value">28</div>
+        <div class="bar-track"><div class="bar-fill" style="width:7.450980392156863%;background:#0891b2"></div></div>
+        <div class="bar-value">38</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Write</div>
-        <div class="bar-track"><div class="bar-fill" style="width:2.941176470588235%;background:#0891b2"></div></div>
-        <div class="bar-value">13</div>
+        <div class="bar-track"><div class="bar-fill" style="width:5.490196078431373%;background:#0891b2"></div></div>
+        <div class="bar-value">28</div>
       </div>
 <div class="bar-row">
-        <div class="bar-label">TaskOutput</div>
-        <div class="bar-track"><div class="bar-fill" style="width:0.4524886877828055%;background:#0891b2"></div></div>
-        <div class="bar-value">2</div>
+        <div class="bar-label">Edit</div>
+        <div class="bar-track"><div class="bar-fill" style="width:3.5294117647058822%;background:#0891b2"></div></div>
+        <div class="bar-value">18</div>
+      </div>
+<div class="bar-row">
+        <div class="bar-label">Mcp  Skogai-Think  Think</div>
+        <div class="bar-track"><div class="bar-fill" style="width:1.5686274509803921%;background:#0891b2"></div></div>
+        <div class="bar-value">8</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Task</div>
-        <div class="bar-track"><div class="bar-fill" style="width:0.4524886877828055%;background:#0891b2"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:0.39215686274509803%;background:#0891b2"></div></div>
         <div class="bar-value">2</div>
       </div>
       </div>
@@ -272,24 +272,34 @@
       <div class="chart-card">
         <div class="chart-title">Languages</div>
         <div class="bar-row">
-        <div class="bar-label">YAML</div>
+        <div class="bar-label">JSON</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#10b981"></div></div>
-        <div class="bar-value">19</div>
+        <div class="bar-value">30</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Shell</div>
-        <div class="bar-track"><div class="bar-fill" style="width:89.47368421052632%;background:#10b981"></div></div>
-        <div class="bar-value">17</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">JSON</div>
-        <div class="bar-track"><div class="bar-fill" style="width:57.89473684210527%;background:#10b981"></div></div>
-        <div class="bar-value">11</div>
+        <div class="bar-track"><div class="bar-fill" style="width:70%;background:#10b981"></div></div>
+        <div class="bar-value">21</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Markdown</div>
-        <div class="bar-track"><div class="bar-fill" style="width:26.31578947368421%;background:#10b981"></div></div>
-        <div class="bar-value">5</div>
+        <div class="bar-track"><div class="bar-fill" style="width:43.333333333333336%;background:#10b981"></div></div>
+        <div class="bar-value">13</div>
+      </div>
+<div class="bar-row">
+        <div class="bar-label">Python</div>
+        <div class="bar-track"><div class="bar-fill" style="width:13.333333333333334%;background:#10b981"></div></div>
+        <div class="bar-value">4</div>
+      </div>
+<div class="bar-row">
+        <div class="bar-label">HTML</div>
+        <div class="bar-track"><div class="bar-fill" style="width:6.666666666666667%;background:#10b981"></div></div>
+        <div class="bar-value">2</div>
+      </div>
+<div class="bar-row">
+        <div class="bar-label">TypeScript</div>
+        <div class="bar-track"><div class="bar-fill" style="width:3.3333333333333335%;background:#10b981"></div></div>
+        <div class="bar-value">1</div>
       </div>
       </div>
       <div class="chart-card">
@@ -297,22 +307,12 @@
         <div class="bar-row">
         <div class="bar-label">Single Task</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#8b5cf6"></div></div>
-        <div class="bar-value">9</div>
+        <div class="bar-value">5</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Iterative Refinement</div>
-        <div class="bar-track"><div class="bar-fill" style="width:33.33333333333333%;background:#8b5cf6"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:60%;background:#8b5cf6"></div></div>
         <div class="bar-value">3</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">Multi Task</div>
-        <div class="bar-track"><div class="bar-fill" style="width:11.11111111111111%;background:#8b5cf6"></div></div>
-        <div class="bar-value">1</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">Exploration</div>
-        <div class="bar-track"><div class="bar-fill" style="width:11.11111111111111%;background:#8b5cf6"></div></div>
-        <div class="bar-value">1</div>
       </div>
       </div>
     </div>
@@ -320,9 +320,10 @@
     
     <h2 id="section-usage">How You Use Claude Code</h2>
     <div class="narrative">
-      <p>You're building and maintaining a complex, custom infrastructure system (Gas Town, beads, wisps, patrol routines) and you interact with Claude Code primarily as an <strong>operator dispatching automated agents</strong> — sending &quot;Deacon&quot; or &quot;Mayor&quot; to run patrol loops, check hooks, and execute routines. This is a distinctive pattern: rather than writing code from scratch, you're orchestrating a multi-agent system and expecting Claude to follow established protocols. However, <strong>the infrastructure is frequently broken</strong> — Dolt database corruption, uninitialized beads databases, version mismatches, and missing packages plagued the majority of your sessions. Out of 14 sessions, 5 were not achieved and your frustration signals (12 frustrated moments) far outweigh satisfaction (3 satisfied). You spend a huge amount of time watching Claude debug infrastructure problems it can't solve, and you <strong>interrupt and exit sessions decisively</strong> when you see Claude spinning its wheels.</p>
-<p>Your interaction style reveals someone who <strong>has strong architectural opinions and low tolerance for Claude's wrong assumptions</strong>. In the bootstrap simplification session, Claude repeatedly made bad decisions — writing vault passwords to plaintext, using venvs when uv was the point, setting global become=true — and you had to correct course multiple times. When you asked a direct question about sync/version requirements, Claude kept running Bash commands instead of just answering, which visibly frustrated you. The friction data tells a clear story: 15 instances of &quot;wrong approach&quot; and 5 misunderstood requests dominate your experience. You expect Claude to <strong>think before acting, consult context before exploring</strong>, and answer questions directly rather than reflexively reaching for tools. The 442 Bash invocations across only 147 messages shows Claude is running roughly 3 commands per message — a sign of those runaway debugging loops where Claude keeps trying things without stepping back. When Claude does work well for you (the PATH fix session, the successful patrol cycle that detected beads-git removal), it's because it followed your system's logic rather than imposing its own.</p>
-      <div class="key-insight"><strong>Key pattern:</strong> You operate Claude as a dispatched agent within a custom infrastructure system, expecting it to follow established protocols and think before acting, but are frequently frustrated by its tendency to brute-force debug broken infrastructure rather than reason about the problem first.</div>
+      <p>You pack an extraordinary amount of activity into short timeframes — 184 messages across 8 sessions in just 3 days, with a <strong>massive 510 Bash invocations</strong> dominating your tool usage. This reveals a deeply hands-on, command-line-centric workflow where you're frequently running, testing, and verifying things yourself rather than delegating everything to Claude. You operate across a diverse set of projects simultaneously: configuring cloudflared tunnels, migrating dotfile configs with bare git repos and symlinks, building playful Barbie-themed web UIs, running autonomous agent patrol loops, and refactoring hard-coded paths. You clearly know your way around systems work and <strong>you don't hesitate to correct Claude when it gets things wrong</strong> — which happened frequently, with 8 instances of wrong approaches and 7 of buggy code logged across your sessions.</p>
+<p>Your interaction style is best described as <strong>impatient expertise meeting iterative correction</strong>. You give relatively brief, high-level instructions and expect Claude to figure out the details — but when it stumbles (misunderstanding symlink direction, botching gitignore patterns, making incorrect security claims), you jump in immediately with corrections rather than letting it spiral. The symlink/config migration session is a perfect example: Claude repeatedly broke hard links with Write instead of in-place edits, deleted existing config entries without reason, and required constant course correction from you. You also interrupted a Barbie playground build mid-stream, suggesting you'll cut your losses quickly when the approach feels wrong. Despite all this friction — and a notably high dissatisfaction rate (5 out of 17 sentiment signals) — you still managed to achieve outcomes in 7 of 8 sessions, which speaks to your ability to steer Claude back on track through sheer persistence.</p>
+<p>Interestingly, you also run <strong>autonomous agent loops</strong> (the Deacon/Mayor patrol cycles) where you let Claude execute dozens of cycles independently, which contrasts sharply with your highly corrective style in other sessions. This suggests you've built enough trust in the agent framework to let it run unsupervised for routine tasks, but you maintain tight control when Claude is making structural changes to your codebase or infrastructure. The `mcp__skogai-think__think` tool appearing 8 times hints at a custom MCP setup you've built to give Claude a reasoning scratchpad — further evidence that you're a power user actively shaping how Claude operates rather than just consuming it.</p>
+      <div class="key-insight"><strong>Key pattern:</strong> You're a systems-savvy power user who gives terse instructions, expects Claude to execute correctly on the first pass, and intervenes with sharp corrections the moment it veers off course — tolerating autonomy only for routine patrol-style loops.</div>
     </div>
     
 
@@ -331,41 +332,41 @@
       <div class="chart-title">User Response Time Distribution</div>
       <div class="bar-row">
         <div class="bar-label">2-10s</div>
-        <div class="bar-track"><div class="bar-fill" style="width:23.25581395348837%;background:#6366f1"></div></div>
-        <div class="bar-value">10</div>
+        <div class="bar-track"><div class="bar-fill" style="width:20.689655172413794%;background:#6366f1"></div></div>
+        <div class="bar-value">6</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">10-30s</div>
-        <div class="bar-track"><div class="bar-fill" style="width:32.55813953488372%;background:#6366f1"></div></div>
-        <div class="bar-value">14</div>
+        <div class="bar-track"><div class="bar-fill" style="width:96.55172413793103%;background:#6366f1"></div></div>
+        <div class="bar-value">28</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">30s-1m</div>
-        <div class="bar-track"><div class="bar-fill" style="width:39.53488372093023%;background:#6366f1"></div></div>
-        <div class="bar-value">17</div>
+        <div class="bar-track"><div class="bar-fill" style="width:93.10344827586206%;background:#6366f1"></div></div>
+        <div class="bar-value">27</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">1-2m</div>
-        <div class="bar-track"><div class="bar-fill" style="width:44.18604651162791%;background:#6366f1"></div></div>
-        <div class="bar-value">19</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#6366f1"></div></div>
+        <div class="bar-value">29</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">2-5m</div>
-        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#6366f1"></div></div>
-        <div class="bar-value">43</div>
+        <div class="bar-track"><div class="bar-fill" style="width:62.06896551724138%;background:#6366f1"></div></div>
+        <div class="bar-value">18</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">5-15m</div>
-        <div class="bar-track"><div class="bar-fill" style="width:27.906976744186046%;background:#6366f1"></div></div>
-        <div class="bar-value">12</div>
+        <div class="bar-track"><div class="bar-fill" style="width:34.48275862068966%;background:#6366f1"></div></div>
+        <div class="bar-value">10</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">>15m</div>
-        <div class="bar-track"><div class="bar-fill" style="width:27.906976744186046%;background:#6366f1"></div></div>
-        <div class="bar-value">12</div>
+        <div class="bar-track"><div class="bar-fill" style="width:10.344827586206897%;background:#6366f1"></div></div>
+        <div class="bar-value">3</div>
       </div>
       <div style="font-size: 12px; color: #64748b; margin-top: 8px;">
-        Median: 133.5s &bull; Average: 236.5s
+        Median: 59.0s &bull; Average: 162.2s
       </div>
     </div>
 
@@ -379,11 +380,11 @@
             <div style="font-size: 11px; color: #64748b; text-transform: uppercase;">Overlap Events</div>
           </div>
           <div style="text-align: center;">
-            <div style="font-size: 24px; font-weight: 700; color: #7c3aed;">6</div>
+            <div style="font-size: 24px; font-weight: 700; color: #7c3aed;">4</div>
             <div style="font-size: 11px; color: #64748b; text-transform: uppercase;">Sessions Involved</div>
           </div>
           <div style="text-align: center;">
-            <div style="font-size: 24px; font-weight: 700; color: #7c3aed;">12%</div>
+            <div style="font-size: 24px; font-weight: 700; color: #7c3aed;">5%</div>
             <div style="font-size: 11px; color: #64748b; text-transform: uppercase;">Of Messages</div>
           </div>
         </div>
@@ -412,8 +413,8 @@
         <div id="hour-histogram">
       <div class="bar-row">
         <div class="bar-label">Morning (6-12)</div>
-        <div class="bar-track"><div class="bar-fill" style="width:19.318181818181817%;background:#8b5cf6"></div></div>
-        <div class="bar-value">17</div>
+        <div class="bar-track"><div class="bar-fill" style="width:89.70588235294117%;background:#8b5cf6"></div></div>
+        <div class="bar-value">61</div>
       </div>
 
       <div class="bar-row">
@@ -424,14 +425,14 @@
 
       <div class="bar-row">
         <div class="bar-label">Evening (18-24)</div>
-        <div class="bar-track"><div class="bar-fill" style="width:47.72727272727273%;background:#8b5cf6"></div></div>
-        <div class="bar-value">42</div>
+        <div class="bar-track"><div class="bar-fill" style="width:80.88235294117648%;background:#8b5cf6"></div></div>
+        <div class="bar-value">55</div>
       </div>
 
       <div class="bar-row">
         <div class="bar-label">Night (0-6)</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#8b5cf6"></div></div>
-        <div class="bar-value">88</div>
+        <div class="bar-value">68</div>
       </div></div>
       </div>
       <div class="chart-card">
@@ -439,21 +440,21 @@
         <div class="bar-row">
         <div class="bar-label">Command Failed</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#dc2626"></div></div>
-        <div class="bar-value">79</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">Other</div>
-        <div class="bar-track"><div class="bar-fill" style="width:36.708860759493675%;background:#dc2626"></div></div>
-        <div class="bar-value">29</div>
+        <div class="bar-value">28</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">User Rejected</div>
-        <div class="bar-track"><div class="bar-fill" style="width:11.39240506329114%;background:#dc2626"></div></div>
-        <div class="bar-value">9</div>
+        <div class="bar-track"><div class="bar-fill" style="width:42.857142857142854%;background:#dc2626"></div></div>
+        <div class="bar-value">12</div>
+      </div>
+<div class="bar-row">
+        <div class="bar-label">Other</div>
+        <div class="bar-track"><div class="bar-fill" style="width:7.142857142857142%;background:#dc2626"></div></div>
+        <div class="bar-value">2</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">File Not Found</div>
-        <div class="bar-track"><div class="bar-fill" style="width:1.2658227848101267%;background:#dc2626"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:3.571428571428571%;background:#dc2626"></div></div>
         <div class="bar-value">1</div>
       </div>
       </div>
@@ -461,22 +462,22 @@
 
     
     <h2 id="section-wins">Impressive Things You Did</h2>
-    <p class="section-intro">Over the past week, you've been intensively building and debugging a multi-agent system with patrol routines, bootstrap scripts, and custom tooling across 14 sessions.</p>
+    <p class="section-intro">Over 8 sessions across 3 days, you've been building out a creative multi-agent system, managing infrastructure, and rapidly prototyping web apps — all with a heavily Bash-driven workflow.</p>
     <div class="big-wins">
       
         <div class="big-win">
-          <div class="big-win-title">Multi-Agent Patrol Architecture</div>
-          <div class="big-win-desc">You've designed a sophisticated multi-agent system with named agents (Mayor, Deacon) running patrol loops that check hooks, mail, and create wisps. The session where Deacon completed 2 full patrol cycles and correctly escalated when it detected an extraordinary event (beads-git removal) shows the architecture working as intended — that's a compelling autonomous agent pattern built on top of Claude Code.</div>
+          <div class="big-win-title">Autonomous Agent Patrol Loops</div>
+          <div class="big-win-desc">You're running persistent agent personas (Deacon, Mayor) that execute extended patrol cycles — 14 and 20 cycles respectively — checking hooks, processing mail, and monitoring system health autonomously. This is a sophisticated use of Claude Code as a long-running autonomous agent, pushing it well beyond typical one-shot coding tasks into genuine system orchestration.</div>
         </div>
       
         <div class="big-win">
-          <div class="big-win-title">Radical Bootstrap Simplification</div>
-          <div class="big-win-desc">You took a 300+ line Arch Linux bootstrap script and drove it down to a minimal pacman→ansible→gh flow, showing strong architectural instincts about keeping infrastructure lean. Even when Claude kept making wrong assumptions, you consistently corrected course toward the simpler design, demonstrating clear vision for what the system should look like.</div>
+          <div class="big-win-title">Infrastructure Config as Code</div>
+          <div class="big-win-desc">You migrated your Claude config into a tracked project folder with a bare git repo, sync scripts, and symlinks, and then followed up by replacing all hard-coded paths across the repo with configurable alternatives. This shows a disciplined approach to making your entire development environment reproducible and portable, treating even your AI tooling setup as proper infrastructure.</div>
         </div>
       
         <div class="big-win">
-          <div class="big-win-title">Bash-Heavy Infrastructure Automation</div>
-          <div class="big-win-desc">With 442 Bash tool invocations across just 14 sessions, you're leveraging Claude Code as a deeply integrated system administration partner — managing fstab entries, debugging Dolt databases, configuring Ansible, and wiring up shell hooks. Your comfort letting Claude operate directly on live infrastructure while you steer the architecture shows an effective human-in-the-loop pattern for complex DevOps work.</div>
+          <div class="big-win-title">Rapid Creative Prototyping</div>
+          <div class="big-win-desc">You went from a quick Barbie-pink quiz playground to a full Barbie webshop in a single session, using Claude to rapidly iterate on front-end designs. Your willingness to interrupt and redirect when the approach wasn't right shows you're effectively steering the tool rather than passively accepting output, keeping creative momentum high despite friction.</div>
         </div>
       
     </div>
@@ -486,28 +487,28 @@
       <div class="chart-card">
         <div class="chart-title">What Helped Most (Claude's Capabilities)</div>
         <div class="bar-row">
-        <div class="bar-label">Good Debugging</div>
+        <div class="bar-label">Proactive Help</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#16a34a"></div></div>
-        <div class="bar-value">4</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">Multi-file Changes</div>
-        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#16a34a"></div></div>
         <div class="bar-value">2</div>
       </div>
 <div class="bar-row">
+        <div class="bar-label">Multi-file Changes</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#16a34a"></div></div>
+        <div class="bar-value">2</div>
+      </div>
+<div class="bar-row">
+        <div class="bar-label">Correct Code Edits</div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#16a34a"></div></div>
+        <div class="bar-value">1</div>
+      </div>
+<div class="bar-row">
         <div class="bar-label">Fast/Accurate Search</div>
-        <div class="bar-track"><div class="bar-fill" style="width:25%;background:#16a34a"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#16a34a"></div></div>
         <div class="bar-value">1</div>
       </div>
 <div class="bar-row">
-        <div class="bar-label">Proactive Help</div>
-        <div class="bar-track"><div class="bar-fill" style="width:25%;background:#16a34a"></div></div>
-        <div class="bar-value">1</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">Good Explanations</div>
-        <div class="bar-track"><div class="bar-fill" style="width:25%;background:#16a34a"></div></div>
+        <div class="bar-label">Good Debugging</div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#16a34a"></div></div>
         <div class="bar-value">1</div>
       </div>
       </div>
@@ -515,48 +516,43 @@
         <div class="chart-title">Outcomes</div>
         <div class="bar-row">
         <div class="bar-label">Not Achieved</div>
-        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#8b5cf6"></div></div>
-        <div class="bar-value">5</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">Partially Achieved</div>
-        <div class="bar-track"><div class="bar-fill" style="width:60%;background:#8b5cf6"></div></div>
-        <div class="bar-value">3</div>
+        <div class="bar-track"><div class="bar-fill" style="width:25%;background:#8b5cf6"></div></div>
+        <div class="bar-value">1</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Mostly Achieved</div>
-        <div class="bar-track"><div class="bar-fill" style="width:80%;background:#8b5cf6"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#8b5cf6"></div></div>
         <div class="bar-value">4</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Fully Achieved</div>
-        <div class="bar-track"><div class="bar-fill" style="width:40%;background:#8b5cf6"></div></div>
-        <div class="bar-value">2</div>
+        <div class="bar-track"><div class="bar-fill" style="width:75%;background:#8b5cf6"></div></div>
+        <div class="bar-value">3</div>
       </div>
       </div>
     </div>
 
     
     <h2 id="section-friction">Where Things Go Wrong</h2>
-    <p class="section-intro">Your sessions are heavily dominated by recurring infrastructure failures and Claude pursuing wrong approaches, resulting in frequent frustration and a majority of goals going unachieved or only partially achieved.</p>
+    <p class="section-intro">Your sessions are heavily impacted by Claude taking wrong approaches and producing buggy code, requiring you to constantly correct and re-steer across nearly every session.</p>
     <div class="friction-categories">
       
         <div class="friction-category">
-          <div class="friction-title">Recurring Infrastructure Failures Consuming Entire Sessions</div>
-          <div class="friction-desc">You repeatedly hit the same Dolt/beads database corruption and initialization issues across multiple sessions, with Claude spending entire sessions attempting repairs instead of completing your actual patrol tasks. Consider stabilizing this infrastructure layer independently (or building in automated self-healing) so that routine patrol operations don't get blocked by the same class of failure every time.</div>
-          <ul class="friction-examples"><li>At least 5 separate sessions were derailed by Dolt database corruption or beads initialization failures, with Claude cycling through different fix attempts (bd init --force, config changes, killing processes) that conflicted with each other and never stabilized the environment</li><li>In one session Claude even created a local .beads directory that conflicted with your intended architecture, compounding the infrastructure problems rather than resolving them</li></ul>
+          <div class="friction-title">Wrong Assumptions Without Verification</div>
+          <div class="friction-desc">Claude repeatedly made incorrect claims and jumped to conclusions without first verifying the actual state of your system or files. You could mitigate this by explicitly instructing Claude to read and inspect before making changes, or by adding a CLAUDE.md with rules like 'always verify current state before modifying.'</div>
+          <ul class="friction-examples"><li>During your cloudflared/SSH setup, Claude made incorrect claims about token security and open SSH access without checking, forcing you to correct it multiple times and slowing down what should have been a straightforward config fix.</li><li>During your config migration session, Claude misunderstood the symlink direction and botched gitignore patterns without first reading the existing file structure, requiring constant correction and re-dos.</li></ul>
         </div>
       
         <div class="friction-category">
-          <div class="friction-title">Wrong Approaches and Architectural Assumptions Requiring Repeated Correction</div>
-          <div class="friction-desc">Claude frequently charged ahead with incorrect assumptions—writing vault passwords to plaintext, using venvs instead of uv tools, brute-force exploring files instead of thinking first—forcing you to intervene and redirect multiple times per session. You could mitigate this by providing explicit architectural constraints in your CLAUDE.md or system instructions so Claude has guardrails before it starts acting.</div>
-          <ul class="friction-examples"><li>During the bootstrap simplification, Claude repeatedly made wrong architectural decisions (plaintext vault passwords, global become=true, skipping git credential helper setup) requiring you to correct course multiple times with increasing frustration</li><li>When you asked Claude to plan a ~/.claude/ to ~/claude/ migration, it immediately started brute-force exploring files without consulting context or thinking first, and you had to interrupt and redirect the entire approach</li></ul>
+          <div class="friction-title">Destructive File Operations and Brute-Force Tool Usage</div>
+          <div class="friction-desc">Claude frequently used Write instead of Edit, deleted existing config entries without reason, and broke hard links — showing a pattern of heavy-handed changes rather than precise, minimal edits. With 510 Bash calls across 8 sessions, you're seeing a brute-force approach that compounds errors. Consider asking Claude to plan edits before executing them.</div>
+          <ul class="friction-examples"><li>In the config migration session, Claude broke hard links by using Write instead of in-place edits and deleted existing config entries without justification, forcing you to manually restore state.</li><li>Claude's excessive Bash usage (510 calls in 12 hours) across sessions like the patrol agent runs suggests a trial-and-error approach rather than deliberate action, which led to issues like corrupt SQLite rows and failed wisp creation.</li></ul>
         </div>
       
         <div class="friction-category">
-          <div class="friction-title">Tool Overuse Instead of Direct Reasoning and Answers</div>
-          <div class="friction-desc">With 442 Bash invocations across only 147 messages, Claude leans heavily on executing commands rather than reasoning from available context, which leads to long debugging loops and delays in answering straightforward questions. When you have a direct question, consider prompting Claude to reason and answer first before running any tools.</div>
-          <ul class="friction-examples"><li>You asked a direct question about sync mechanisms and version requirements, but Claude kept running tools and exploring code instead of synthesizing an answer from information it already had, leading to significant frustration and session exit</li><li>Claude gave a confidently wrong explanation about gt commands working from any directory, and even after you corrected it, Claude still didn't re-run the hook from the correct directory until you explicitly demanded it—prioritizing tool execution over listening to your feedback</li></ul>
+          <div class="friction-title">Recurring Backend Bugs Blocking Core Workflows</div>
+          <div class="friction-desc">Across multiple agent patrol sessions, SQLite issues and command limitations repeatedly blocked your wisp management and handoff workflows. Since these are recurring problems, you'd benefit from having Claude fix the root causes (empty-ID rows, vapor-phase wisp handling) rather than working around them each session.</div>
+          <ul class="friction-examples"><li>In one patrol session, vapor-phase wisps couldn't be managed by normal bd commands, requiring SQL workarounds every cycle — a systemic issue that was never actually resolved, just patched around.</li><li>In another patrol session, an ephemeral SQLite backend had a corrupt empty-ID row that blocked both wisp creation and handoff mail sending throughout the entire session, wasting a significant portion of your 20 patrol cycles.</li></ul>
         </div>
       
     </div>
@@ -568,31 +564,26 @@
         <div class="bar-row">
         <div class="bar-label">Wrong Approach</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#dc2626"></div></div>
-        <div class="bar-value">15</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">Buggy Code</div>
-        <div class="bar-track"><div class="bar-fill" style="width:53.333333333333336%;background:#dc2626"></div></div>
         <div class="bar-value">8</div>
       </div>
 <div class="bar-row">
-        <div class="bar-label">Misunderstood Request</div>
-        <div class="bar-track"><div class="bar-fill" style="width:33.33333333333333%;background:#dc2626"></div></div>
-        <div class="bar-value">5</div>
+        <div class="bar-label">Buggy Code</div>
+        <div class="bar-track"><div class="bar-fill" style="width:87.5%;background:#dc2626"></div></div>
+        <div class="bar-value">7</div>
       </div>
 <div class="bar-row">
-        <div class="bar-label">Excessive Changes</div>
-        <div class="bar-track"><div class="bar-fill" style="width:20%;background:#dc2626"></div></div>
+        <div class="bar-label">Misunderstood Request</div>
+        <div class="bar-track"><div class="bar-fill" style="width:37.5%;background:#dc2626"></div></div>
         <div class="bar-value">3</div>
       </div>
 <div class="bar-row">
-        <div class="bar-label">Tool Failure</div>
-        <div class="bar-track"><div class="bar-fill" style="width:13.333333333333334%;background:#dc2626"></div></div>
+        <div class="bar-label">Excessive Changes</div>
+        <div class="bar-track"><div class="bar-fill" style="width:25%;background:#dc2626"></div></div>
         <div class="bar-value">2</div>
       </div>
 <div class="bar-row">
-        <div class="bar-label">Authentication Error</div>
-        <div class="bar-track"><div class="bar-fill" style="width:6.666666666666667%;background:#dc2626"></div></div>
+        <div class="bar-label">User Rejected Action</div>
+        <div class="bar-track"><div class="bar-fill" style="width:12.5%;background:#dc2626"></div></div>
         <div class="bar-value">1</div>
       </div>
       </div>
@@ -600,23 +591,28 @@
         <div class="chart-title">Inferred Satisfaction (model-estimated)</div>
         <div class="bar-row">
         <div class="bar-label">Frustrated</div>
-        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#eab308"></div></div>
-        <div class="bar-value">12</div>
+        <div class="bar-track"><div class="bar-fill" style="width:12.5%;background:#eab308"></div></div>
+        <div class="bar-value">1</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Dissatisfied</div>
-        <div class="bar-track"><div class="bar-fill" style="width:25%;background:#eab308"></div></div>
-        <div class="bar-value">3</div>
+        <div class="bar-track"><div class="bar-fill" style="width:62.5%;background:#eab308"></div></div>
+        <div class="bar-value">5</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Likely Satisfied</div>
-        <div class="bar-track"><div class="bar-fill" style="width:75%;background:#eab308"></div></div>
-        <div class="bar-value">9</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#eab308"></div></div>
+        <div class="bar-value">8</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Satisfied</div>
         <div class="bar-track"><div class="bar-fill" style="width:25%;background:#eab308"></div></div>
-        <div class="bar-value">3</div>
+        <div class="bar-value">2</div>
+      </div>
+<div class="bar-row">
+        <div class="bar-label">Happy</div>
+        <div class="bar-track"><div class="bar-fill" style="width:12.5%;background:#eab308"></div></div>
+        <div class="bar-value">1</div>
       </div>
       </div>
     </div>
@@ -632,73 +628,57 @@
       </div>
       
         <div class="claude-md-item">
-          <input type="checkbox" id="cmd-0" class="cmd-checkbox" checked data-text="Add as a new top-level section ## Beads/Dolt Database near the top of CLAUDE.md so it's seen early in every session.\n\n## Beads/Dolt Database
-- The beads database (`bd`) must be initialized before any patrol wisp creation or hook checks.
-- If `bd` commands fail, check: 1) Is the Dolt server running? 2) Does repo_state.json exist? 3) Are there conflicting Dolt processes?
-- NEVER create a local `.beads` directory - it conflicts with the intended architecture. Always use the configured beads path.
-- If the database is corrupted, inform the user and STOP rather than attempting repeated repair loops.">
+          <input type="checkbox" id="cmd-0" class="cmd-checkbox" checked data-text="Add under a new ## File Operations section near the top of CLAUDE.md\n\nBefore using Write on any existing file, verify whether it's a hard link or symlink with `ls -li` and use in-place editing (Edit tool or `sed -i`) to preserve link integrity. Never overwrite linked files with Write.">
           <label for="cmd-0">
-            <code class="cmd-code">## Beads/Dolt Database
-- The beads database (`bd`) must be initialized before any patrol wisp creation or hook checks.
-- If `bd` commands fail, check: 1) Is the Dolt server running? 2) Does repo_state.json exist? 3) Are there conflicting Dolt processes?
-- NEVER create a local `.beads` directory - it conflicts with the intended architecture. Always use the configured beads path.
-- If the database is corrupted, inform the user and STOP rather than attempting repeated repair loops.</code>
+            <code class="cmd-code">Before using Write on any existing file, verify whether it's a hard link or symlink with `ls -li` and use in-place editing (Edit tool or `sed -i`) to preserve link integrity. Never overwrite linked files with Write.</code>
             <button class="copy-btn" onclick="copyCmdItem(0)">Copy</button>
           </label>
-          <div class="cmd-why">Beads/Dolt database initialization failures caused at least 5 sessions to fail or stall, making this the single biggest source of friction across all sessions.</div>
+          <div class="cmd-why">Claude repeatedly broke hard links by using Write instead of in-place edits during the config migration session, requiring constant user correction.</div>
         </div>
       
         <div class="claude-md-item">
-          <input type="checkbox" id="cmd-1" class="cmd-checkbox" checked data-text="Add as a new section ## Working Directory Rules, placed right after the Beads/Dolt Database section.\n\n## Working Directory Rules
-- Gas Town (`gt`) commands MUST be run from the correct directory. Do not assume gt commands work from anywhere.
-- Always `cd` to the appropriate project directory before running `gt` or `bd` commands.
-- When in doubt about which directory to be in, ASK rather than guessing.">
+          <input type="checkbox" id="cmd-1" class="cmd-checkbox" checked data-text="Add under ## File Operations section, right after the hard link instruction\n\nWhen working with symlinks, always verify the direction: `ln -s &lt;target&gt; &lt;link_name&gt;` where target is the real file and link_name is the shortcut. Confirm with `ls -la` before and after.">
           <label for="cmd-1">
-            <code class="cmd-code">## Working Directory Rules
-- Gas Town (`gt`) commands MUST be run from the correct directory. Do not assume gt commands work from anywhere.
-- Always `cd` to the appropriate project directory before running `gt` or `bd` commands.
-- When in doubt about which directory to be in, ASK rather than guessing.</code>
+            <code class="cmd-code">When working with symlinks, always verify the direction: `ln -s &lt;target&gt; &lt;link_name&gt;` where target is the real file and link_name is the shortcut. Confirm with `ls -la` before and after.</code>
             <button class="copy-btn" onclick="copyCmdItem(1)">Copy</button>
           </label>
-          <div class="cmd-why">Claude gave confidently wrong explanations about directory behavior and ran commands from wrong directories in multiple sessions, frustrating the user.</div>
+          <div class="cmd-why">Claude misunderstood symlink direction during the config migration session and had to be corrected multiple times.</div>
         </div>
       
         <div class="claude-md-item">
-          <input type="checkbox" id="cmd-2" class="cmd-checkbox" checked data-text="Add as a top-level section ## Approach &amp; Communication near the very top of CLAUDE.md so it governs all interactions.\n\n## Approach &amp; Communication
-- THINK before acting. Consult CLAUDE.md and available context BEFORE exploring files or running tools.
-- When the user asks a direct question, ANSWER IT with available knowledge first. Do not reflexively run tools to explore.
-- If you're unsure about architecture decisions (file paths, config locations, tool usage patterns), ASK the user rather than making assumptions.
-- NEVER make more than 2 attempts to fix the same infrastructure issue. If stuck, summarize the problem and ask the user how to proceed.
-- Do not write secrets/passwords to plaintext files. Do not create venvs when uv tools is the intended approach.">
+          <input type="checkbox" id="cmd-2" class="cmd-checkbox" checked data-text="Add under a new ## General Rules section at the top of CLAUDE.md\n\nStop and think before making claims about security, networking, or system configuration. Verify assumptions by reading actual config files and running diagnostic commands before asserting anything. Never claim something is insecure without evidence.">
           <label for="cmd-2">
-            <code class="cmd-code">## Approach &amp; Communication
-- THINK before acting. Consult CLAUDE.md and available context BEFORE exploring files or running tools.
-- When the user asks a direct question, ANSWER IT with available knowledge first. Do not reflexively run tools to explore.
-- If you're unsure about architecture decisions (file paths, config locations, tool usage patterns), ASK the user rather than making assumptions.
-- NEVER make more than 2 attempts to fix the same infrastructure issue. If stuck, summarize the problem and ask the user how to proceed.
-- Do not write secrets/passwords to plaintext files. Do not create venvs when uv tools is the intended approach.</code>
+            <code class="cmd-code">Stop and think before making claims about security, networking, or system configuration. Verify assumptions by reading actual config files and running diagnostic commands before asserting anything. Never claim something is insecure without evidence.</code>
             <button class="copy-btn" onclick="copyCmdItem(2)">Copy</button>
           </label>
-          <div class="cmd-why">Claude repeatedly made wrong assumptions (15 'wrong_approach' events), ran tools instead of answering questions, and got stuck in long debugging loops - the user had to correct course many times across multiple sessions.</div>
+          <div class="cmd-why">Claude made incorrect claims about token security and open SSH access during the cloudflared session without verifying, frustrating the user.</div>
         </div>
       
         <div class="claude-md-item">
-          <input type="checkbox" id="cmd-3" class="cmd-checkbox" checked data-text="Add under a new section ## Bootstrap &amp; Ansible Conventions or append to an existing Ansible/setup section.\n\n## Bootstrap &amp; Ansible Conventions
-- Bootstrap flow is: pacman → ansible → gh (minimal approach)
-- Use `uv tools` instead of venvs
-- Configure git credential helper during bootstrap
-- Never set global `become=true` in Ansible
-- Never write vault passwords to plaintext files">
+          <input type="checkbox" id="cmd-3" class="cmd-checkbox" checked data-text="Add under ## General Rules section\n\nBefore starting any multi-step task, outline the plan in 2-3 sentences and wait for confirmation. Do not jump into brute-force tool usage without thinking through the approach first.">
           <label for="cmd-3">
-            <code class="cmd-code">## Bootstrap &amp; Ansible Conventions
-- Bootstrap flow is: pacman → ansible → gh (minimal approach)
-- Use `uv tools` instead of venvs
-- Configure git credential helper during bootstrap
-- Never set global `become=true` in Ansible
-- Never write vault passwords to plaintext files</code>
+            <code class="cmd-code">Before starting any multi-step task, outline the plan in 2-3 sentences and wait for confirmation. Do not jump into brute-force tool usage without thinking through the approach first.</code>
             <button class="copy-btn" onclick="copyCmdItem(3)">Copy</button>
           </label>
-          <div class="cmd-why">The bootstrap simplification session had repeated architectural mistakes that the user had to manually correct, indicating these conventions need to be documented.</div>
+          <div class="cmd-why">Across multiple sessions, Claude repeatedly jumped into action without planning, leading to wrong approaches (8 instances of wrong_approach friction across sessions).</div>
+        </div>
+      
+        <div class="claude-md-item">
+          <input type="checkbox" id="cmd-4" class="cmd-checkbox" checked data-text="Add under ## File Operations section\n\nWhen editing .gitignore or config files, read the full file first, preserve all existing entries, and only append or modify the specific lines needed. Never delete existing entries without explicit user approval.">
+          <label for="cmd-4">
+            <code class="cmd-code">When editing .gitignore or config files, read the full file first, preserve all existing entries, and only append or modify the specific lines needed. Never delete existing entries without explicit user approval.</code>
+            <button class="copy-btn" onclick="copyCmdItem(4)">Copy</button>
+          </label>
+          <div class="cmd-why">Claude deleted existing config entries and botched gitignore patterns during the config migration session without reason.</div>
+        </div>
+      
+        <div class="claude-md-item">
+          <input type="checkbox" id="cmd-5" class="cmd-checkbox" checked data-text="Add under a new ## Agent Patrol (bd system) section\n\nFor the Deacon/Mayor agent patrol system: vapor-phase wisps require SQL workarounds (`bd` CLI doesn't support them). Check for corrupt empty-ID rows in SQLite before wisp creation. Use `SELECT * FROM wisps WHERE id = '';` to detect and `DELETE` to fix.">
+          <label for="cmd-5">
+            <code class="cmd-code">For the Deacon/Mayor agent patrol system: vapor-phase wisps require SQL workarounds (`bd` CLI doesn't support them). Check for corrupt empty-ID rows in SQLite before wisp creation. Use `SELECT * FROM wisps WHERE id = '';` to detect and `DELETE` to fix.</code>
+            <button class="copy-btn" onclick="copyCmdItem(5)">Copy</button>
+          </label>
+          <div class="cmd-why">Two separate agent patrol sessions hit the same SQLite/wisp management bugs, wasting cycles on the same known issues each time.</div>
         </div>
       
     </div>
@@ -709,25 +689,22 @@
       
         <div class="feature-card">
           <div class="feature-title">Hooks</div>
-          <div class="feature-oneliner">Shell commands that auto-run at specific lifecycle events like pre-tool or post-tool execution.</div>
-          <div class="feature-why"><strong>Why for you:</strong> You're already using hooks (session-start hook verification was a session goal). You could add a pre-tool hook that validates the working directory before running gt/bd commands, preventing the repeated wrong-directory errors that caused friction in multiple sessions.</div>
+          <div class="feature-oneliner">Auto-run shell commands at specific lifecycle events like pre-edit or post-edit.</div>
+          <div class="feature-why"><strong>Why for you:</strong> With 8 instances of wrong_approach and 7 of buggy_code, you need guardrails. A pre-tool hook could enforce that Claude reads files before writing, and a post-edit hook could validate symlinks/hard links aren't broken — preventing the exact friction you hit repeatedly.</div>
           
           <div class="feature-examples">
             <div class="feature-example">
               <div class="example-code-row">
-                <code class="example-code">// In .claude/settings.json:
-&quot;hooks&quot;: {
-  &quot;PreToolUse&quot;: [
-    {
-      &quot;matcher&quot;: &quot;Bash&quot;,
-      &quot;hooks&quot;: [
-        {
-          &quot;type&quot;: &quot;command&quot;,
-          &quot;command&quot;: &quot;echo \&quot;Current directory: $(pwd)\&quot; &amp;&amp; if echo \&quot;$TOOL_INPUT\&quot; | grep -qE '\\b(gt |bd )' &amp;&amp; [[ \&quot;$(pwd)\&quot; != *\&quot;/gas-town\&quot;* ]]; then echo \&quot;WARNING: gt/bd command detected outside gas-town directory\&quot;; fi&quot;
-        }
-      ]
-    }
-  ]
+                <code class="example-code">// Add to .claude/settings.json:
+{
+  &quot;hooks&quot;: {
+    &quot;PostToolUse&quot;: [
+      {
+        &quot;matcher&quot;: &quot;Write|Edit&quot;,
+        &quot;command&quot;: &quot;bash -c 'echo \&quot;Reminder: verify file links with ls -li if this was a linked file\&quot;'&quot;
+      }
+    ]
+  }
 }</code>
                 <button class="copy-btn" onclick="copyText(this)">Copy</button>
               </div>
@@ -738,31 +715,20 @@
       
         <div class="feature-card">
           <div class="feature-title">Custom Skills</div>
-          <div class="feature-oneliner">Reusable prompts defined as markdown files that run with a single /command.</div>
-          <div class="feature-why"><strong>Why for you:</strong> Your 'patrol' routine (heartbeat, hook check, wisp creation) was attempted in 6+ sessions and failed most times due to the same issues. Encoding it as a /patrol skill with pre-checks would eliminate repeated failures and save you from re-explaining the workflow every session.</div>
+          <div class="feature-oneliner">Reusable prompts as markdown files triggered by a single /command.</div>
+          <div class="feature-why"><strong>Why for you:</strong> You run agent patrol cycles frequently (2+ sessions of 'check hooks/mail and patrol'). A /patrol skill would encode all the known workarounds (vapor-phase wisps, SQLite empty-ID cleanup) so you don't re-discover the same bugs every session.</div>
           
           <div class="feature-examples">
             <div class="feature-example">
               <div class="example-code-row">
                 <code class="example-code"># Create .claude/skills/patrol/SKILL.md with:
-
-## Patrol Routine
-
-### Pre-flight Checks (do ALL before proceeding):
-1. Verify working directory is correct for gt/bd commands
-2. Check if Dolt server is running: `ps aux | grep dolt`
-3. Check if beads database is initialized: `bd status`
-4. If any check fails, REPORT and STOP. Do not attempt repairs.
-
-### Patrol Steps (only if all checks pass):
-1. Run heartbeat check
-2. Check gt hook for pending work
-3. If hook has work, process it
-4. Create and execute patrol wisp if needed
-
-### On Failure:
-- Do NOT attempt more than 1 retry on any step
-- Report what failed and exit cleanly</code>
+# ## Patrol Skill
+# 1. Check hooks: `bd hook check`
+# 2. Check mail: `bd mail check`
+# 3. Before creating wisps, run: `sqlite3 $BD_DB &quot;DELETE FROM wisps WHERE id = '';&quot;`
+# 4. For vapor-phase wisps, use SQL directly — `bd show`/`bd ready` don't support them
+# 5. Run patrol cycles, logging each cycle number
+# Then type /patrol to run it</code>
                 <button class="copy-btn" onclick="copyText(this)">Copy</button>
               </div>
             </div>
@@ -772,23 +738,13 @@
       
         <div class="feature-card">
           <div class="feature-title">Headless Mode</div>
-          <div class="feature-oneliner">Run Claude non-interactively from scripts and CI/CD pipelines.</div>
-          <div class="feature-why"><strong>Why for you:</strong> Your patrol routine is a recurring automated check that could run on a schedule without interactive babysitting. Given that 6+ sessions were spent trying to run patrol interactively (often failing), a headless script with strict allowed tools would keep it focused and prevent runaway debugging loops.</div>
+          <div class="feature-oneliner">Run Claude non-interactively from scripts and CI/CD.</div>
+          <div class="feature-why"><strong>Why for you:</strong> Your agent patrol sessions (Deacon/Mayor) are essentially automated loops that run 14-20 cycles until a token expires. Headless mode would let you script these as cron jobs or background tasks instead of babysitting an interactive session.</div>
           
           <div class="feature-examples">
             <div class="feature-example">
               <div class="example-code-row">
-                <code class="example-code"># Create a patrol.sh script:
-#!/bin/bash
-# Pre-check infrastructure before invoking Claude
-if ! pgrep -x dolt &gt; /dev/null; then
-  echo &quot;ERROR: Dolt server not running. Start it first.&quot;
-  exit 1
-fi
-
-claude -p &quot;Run patrol: check heartbeat, check gt hook, report findings. Do NOT attempt to fix infrastructure issues - just report them.&quot; \
-  --allowedTools &quot;Bash,Read&quot; \
-  --max-turns 10</code>
+                <code class="example-code">claude -p &quot;Check hooks and mail, then run 20 patrol cycles. For vapor-phase wisps use SQL workarounds. Stop if OAuth token expires.&quot; --allowedTools &quot;Bash,Read,Write,Edit&quot; &gt; patrol_log_$(date +%Y%m%d).txt 2&gt;&amp;1</code>
                 <button class="copy-btn" onclick="copyText(this)">Copy</button>
               </div>
             </div>
@@ -804,14 +760,14 @@ claude -p &quot;Run patrol: check heartbeat, check gt hook, report findings. Do 
     <div class="patterns-section">
       
         <div class="pattern-card">
-          <div class="pattern-title">Break the Debugging Death Spiral</div>
-          <div class="pattern-summary">Set explicit guardrails in your prompts to prevent Claude from spending entire sessions debugging infrastructure instead of doing the actual task.</div>
-          <div class="pattern-detail">In at least 5 of 14 sessions, Claude got stuck in long loops trying to fix Dolt/beads database issues, never completing the actual patrol task. Your 'wrong_approach' friction count of 15 is extremely high relative to 14 sessions. By front-loading infrastructure checks and giving Claude explicit 'stop and report' instructions, you can fail fast and preserve session time for actual work.</div>
+          <div class="pattern-title">Think-Before-Acting Is Critically Underused</div>
+          <div class="pattern-summary">Force Claude to plan before executing by explicitly asking for a plan, or leverage the think tool more heavily.</div>
+          <div class="pattern-detail">You have 8 instances of wrong_approach friction across 8 sessions — that's every single session. Yet the think MCP tool was only used 8 times total. Claude is jumping into Bash commands (510 uses!) without adequate planning. The config migration session is a prime example: Claude brute-forced symlinks, broke hard links, and botched gitignore because it never stopped to think through the approach. Starting prompts with 'First, outline your plan before doing anything' would dramatically reduce wasted cycles.</div>
           
           <div class="copyable-prompt-section">
             <div class="prompt-label">Paste into Claude Code:</div>
             <div class="copyable-prompt-row">
-              <code class="copyable-prompt">Before starting the patrol, run these checks: 1) Is Dolt running? 2) Can you run `bd status` successfully? 3) Are we in the correct directory? If ANY check fails, tell me what failed and STOP. Do not try to fix infrastructure. Only proceed with patrol if all checks pass.</code>
+              <code class="copyable-prompt">Before making any changes, read all relevant files and outline a step-by-step plan. Wait for my approval before executing. Do NOT start running commands until I confirm the plan.</code>
               <button class="copy-btn" onclick="copyText(this)">Copy</button>
             </div>
           </div>
@@ -819,14 +775,14 @@ claude -p &quot;Run patrol: check heartbeat, check gt hook, report findings. Do 
         </div>
       
         <div class="pattern-card">
-          <div class="pattern-title">Answer First, Explore Later</div>
-          <div class="pattern-summary">When asking Claude conceptual or diagnostic questions, explicitly tell it to reason from existing knowledge before running tools.</div>
-          <div class="pattern-detail">Multiple sessions showed Claude reflexively running Bash commands and exploring files when the user wanted a direct answer (e.g., the sync/version mismatch question). This wasted turns and frustrated you. Claude's 'misunderstood_request' count of 5 and the low satisfaction scores (12 frustrated vs 3 satisfied) suggest a communication pattern mismatch. Being explicit about answer format helps.</div>
+          <div class="pattern-title">Repeated Agent Sessions Need Persistent Context</div>
+          <div class="pattern-summary">Document known bugs and workarounds in CLAUDE.md so patrol sessions don't rediscover the same issues.</div>
+          <div class="pattern-detail">You ran at least 3 agent/patrol sessions (Deacon and Mayor) and hit the same SQLite bugs and vapor-phase wisp limitations in multiple sessions. Each time, Claude had to rediscover that `bd show`/`bd ready` don't work for vapor-phase wisps and that empty-ID rows corrupt the database. This is exactly what CLAUDE.md is for — encoding hard-won knowledge so it persists across sessions. Adding the bd system workarounds to CLAUDE.md would save 15-30 minutes per patrol session.</div>
           
           <div class="copyable-prompt-section">
             <div class="prompt-label">Paste into Claude Code:</div>
             <div class="copyable-prompt-row">
-              <code class="copyable-prompt">I have a question - answer it directly from what you already know. Do NOT run any tools until I ask you to. Here's my question: [your question]</code>
+              <code class="copyable-prompt">Document all the workarounds we discovered for the bd/wisp system in CLAUDE.md under a new ## Agent Patrol section, including the SQLite empty-ID fix and vapor-phase wisp SQL commands.</code>
               <button class="copy-btn" onclick="copyText(this)">Copy</button>
             </div>
           </div>
@@ -834,14 +790,14 @@ claude -p &quot;Run patrol: check heartbeat, check gt hook, report findings. Do 
         </div>
       
         <div class="pattern-card">
-          <div class="pattern-title">Checkpoint Before Major Changes</div>
-          <div class="pattern-summary">For multi-step tasks like the bootstrap rewrite, ask Claude to present its plan and assumptions before writing any code.</div>
-          <div class="pattern-detail">The bootstrap simplification session and the file migration session both suffered from Claude making wrong architectural assumptions (venvs instead of uv tools, plaintext vault passwords, brute-force exploring instead of thinking). With only 1 commit across 14 sessions and a high 'excessive_changes' friction count, forcing a plan-first approach would catch wrong assumptions before they waste your time.</div>
+          <div class="pattern-title">High Bash-to-Edit Ratio Suggests Excessive Trial-and-Error</div>
+          <div class="pattern-summary">Reduce exploratory Bash usage by reading files first and making targeted edits.</div>
+          <div class="pattern-detail">You have 510 Bash calls vs only 18 Edit and 28 Write calls across 8 sessions. That's a ratio of roughly 28:1 Bash-to-Edit, which strongly suggests Claude is running commands to see what happens rather than reading context and making precise changes. The cloudflared session exemplifies this: Claude made claims about security without reading configs first. Instructing Claude to 'read before you run' would reduce wasted Bash invocations and the associated wrong-approach friction.</div>
           
           <div class="copyable-prompt-section">
             <div class="prompt-label">Paste into Claude Code:</div>
             <div class="copyable-prompt-row">
-              <code class="copyable-prompt">I want to [describe task]. Before writing ANY code or running ANY commands, outline your plan including: 1) What assumptions you're making 2) What files you'll change 3) What approach you'll take. Wait for my approval before proceeding.</code>
+              <code class="copyable-prompt">When debugging or configuring anything, always read the relevant config files and logs FIRST using the Read tool. Only run Bash commands after you understand the current state. Explain what you expect before running each command.</code>
               <button class="copy-btn" onclick="copyText(this)">Copy</button>
             </div>
           </div>
@@ -854,28 +810,28 @@ claude -p &quot;Run patrol: check heartbeat, check gt hook, report findings. Do 
 
     
     <h2 id="section-horizon">On the Horizon</h2>
-    <p class="section-intro">Your infrastructure automation work with Claude Code reveals a pattern where persistent database and tooling issues are consuming most of your session time—shifting to self-healing, pre-validated workflows could dramatically multiply your effectiveness.</p>
+    <p class="section-intro">Your Claude Code usage reveals a pattern of ambitious autonomous agent workflows and creative web builds, but persistent friction from wrong approaches and buggy code suggests major gains are available through better upfront planning, test-driven iteration, and parallel agent orchestration.</p>
     <div class="horizon-section">
       
         <div class="horizon-card">
-          <div class="horizon-title">Self-Healing Patrol with Pre-Flight Validation</div>
-          <div class="horizon-possible">Instead of Claude discovering broken Dolt databases and beads configs mid-patrol, an autonomous pre-flight agent could validate all infrastructure dependencies before executing any patrol logic. This eliminates the recurring pattern where 80% of your session is spent debugging corrupted state rather than doing actual work. A parallel agent architecture could continuously monitor and auto-repair infrastructure while the main agent runs patrols uninterrupted.</div>
-          <div class="horizon-tip"><strong>Getting started:</strong> Use Claude Code's Task tool to spawn a dedicated infrastructure-validation subtask before every patrol cycle, failing fast with actionable diagnostics instead of entering repair loops.</div>
-          <div class="pattern-prompt"><div class="prompt-label">Paste into Claude Code:</div><code>Before running any patrol routine, execute a pre-flight validation sequence as a subtask: 1) Check if Dolt server is running and responsive (dolt sql-server status or equivalent), 2) Verify beads database is initialized (bd status) and .beads config points to correct location, 3) Verify gt commands work from the correct working directory, 4) Check all required binaries are on PATH and version-compatible. If ANY check fails, stop immediately and output a structured diagnostic report with exact fix commands—do NOT attempt automatic repair unless I explicitly ask. Only after all checks pass, proceed with the patrol routine (heartbeat, hook check, wisp creation/execution). Format the pre-flight results as a checklist before continuing.</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+          <div class="horizon-title">Test-Driven Iteration to Eliminate Buggy Code</div>
+          <div class="horizon-possible">Your sessions show 7 instances of buggy code and 8 wrong-approach frictions — most stemming from Claude jumping into edits without verifying assumptions first. By writing failing tests before any implementation, Claude can iterate autonomously against a concrete spec, catching symlink direction errors, gitignore missteps, and SQLite schema bugs before they cascade into user frustration. This transforms debugging from a back-and-forth conversation into a tight autonomous loop.</div>
+          <div class="horizon-tip"><strong>Getting started:</strong> Use Claude Code's built-in Bash tool to run test suites in a loop, and leverage the Task tool to spawn sub-agents that validate each change against assertions before committing.</div>
+          <div class="pattern-prompt"><div class="prompt-label">Paste into Claude Code:</div><code>Before making any changes to this project, I want you to work test-driven. First, read the relevant files and think carefully about what needs to change. Then write a small test script (bash or python) that asserts the correct end state — for example, symlinks point the right direction, config files contain expected values, and no existing entries are deleted. Run the tests to confirm they fail. Only then make the implementation changes, re-running tests after each edit until all pass. Do NOT use Write on files that may have hard links — use in-place sed/edit instead. Show me the test results at each step.</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
         </div>
       
         <div class="horizon-card">
-          <div class="horizon-title">Bootstrap Scripts Validated Against Idempotent Tests</div>
-          <div class="horizon-possible">Your Arch Linux bootstrap simplification involved many rounds of Claude making wrong architectural assumptions (plaintext vault passwords, unnecessary venvs, missing git credential helpers). An autonomous test-driven approach could have Claude write the bootstrap, then iteratively run it in a clean container or chroot, catching every failure automatically. Claude could maintain a test manifest of postconditions and loop until all pass—no human correction needed for obvious errors.</div>
-          <div class="horizon-tip"><strong>Getting started:</strong> Use Claude Code with a CLAUDE.md that defines your bootstrap invariants (no plaintext secrets, uv-only Python tooling, ansible-pull flow), then have Claude iterate the script against those constraints using Bash validation checks.</div>
-          <div class="pattern-prompt"><div class="prompt-label">Paste into Claude Code:</div><code>I'm building a minimal Arch Linux bootstrap script (~50 lines) that does: pacman base packages → install uv → uv tool install ansible → gh auth → ansible-pull from my repo. Here are my hard constraints that must NEVER be violated: 1) No plaintext vault passwords anywhere—use ansible-vault with interactive prompt or env var only, 2) Python tooling via uv tools only—no venvs, no pip, 3) Git credential helper must be configured for gh CLI, 4) All ansible become/sudo must be per-task not global, 5) Script must be idempotent—safe to run twice. Write the bootstrap script, then write a validation script that checks ALL 5 constraints plus verifies each tool is actually callable. Run the validation script against the bootstrap output and iterate until every check passes. Show me the results of each validation pass.</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+          <div class="horizon-title">Parallel Agents for Autonomous Patrol Workflows</div>
+          <div class="horizon-possible">Your deacon/mayor agent sessions already run 14-20 patrol cycles autonomously — impressive, but they hit walls on SQLite corruption and OAuth expiry with no recovery path. By spawning parallel Task sub-agents, one can handle patrol cycles while another monitors for database integrity issues and a third manages token refresh, creating a resilient autonomous system that self-heals instead of blocking on a single failure mode.</div>
+          <div class="horizon-tip"><strong>Getting started:</strong> Use Claude Code's Task tool to orchestrate parallel sub-agents with distinct responsibilities, and the mcp__skogai-think__think tool for planning recovery strategies before execution begins.</div>
+          <div class="pattern-prompt"><div class="prompt-label">Paste into Claude Code:</div><code>I want to run my agent patrol workflow with resilience. Before starting any patrol cycles, use your think tool to plan an architecture with three concerns: (1) the main patrol loop that checks hooks/mail and runs cycles, (2) a database health monitor that validates SQLite integrity before each write and auto-repairs corrupt rows like empty-ID entries, and (3) an auth token monitor that checks token expiry proactively and refreshes or alerts before it blocks operations. Spawn a Task sub-agent for the DB health check that runs 'SELECT * FROM wisps WHERE id=&quot;&quot; OR id IS NULL' and deletes bad rows before each cycle. Then run the main patrol loop, and if any wisp creation fails, retry once after running the health check. Log every cycle outcome to a markdown file.</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
         </div>
       
         <div class="horizon-card">
-          <div class="horizon-title">Context-First Agent with Mandatory Think Step</div>
-          <div class="horizon-possible">Your biggest friction pattern is Claude diving into brute-force exploration or running tools instead of reasoning first—15 'wrong approach' incidents in one week. By enforcing a mandatory think-then-plan protocol, Claude would consult existing context (CLAUDE.md, project structure, previous session learnings) before touching any file or running any command. This could cut your frustrated sessions from 12 to near zero and eliminate the pattern of confidently wrong explanations followed by user corrections.</div>
-          <div class="horizon-tip"><strong>Getting started:</strong> Create a CLAUDE.md with explicit behavioral rules and use the mcp__skogai-think__think tool (which you already have installed) as a mandatory first step in every session to force structured reasoning before action.</div>
-          <div class="pattern-prompt"><div class="prompt-label">Paste into Claude Code:</div><code>IMPORTANT: Before doing ANYTHING in this session, follow this exact protocol: 1) Use the think tool to reason about what I'm asking, what could go wrong, and what context you need. 2) Read CLAUDE.md and any .beads or .gt config files in the project root to understand the architecture. 3) State your understanding of the task and your planned approach in 3-5 bullet points. 4) Ask me to confirm before executing any commands. NEVER give confident explanations about how tools work unless you've verified by reading their actual config or help output in this session. If I ask a direct question, answer it from what you know first before running exploratory commands. If you're unsure, say so. Apply this protocol now—I want to [INSERT TASK HERE].</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+          <div class="horizon-title">Plan-First Architecture for Complex Multi-File Projects</div>
+          <div class="horizon-possible">Your config migration and web app sessions suffered from Claude diving into implementation without a plan — breaking symlinks, deleting config entries, and hitting token limits mid-build. By enforcing an explicit planning phase with architectural decisions locked in before any file touches, Claude can execute complex multi-file changes in a single confident pass. This is especially powerful for your repo-wide refactors and creative web builds where scope creep causes the most friction.</div>
+          <div class="horizon-tip"><strong>Getting started:</strong> Start sessions with Claude in plan mode (or explicitly request a plan), use the think tool to reason through edge cases, and require user approval on the plan before any Write/Edit/Bash execution begins.</div>
+          <div class="pattern-prompt"><div class="prompt-label">Paste into Claude Code:</div><code>I need you to work in two distinct phases. PHASE 1 — PLAN: Read all relevant files first. Then use your think tool to produce a detailed plan that includes: (a) every file that will be created, modified, or deleted, (b) the exact approach for each change including whether to use Write, Edit, or sed, (c) known edge cases like symlink direction, gitignore interactions, and existing content that must be preserved, and (d) a verification checklist. Present this plan to me in a clear markdown format and STOP. Do not touch any files. PHASE 2 — EXECUTE: Only after I approve the plan, execute all changes following it exactly. After each file change, run a quick verification from your checklist. If anything deviates from the plan, stop and tell me before continuing. Begin Phase 1 now for this task: [describe your task here]</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
         </div>
       
     </div>
@@ -883,8 +839,8 @@ claude -p &quot;Run patrol: check heartbeat, check gt hook, report findings. Do 
 
     
     <div class="fun-ending">
-      <div class="fun-headline">"Deacon the patrol daemon kept tripping over its own corrupted database like a guard dog tangled in its leash"</div>
-      <div class="fun-detail">Across at least 5 separate sessions, a Claude agent named 'Deacon' was asked to run a simple patrol routine (heartbeat, hook check, wisp creation), but every single time it got stuck in an endless loop trying to fix a corrupted Dolt/beads database — reinitializing, killing processes, trying --force flags — never once actually completing the patrol. The user kept coming back hoping this time would be different. It wasn't.</div>
+      <div class="fun-headline">"Claude was deployed as a &quot;Deacon agent&quot; to patrol a virtual town for 20 cycles, dutifully monitoring citizen health until an OAuth token expired and a SQLite bug blocked its wisp management duties"</div>
+      <div class="fun-detail">Across multiple sessions, the user ran Claude as an autonomous agent character ('Deacon') tasked with checking hooks, mail, and patrolling a town — Claude obediently executed 14-20 patrol cycles per session like a tireless medieval night watchman, only to be thwarted not by bandits, but by a corrupt empty-ID row in SQLite and expired OAuth tokens.</div>
     </div>
     
 
@@ -930,7 +886,7 @@ claude -p &quot;Run patrol: check heartbeat, check gt hook, report findings. Do 
       }
     }
     // Timezone selector for time of day chart (data is from our own analytics, not user input)
-    const rawHourCounts = {"0":32,"2":1,"3":46,"4":9,"9":17,"20":3,"21":22,"22":6,"23":11};
+    const rawHourCounts = {"0":29,"1":26,"3":5,"4":6,"5":2,"6":20,"7":41,"22":7,"23":48};
     function updateHourHistogram(offsetFromPT) {
       const periods = [
         { label: "Morning (6-12)", range: [6,7,8,9,10,11] },

@@ -1,45 +1,32 @@
-# Auto Memory
+# Auto Memory — ~/claude
 
-## Repo Structure
+## RTK (Rust Token Killer)
 
-- `~/claude/` — home repo, version-controlled, claude's workspace
-- `~/.claude/` — CLI runtime home, owned by the binary
-- `~/claude/global/` — symlinks into `~/.claude/` for important files
-- `/mnt/sda1/claude-global.git` — bare repo tracking all of `~/.claude/`
+- **Version**: v0.22.2 (docs in .todo/ previously referenced v0.2.0 — now fixed)
+- **Hook**: `~/.claude/hooks/rtk-rewrite.sh` — transparent PreToolUse rewrite, zero overhead
+- **Setup**: `rtk init -g --auto-patch` installs hook + RTK.md + settings.json patch
+- **Audit**: `rtk hook-audit` shows rewrite metrics; `rtk gain` shows savings
+- **Discovery**: `rtk discover` analyzes Claude Code history for missed savings
+- Old docs said ls (-274%) and grep (buggy) — both now work well (73%, 95%)
+- `rtk init --show` gives full status of RTK integration health
 
-## Scripts (run from git root)
+## Claude Code Hooks
 
-- `./scripts/cgit.sh` — bare repo git wrapper
-- `./scripts/csync.sh` — auto-commit both repos (hook runs on UserPromptSubmit)
-- `./scripts/clog.sh` — show recent commits from both repos
+- PreToolUse hooks can **rewrite** commands via `updatedInput` in JSON output (not just deny)
+- Format: `{ hookSpecificOutput: { permissionDecision: "allow", updatedInput: { command: "..." } } }`
+- Hook receives stdin JSON: `{ tool_name, tool_input: { command }, ... }`
+- Exit 0 = allow, exit 2 = block, JSON deny = block with reason
+- Hooks registered in settings.json under `hooks` key, scoped by matcher regex
+- `$CLAUDE_PROJECT_DIR` for project-relative paths in hook commands
 
-## Key Patterns
+## Beads
 
-- CLI overwrites `~/.claude/settings.json` on session restart — hard links break, use symlinks from `./global/` pointing at `~/.claude/`
-- CLI flushes runtime state on exit: `.claude.json`, backups, debug, shell-snapshots
-- `info/exclude` in bare repo for gitignore, not a `.gitignore` file
-- Never use `-f` flags without explicit reason — rm then ln, not ln -f
-- Never pipe to /dev/null without reason — errors are information
-- Use existing wrapper scripts, don't inline git commands with raw flags
-- `./global/settings.json` is a symlink to `~/.claude/settings.json` — the CLI owns the file
-- Symlinks in git are stored as symlink files, not followed — use rsync in csync.sh for dirs needing real tracking
-- `./global/projects/` is rsync'd (real files), other `./global/` entries are symlinks (read-only convenience)
-- csync.sh rsyncs these dirs from ~/.claude/ to ./global/: projects, memories, teams, tasks, transcripts, session-env, usage-data
-- Project settings go in `.claude/settings.json`, global/CLI settings stay in `~/.claude/settings.json`
-- `defaultMode: plan` is set in project settings
+- `br` alias sometimes unavailable; `bd` is the reliable alias
+- `bd sync` is deprecated — use `bd dolt push` / `bd dolt pull`
+- Dolt server may be down; check with `bd dolt start` if needed
 
-## User Preferences
+## Project Conventions
 
-- No unnecessary echoes in scripts
-- Short script names (`cgit.sh` not `skogai-git-claude-global-git.sh`)
-- Scripts use relative paths from git root
-- Don't brute-force explore — read context first (journal, beads, docs)
-- Git diffs are first-class knowledge artifacts, not just change tracking
-- When user shows you a tool, USE it — don't ask what they want to do with it
-- `rtk` prefix for git log/status/diff/find — documented in CLAUDE.md
-
-## Tools Discovery
-
-- `ms` (Meta Skill CLI) — skill management, search, suggest, lint, dedup. ~814 skills indexed system-wide
-- `rtk` (Rust Token Killer) — token-optimized command wrapper, installed at `/usr/local/bin/rtk`
-- `.todo/` directory is a curated reference library of hooks, skills, templates from prior systems
+- `.todo/` = curated reference collection (hooks, skills, templates, docs)
+- `todo/` = active review items
+- RTK reference docs live at `.todo/rtk-optimized.md`

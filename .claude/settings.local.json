@@ -7,7 +7,8 @@
       "Bash(/home/skogix/claude/.claude/hooks/rtk-auto-wrapper.sh:*)",
       "Bash(/home/skogix/.claude/hooks/rtk-rewrite.sh:*)",
       "Bash(command:*)",
-      "Bash(dolt version:*)"
+      "Bash(dolt version:*)",
+      "Bash(dolt push:*)"
     ]
   }
 }

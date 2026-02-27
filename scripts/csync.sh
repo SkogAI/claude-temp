@@ -5,7 +5,7 @@ TS="$(date +%H:%M:%S)"
 
 # sync important dirs to ./global/
 # rsync ~/.claude/projects/ ./global/projects/
-for dir in memories teams tasks projects transcripts session-env usage-data; do
+for dir in plans memories teams tasks projects transcripts session-env usage-data; do
   [ -d ~/.claude/$dir ] && rsync ~/.claude/$dir/ ./global/$dir/
 done
 

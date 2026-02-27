@@ -6,7 +6,7 @@ TS="$(date +%H:%M:%S)"
 # sync important dirs to ./global/
 # rsync ~/.claude/projects/ ./global/projects/
 for dir in plans memories teams tasks projects transcripts session-env usage-data commands agents skills hooks; do
-  [ -d ~/.claude/$dir ] && rsync ~/.claude/$dir/ ./global/$dir/
+  [ -d ~/.claude/$dir ] && rsync -a --delete ~/.claude/$dir/ ./global/$dir/
 done
 
 # bare repo: everything in ~/.claude/

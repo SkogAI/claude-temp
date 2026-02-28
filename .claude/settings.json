@@ -1,11 +1,11 @@
 {
   "enabledMcpjsonServers": [
     "skogai-think",
-    "skogai-arch-linux"
+    "skogai-arch-linux",
+    "skogai-tools"
   ],
   "disabledMcpjsonServers": [
     "skogai-claude-ssh",
-    "skogai-tools",
     "skogai-nushell",
     "skogai-mcp"
   ],

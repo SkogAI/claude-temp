@@ -119,16 +119,16 @@
 <body>
   <div class="container">
     <h1>Claude Code Insights</h1>
-    <p class="subtitle">147 messages across 14 sessions (168 total) | 2026-02-20 to 2026-02-27</p>
+    <p class="subtitle">254 messages across 22 sessions (707 total) | 2026-02-20 to 2026-02-28</p>
 
     
     <div class="at-a-glance">
       <div class="glance-title">At a Glance</div>
       <div class="glance-sections">
-        <div class="glance-section"><strong>What's working:</strong> You've built a genuinely impressive multi-agent system (Mayor, Deacon) with patrol loops, hook checks, and wisp creation — and when the infrastructure cooperates, it works beautifully, like the session where Deacon completed two full patrol cycles and correctly escalated an anomaly. You also showed strong architectural instincts driving a 300+ line bootstrap script down to a minimal pacman→ansible→gh flow, consistently overruling Claude's over-engineered suggestions to keep things lean. <a href="#section-wins" class="see-more">Impressive Things You Did →</a></div>
-        <div class="glance-section"><strong>What's hindering you:</strong> On Claude's side, it repeatedly charged ahead with wrong assumptions (plaintext vault passwords, unnecessary venvs, brute-force file exploration) and leaned on running commands instead of reasoning through your questions — leading to long, frustrating debugging spirals. On your side, the recurring Dolt/beads database corruption consumed entire sessions because there's no self-healing or pre-flight validation layer, so Claude keeps rediscovering the same broken state every time you kick off a patrol. <a href="#section-friction" class="see-more">Where Things Go Wrong →</a></div>
-        <div class="glance-section"><strong>Quick wins to try:</strong> Try setting up <strong>hooks</strong> to auto-run a quick infrastructure health check (Dolt server running, beads DB initialized) before every session or tool invocation — this alone could prevent the recurring patrol failures. You could also create <strong>custom slash commands</strong> (like `/patrol` or `/bootstrap-check`) as markdown skill files that encode your architectural constraints and preferred approaches, so Claude doesn't start from scratch each time. <a href="#section-features" class="see-more">Features to Try →</a></div>
-        <div class="glance-section"><strong>Ambitious workflows:</strong> As models get more capable, consider building a parallel pre-flight agent that validates all infrastructure dependencies before your patrol agents even start — eliminating the pattern where most of your session is spent on repairs. Even more powerful: your bootstrap rewrite workflow could become fully autonomous, with Claude writing the script, running it in a clean container, checking postconditions, and iterating until everything passes without needing you to catch obvious architectural mistakes. <a href="#section-horizon" class="see-more">On the Horizon →</a></div>
+        <div class="glance-section"><strong>What's working:</strong> You've built a genuinely inventive multi-agent system with mayor, deacon, and witness roles running patrol loops, heartbeat checks, and escalation protocols — that's a serious architectural achievement on top of Claude Code. You also have a great instinct for ruthless simplification, like cutting a 300-line bootstrap to a minimal flow and collapsing 68 generated files into 3 clean ones. When you push back on Claude's wrong approaches, the end results are significantly better. <a href="#section-wins" class="see-more">Impressive Things You Did →</a></div>
+        <div class="glance-section"><strong>What's hindering you:</strong> On Claude's side, it repeatedly jumps to wrong architectural assumptions (plaintext secrets, wrong tool choices, assuming commands work from any directory) instead of asking you first, and it often spirals into exploratory tool-running when it should just reason from what it already knows. On your side, the Dolt/beads infrastructure is fragile enough that the same class of corruption or initialization failure has eaten entire sessions at least six times — without a pre-flight health check, Claude ends up doing repair work instead of the actual patrol task you asked for. <a href="#section-friction" class="see-more">Where Things Go Wrong →</a></div>
+        <div class="glance-section"><strong>Quick wins to try:</strong> Try setting up a <strong>startup hook</strong> that runs a quick infrastructure health check (Dolt server, beads init, process conflicts) at session start so you never lose another full session to corruption. You could also create <strong>custom slash commands</strong> (like `/patrol` or `/bootstrap-test`) as markdown files encoding your constraints and architectural rules, which would prevent Claude from defaulting to the wrong assumptions you keep having to correct. <a href="#section-features" class="see-more">Features to Try →</a></div>
+        <div class="glance-section"><strong>Ambitious workflows:</strong> As models get more capable, your multi-agent patrol system could run with parallel sub-agents that coordinate through shared state and proper locking — no more collisions between deacon and witness or conflicting Dolt processes eating your time. Even more compelling, a self-healing pre-flight agent could validate and auto-remediate known infrastructure failures before any patrol begins, and your bootstrap simplification work could be driven by an autonomous loop that spins up in a container, runs the bootstrap, asserts outcomes, and iterates — catching architectural mistakes before they ever reach you. <a href="#section-horizon" class="see-more">On the Horizon →</a></div>
       </div>
     </div>
     
@@ -145,11 +145,11 @@
     </nav>
 
     <div class="stats-row">
-      <div class="stat"><div class="stat-value">147</div><div class="stat-label">Messages</div></div>
-      <div class="stat"><div class="stat-value">+353/-26</div><div class="stat-label">Lines</div></div>
-      <div class="stat"><div class="stat-value">13</div><div class="stat-label">Files</div></div>
-      <div class="stat"><div class="stat-value">4</div><div class="stat-label">Days</div></div>
-      <div class="stat"><div class="stat-value">36.8</div><div class="stat-label">Msgs/Day</div></div>
+      <div class="stat"><div class="stat-value">254</div><div class="stat-label">Messages</div></div>
+      <div class="stat"><div class="stat-value">+563/-76</div><div class="stat-label">Lines</div></div>
+      <div class="stat"><div class="stat-value">20</div><div class="stat-label">Files</div></div>
+      <div class="stat"><div class="stat-value">5</div><div class="stat-label">Days</div></div>
+      <div class="stat"><div class="stat-value">50.8</div><div class="stat-label">Msgs/Day</div></div>
     </div>
 
     
@@ -158,42 +158,42 @@
       
         <div class="project-area">
           <div class="area-header">
-            <span class="area-name">Gas Town Patrol &amp; Daemon Operations</span>
-            <span class="area-count">~7 sessions</span>
+            <span class="area-name">Agent Patrol &amp; Daemon Routines</span>
+            <span class="area-count">~10 sessions</span>
           </div>
-          <div class="area-desc">Repeated attempts to run a &quot;Deacon&quot; patrol routine involving heartbeats, hook checks, and wisp creation/execution within a Gas Town system. Claude was heavily blocked by Dolt database corruption, beads database initialization failures, and version mismatches, spending most sessions debugging infrastructure rather than completing patrols. Only one session achieved a successful multi-cycle patrol with proper event escalation.</div>
+          <div class="area-desc">Running automated patrol loops for agent personas (Deacon, Mayor, Witness) that check hooks, mail, heartbeats, and create/execute wisps. Claude was used to execute these multi-step routines, but sessions were frequently derailed by underlying infrastructure failures (Dolt corruption, beads initialization issues), with many patrols failing to complete.</div>
         </div>
       
         <div class="project-area">
           <div class="area-header">
-            <span class="area-name">Hook &amp; Mail Checking (Mayor Agent)</span>
-            <span class="area-count">~3 sessions</span>
+            <span class="area-name">Dolt &amp; Beads Database Infrastructure</span>
+            <span class="area-count">~7 sessions</span>
           </div>
-          <div class="area-desc">Sessions where a &quot;mayor&quot; agent checked hooked work and mail within the Gas Town system. Claude generally completed the checks but provided confidently wrong explanations about directory behavior and tool semantics, frustrating the user. These sessions also surfaced infrastructure issues like expired OAuth tokens and uninitialized databases.</div>
+          <div class="area-desc">Debugging and stabilizing Dolt database corruption, beads database initialization, and related tooling (gt/bd version mismatches, missing configs, conflicting processes). Claude spent significant time diagnosing infrastructure failures—reinitializing databases, fixing config issues, and researching Dolt internals—though solutions were often incomplete or created new conflicts.</div>
         </div>
       
         <div class="project-area">
           <div class="area-header">
             <span class="area-name">Arch Linux Bootstrap Simplification</span>
-            <span class="area-count">~2 sessions</span>
+            <span class="area-count">~3 sessions</span>
           </div>
-          <div class="area-desc">The user wanted to radically simplify a 300+ line Arch Linux bootstrap script down to a minimal pacman→ansible→gh flow. Claude made repeated wrong architectural assumptions—writing vault passwords to plaintext, using venvs instead of uv tools, misconfiguring git credentials—requiring many user corrections across rounds of iteration.</div>
+          <div class="area-desc">Radically simplifying an Arch Linux bootstrap script from 300+ lines down to a minimal pacman→ansible→gh flow, and cleaning up over-generated Ansible roles (e.g., Bitwarden reduced from 68 files to 3). Claude assisted with rewriting and condensing the bootstrap but repeatedly made wrong architectural assumptions that required user correction.</div>
         </div>
       
         <div class="project-area">
           <div class="area-header">
-            <span class="area-name">Ansible &amp; System Configuration</span>
-            <span class="area-count">~2 sessions</span>
+            <span class="area-name">System Administration &amp; Configuration</span>
+            <span class="area-count">~3 sessions</span>
           </div>
-          <div class="area-desc">Work on Ansible configuration and system administration tasks including fstab mount entries and PATH settings in Claude configuration files. One session was blocked by usage limits, while another successfully identified and fixed missing PATH entries across multiple settings files and hooks.</div>
+          <div class="area-desc">Handling system-level tasks including fixing PATH settings in .claude/settings.json files, planning migration of config files from ~/.claude/ to ~/claude/ with symlinks, and managing fstab mount entries. Claude was used to identify misconfigurations and apply targeted fixes across multiple files.</div>
         </div>
       
         <div class="project-area">
           <div class="area-header">
-            <span class="area-name">Claude Configuration &amp; File Migration Planning</span>
-            <span class="area-count">~1 sessions</span>
+            <span class="area-name">Agent Session Handoff &amp; Status Checks</span>
+            <span class="area-count">~3 sessions</span>
           </div>
-          <div class="area-desc">Planning the migration of important files from ~/.claude/ to ~/claude/ with symlinks to maintain compatibility. Claude initially took a brute-force exploration approach instead of thinking through the problem, requiring user redirection. A strategy was agreed upon but the session ended before implementation.</div>
+          <div class="area-desc">Performing structured session handoffs between agent personas, checking system status, investigating false alerts (deacon-down), and closing stale issues. Claude successfully traced root causes like zsh tmux aliases mangling return codes in formulas and applied fixes across affected files.</div>
         </div>
       
     </div>
@@ -203,6 +203,11 @@
       <div class="chart-card">
         <div class="chart-title">What You Wanted</div>
         <div class="bar-row">
+        <div class="bar-label">Setup And Configuration</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#2563eb"></div></div>
+        <div class="bar-value">3</div>
+      </div>
+<div class="bar-row">
         <div class="bar-label">Simplify And Rewrite Bootstrap</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#2563eb"></div></div>
         <div class="bar-value">3</div>
@@ -218,17 +223,12 @@
         <div class="bar-value">3</div>
       </div>
 <div class="bar-row">
+        <div class="bar-label">Session Handoff</div>
+        <div class="bar-track"><div class="bar-fill" style="width:66.66666666666666%;background:#2563eb"></div></div>
+        <div class="bar-value">2</div>
+      </div>
+<div class="bar-row">
         <div class="bar-label">System Administration</div>
-        <div class="bar-track"><div class="bar-fill" style="width:66.66666666666666%;background:#2563eb"></div></div>
-        <div class="bar-value">2</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">Create Helper Scripts</div>
-        <div class="bar-track"><div class="bar-fill" style="width:66.66666666666666%;background:#2563eb"></div></div>
-        <div class="bar-value">2</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">Configure Ansible</div>
         <div class="bar-track"><div class="bar-fill" style="width:66.66666666666666%;background:#2563eb"></div></div>
         <div class="bar-value">2</div>
       </div>
@@ -238,32 +238,32 @@
         <div class="bar-row">
         <div class="bar-label">Bash</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#0891b2"></div></div>
-        <div class="bar-value">442</div>
+        <div class="bar-value">637</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Read</div>
-        <div class="bar-track"><div class="bar-fill" style="width:8.823529411764707%;background:#0891b2"></div></div>
-        <div class="bar-value">39</div>
+        <div class="bar-track"><div class="bar-fill" style="width:10.989010989010989%;background:#0891b2"></div></div>
+        <div class="bar-value">70</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Edit</div>
-        <div class="bar-track"><div class="bar-fill" style="width:6.334841628959276%;background:#0891b2"></div></div>
-        <div class="bar-value">28</div>
+        <div class="bar-track"><div class="bar-fill" style="width:6.122448979591836%;background:#0891b2"></div></div>
+        <div class="bar-value">39</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Write</div>
-        <div class="bar-track"><div class="bar-fill" style="width:2.941176470588235%;background:#0891b2"></div></div>
-        <div class="bar-value">13</div>
+        <div class="bar-track"><div class="bar-fill" style="width:2.8257456828885403%;background:#0891b2"></div></div>
+        <div class="bar-value">18</div>
       </div>
 <div class="bar-row">
-        <div class="bar-label">TaskOutput</div>
-        <div class="bar-track"><div class="bar-fill" style="width:0.4524886877828055%;background:#0891b2"></div></div>
-        <div class="bar-value">2</div>
+        <div class="bar-label">Glob</div>
+        <div class="bar-track"><div class="bar-fill" style="width:0.7849293563579277%;background:#0891b2"></div></div>
+        <div class="bar-value">5</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Task</div>
-        <div class="bar-track"><div class="bar-fill" style="width:0.4524886877828055%;background:#0891b2"></div></div>
-        <div class="bar-value">2</div>
+        <div class="bar-track"><div class="bar-fill" style="width:0.7849293563579277%;background:#0891b2"></div></div>
+        <div class="bar-value">5</div>
       </div>
       </div>
     </div>
@@ -274,22 +274,22 @@
         <div class="bar-row">
         <div class="bar-label">YAML</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#10b981"></div></div>
-        <div class="bar-value">19</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">Shell</div>
-        <div class="bar-track"><div class="bar-fill" style="width:89.47368421052632%;background:#10b981"></div></div>
-        <div class="bar-value">17</div>
-      </div>
-<div class="bar-row">
-        <div class="bar-label">JSON</div>
-        <div class="bar-track"><div class="bar-fill" style="width:57.89473684210527%;background:#10b981"></div></div>
-        <div class="bar-value">11</div>
+        <div class="bar-value">39</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Markdown</div>
-        <div class="bar-track"><div class="bar-fill" style="width:26.31578947368421%;background:#10b981"></div></div>
-        <div class="bar-value">5</div>
+        <div class="bar-track"><div class="bar-fill" style="width:51.28205128205128%;background:#10b981"></div></div>
+        <div class="bar-value">20</div>
+      </div>
+<div class="bar-row">
+        <div class="bar-label">Shell</div>
+        <div class="bar-track"><div class="bar-fill" style="width:51.28205128205128%;background:#10b981"></div></div>
+        <div class="bar-value">20</div>
+      </div>
+<div class="bar-row">
+        <div class="bar-label">JSON</div>
+        <div class="bar-track"><div class="bar-fill" style="width:30.76923076923077%;background:#10b981"></div></div>
+        <div class="bar-value">12</div>
       </div>
       </div>
       <div class="chart-card">
@@ -297,22 +297,22 @@
         <div class="bar-row">
         <div class="bar-label">Single Task</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#8b5cf6"></div></div>
-        <div class="bar-value">9</div>
+        <div class="bar-value">14</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Iterative Refinement</div>
-        <div class="bar-track"><div class="bar-fill" style="width:33.33333333333333%;background:#8b5cf6"></div></div>
-        <div class="bar-value">3</div>
+        <div class="bar-track"><div class="bar-fill" style="width:28.57142857142857%;background:#8b5cf6"></div></div>
+        <div class="bar-value">4</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Multi Task</div>
-        <div class="bar-track"><div class="bar-fill" style="width:11.11111111111111%;background:#8b5cf6"></div></div>
-        <div class="bar-value">1</div>
+        <div class="bar-track"><div class="bar-fill" style="width:14.285714285714285%;background:#8b5cf6"></div></div>
+        <div class="bar-value">2</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Exploration</div>
-        <div class="bar-track"><div class="bar-fill" style="width:11.11111111111111%;background:#8b5cf6"></div></div>
-        <div class="bar-value">1</div>
+        <div class="bar-track"><div class="bar-fill" style="width:14.285714285714285%;background:#8b5cf6"></div></div>
+        <div class="bar-value">2</div>
       </div>
       </div>
     </div>
@@ -320,9 +320,9 @@
     
     <h2 id="section-usage">How You Use Claude Code</h2>
     <div class="narrative">
-      <p>You're building and maintaining a complex, custom infrastructure system (Gas Town, beads, wisps, patrol routines) and you interact with Claude Code primarily as an <strong>operator dispatching automated agents</strong> — sending &quot;Deacon&quot; or &quot;Mayor&quot; to run patrol loops, check hooks, and execute routines. This is a distinctive pattern: rather than writing code from scratch, you're orchestrating a multi-agent system and expecting Claude to follow established protocols. However, <strong>the infrastructure is frequently broken</strong> — Dolt database corruption, uninitialized beads databases, version mismatches, and missing packages plagued the majority of your sessions. Out of 14 sessions, 5 were not achieved and your frustration signals (12 frustrated moments) far outweigh satisfaction (3 satisfied). You spend a huge amount of time watching Claude debug infrastructure problems it can't solve, and you <strong>interrupt and exit sessions decisively</strong> when you see Claude spinning its wheels.</p>
-<p>Your interaction style reveals someone who <strong>has strong architectural opinions and low tolerance for Claude's wrong assumptions</strong>. In the bootstrap simplification session, Claude repeatedly made bad decisions — writing vault passwords to plaintext, using venvs when uv was the point, setting global become=true — and you had to correct course multiple times. When you asked a direct question about sync/version requirements, Claude kept running Bash commands instead of just answering, which visibly frustrated you. The friction data tells a clear story: 15 instances of &quot;wrong approach&quot; and 5 misunderstood requests dominate your experience. You expect Claude to <strong>think before acting, consult context before exploring</strong>, and answer questions directly rather than reflexively reaching for tools. The 442 Bash invocations across only 147 messages shows Claude is running roughly 3 commands per message — a sign of those runaway debugging loops where Claude keeps trying things without stepping back. When Claude does work well for you (the PATH fix session, the successful patrol cycle that detected beads-git removal), it's because it followed your system's logic rather than imposing its own.</p>
-      <div class="key-insight"><strong>Key pattern:</strong> You operate Claude as a dispatched agent within a custom infrastructure system, expecting it to follow established protocols and think before acting, but are frequently frustrated by its tendency to brute-force debug broken infrastructure rather than reason about the problem first.</div>
+      <p>You're building a <strong>multi-agent infrastructure system</strong> (mayor, deacon, witness agents with patrol routines, hooks, mail, and wisps) on top of Dolt databases, Ansible, and custom tooling — and you interact with Claude Code as an operator dispatching agents to run routines rather than as a traditional developer writing code. Across 22 sessions in just 9 days, a striking pattern emerges: you <strong>frequently launch patrol or check routines that collide with unstable infrastructure</strong>, particularly Dolt database corruption and beads initialization failures. At least 7 sessions were derailed by these infrastructure issues, and Claude often got trapped in prolonged debugging loops — reinitializing databases, killing conflicting processes, trying config changes that conflicted with each other — while you grew frustrated and eventually interrupted. The <strong>overwhelming dominance of Bash tool usage (637 calls)</strong> versus Edit (39) or Write (18) confirms that most sessions are about running and monitoring systems, not writing new code.</p>
+<p>When you do engage in creative development work — like simplifying your bootstrap script from 300+ lines to a minimal flow, or cleaning up 68 over-generated Bitwarden files to a lean 3-file solution — you have <strong>strong architectural opinions and intervene quickly when Claude makes wrong assumptions</strong>. You corrected Claude multiple times for writing vault passwords to plaintext, using venvs instead of uv tools, and exploring files brute-force without consulting context first. Your frustration score is notably high (12 frustrated signals across 22 sessions), largely driven by Claude taking <strong>wrong approaches 17 times</strong> — the single largest friction category. Yet you're also clearly satisfied when Claude gets it right: the false deacon-down alert debugging session and the Bitwarden cleanup both earned &quot;essential&quot; ratings, showing you deeply value Claude's ability to trace root causes and deliver clean, minimal results. Your best sessions are the quick handoff checks where Claude confirms hook/mail status and moves on; your worst are when Claude spirals into infrastructure debugging without stepping back to assess the bigger picture.</p>
+      <div class="key-insight"><strong>Key pattern:</strong> You operate Claude Code as a **systems operator dispatching agent routines**, intervening sharply when Claude spirals into wrong approaches or infrastructure debugging loops instead of stepping back to reason about the problem.</div>
     </div>
     
 
@@ -331,41 +331,41 @@
       <div class="chart-title">User Response Time Distribution</div>
       <div class="bar-row">
         <div class="bar-label">2-10s</div>
-        <div class="bar-track"><div class="bar-fill" style="width:23.25581395348837%;background:#6366f1"></div></div>
-        <div class="bar-value">10</div>
+        <div class="bar-track"><div class="bar-fill" style="width:35.55555555555556%;background:#6366f1"></div></div>
+        <div class="bar-value">16</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">10-30s</div>
-        <div class="bar-track"><div class="bar-fill" style="width:32.55813953488372%;background:#6366f1"></div></div>
-        <div class="bar-value">14</div>
+        <div class="bar-track"><div class="bar-fill" style="width:53.333333333333336%;background:#6366f1"></div></div>
+        <div class="bar-value">24</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">30s-1m</div>
-        <div class="bar-track"><div class="bar-fill" style="width:39.53488372093023%;background:#6366f1"></div></div>
-        <div class="bar-value">17</div>
+        <div class="bar-track"><div class="bar-fill" style="width:62.22222222222222%;background:#6366f1"></div></div>
+        <div class="bar-value">28</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">1-2m</div>
-        <div class="bar-track"><div class="bar-fill" style="width:44.18604651162791%;background:#6366f1"></div></div>
-        <div class="bar-value">19</div>
+        <div class="bar-track"><div class="bar-fill" style="width:75.55555555555556%;background:#6366f1"></div></div>
+        <div class="bar-value">34</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">2-5m</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#6366f1"></div></div>
-        <div class="bar-value">43</div>
+        <div class="bar-value">45</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">5-15m</div>
-        <div class="bar-track"><div class="bar-fill" style="width:27.906976744186046%;background:#6366f1"></div></div>
-        <div class="bar-value">12</div>
+        <div class="bar-track"><div class="bar-fill" style="width:37.77777777777778%;background:#6366f1"></div></div>
+        <div class="bar-value">17</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">>15m</div>
-        <div class="bar-track"><div class="bar-fill" style="width:27.906976744186046%;background:#6366f1"></div></div>
-        <div class="bar-value">12</div>
+        <div class="bar-track"><div class="bar-fill" style="width:68.88888888888889%;background:#6366f1"></div></div>
+        <div class="bar-value">31</div>
       </div>
       <div style="font-size: 12px; color: #64748b; margin-top: 8px;">
-        Median: 133.5s &bull; Average: 236.5s
+        Median: 112.8s &bull; Average: 429.0s
       </div>
     </div>
 
@@ -375,15 +375,15 @@
       
         <div style="display: flex; gap: 24px; margin: 12px 0;">
           <div style="text-align: center;">
-            <div style="font-size: 24px; font-weight: 700; color: #7c3aed;">3</div>
+            <div style="font-size: 24px; font-weight: 700; color: #7c3aed;">6</div>
             <div style="font-size: 11px; color: #64748b; text-transform: uppercase;">Overlap Events</div>
           </div>
           <div style="text-align: center;">
-            <div style="font-size: 24px; font-weight: 700; color: #7c3aed;">6</div>
+            <div style="font-size: 24px; font-weight: 700; color: #7c3aed;">10</div>
             <div style="font-size: 11px; color: #64748b; text-transform: uppercase;">Sessions Involved</div>
           </div>
           <div style="text-align: center;">
-            <div style="font-size: 24px; font-weight: 700; color: #7c3aed;">12%</div>
+            <div style="font-size: 24px; font-weight: 700; color: #7c3aed;">10%</div>
             <div style="font-size: 11px; color: #64748b; text-transform: uppercase;">Of Messages</div>
           </div>
         </div>
@@ -412,7 +412,7 @@
         <div id="hour-histogram">
       <div class="bar-row">
         <div class="bar-label">Morning (6-12)</div>
-        <div class="bar-track"><div class="bar-fill" style="width:19.318181818181817%;background:#8b5cf6"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:12.878787878787879%;background:#8b5cf6"></div></div>
         <div class="bar-value">17</div>
       </div>
 
@@ -424,14 +424,14 @@
 
       <div class="bar-row">
         <div class="bar-label">Evening (18-24)</div>
-        <div class="bar-track"><div class="bar-fill" style="width:47.72727272727273%;background:#8b5cf6"></div></div>
-        <div class="bar-value">42</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#8b5cf6"></div></div>
+        <div class="bar-value">132</div>
       </div>
 
       <div class="bar-row">
         <div class="bar-label">Night (0-6)</div>
-        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#8b5cf6"></div></div>
-        <div class="bar-value">88</div>
+        <div class="bar-track"><div class="bar-fill" style="width:79.54545454545455%;background:#8b5cf6"></div></div>
+        <div class="bar-value">105</div>
       </div></div>
       </div>
       <div class="chart-card">
@@ -439,44 +439,49 @@
         <div class="bar-row">
         <div class="bar-label">Command Failed</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#dc2626"></div></div>
-        <div class="bar-value">79</div>
+        <div class="bar-value">90</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Other</div>
-        <div class="bar-track"><div class="bar-fill" style="width:36.708860759493675%;background:#dc2626"></div></div>
-        <div class="bar-value">29</div>
+        <div class="bar-track"><div class="bar-fill" style="width:38.88888888888889%;background:#dc2626"></div></div>
+        <div class="bar-value">35</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">User Rejected</div>
-        <div class="bar-track"><div class="bar-fill" style="width:11.39240506329114%;background:#dc2626"></div></div>
-        <div class="bar-value">9</div>
+        <div class="bar-track"><div class="bar-fill" style="width:12.222222222222221%;background:#dc2626"></div></div>
+        <div class="bar-value">11</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">File Not Found</div>
-        <div class="bar-track"><div class="bar-fill" style="width:1.2658227848101267%;background:#dc2626"></div></div>
-        <div class="bar-value">1</div>
+        <div class="bar-track"><div class="bar-fill" style="width:4.444444444444445%;background:#dc2626"></div></div>
+        <div class="bar-value">4</div>
+      </div>
+<div class="bar-row">
+        <div class="bar-label">Edit Failed</div>
+        <div class="bar-track"><div class="bar-fill" style="width:2.2222222222222223%;background:#dc2626"></div></div>
+        <div class="bar-value">2</div>
       </div>
       </div>
     </div>
 
     
     <h2 id="section-wins">Impressive Things You Did</h2>
-    <p class="section-intro">Over the past week, you've been intensively building and debugging a multi-agent system with patrol routines, bootstrap scripts, and custom tooling across 14 sessions.</p>
+    <p class="section-intro">Over 22 sessions in 9 days, you've been building a sophisticated multi-agent infrastructure system (mayor, deacon, witness) with patrol routines, hook/mail queues, and Dolt-backed databases — an ambitious custom orchestration layer on top of Claude Code.</p>
     <div class="big-wins">
       
         <div class="big-win">
           <div class="big-win-title">Multi-Agent Patrol Architecture</div>
-          <div class="big-win-desc">You've designed a sophisticated multi-agent system with named agents (Mayor, Deacon) running patrol loops that check hooks, mail, and create wisps. The session where Deacon completed 2 full patrol cycles and correctly escalated when it detected an extraordinary event (beads-git removal) shows the architecture working as intended — that's a compelling autonomous agent pattern built on top of Claude Code.</div>
+          <div class="big-win-desc">You've designed a layered agent system with distinct roles — mayor, deacon, and witness — each running patrol loops that check hooks, process mail queues, and create wisps. This is a genuinely creative approach to building persistent, autonomous agent workflows on top of Claude Code, complete with heartbeat checks and escalation protocols for extraordinary events.</div>
         </div>
       
         <div class="big-win">
-          <div class="big-win-title">Radical Bootstrap Simplification</div>
-          <div class="big-win-desc">You took a 300+ line Arch Linux bootstrap script and drove it down to a minimal pacman→ansible→gh flow, showing strong architectural instincts about keeping infrastructure lean. Even when Claude kept making wrong assumptions, you consistently corrected course toward the simpler design, demonstrating clear vision for what the system should look like.</div>
+          <div class="big-win-title">Ruthless Codebase Simplification</div>
+          <div class="big-win-desc">You consistently push back against bloat and over-engineering, like when you cut a 300+ line bootstrap script down to a minimal pacman→ansible→gh flow, and when you had Claude clean 68 over-generated Bitwarden files into a clean 3-file, 49-line result. Your instinct to simplify radically — and your willingness to reject Claude's wrong approaches until it gets there — produces much better outcomes.</div>
         </div>
       
         <div class="big-win">
-          <div class="big-win-title">Bash-Heavy Infrastructure Automation</div>
-          <div class="big-win-desc">With 442 Bash tool invocations across just 14 sessions, you're leveraging Claude Code as a deeply integrated system administration partner — managing fstab entries, debugging Dolt databases, configuring Ansible, and wiring up shell hooks. Your comfort letting Claude operate directly on live infrastructure while you steer the architecture shows an effective human-in-the-loop pattern for complex DevOps work.</div>
+          <div class="big-win-title">Systematic Root Cause Debugging</div>
+          <div class="big-win-desc">When you encountered false deacon-down alerts, you didn't just patch the symptom — you had Claude trace the issue all the way to a zsh tmux alias mangling return codes in formulas, then fix all affected formulas globally. This methodical approach to infrastructure debugging, treating your agent system as real production software, shows strong operational discipline.</div>
         </div>
       
     </div>
@@ -486,28 +491,33 @@
       <div class="chart-card">
         <div class="chart-title">What Helped Most (Claude's Capabilities)</div>
         <div class="bar-row">
+        <div class="bar-label">Proactive Help</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#16a34a"></div></div>
+        <div class="bar-value">5</div>
+      </div>
+<div class="bar-row">
         <div class="bar-label">Good Debugging</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#16a34a"></div></div>
-        <div class="bar-value">4</div>
+        <div class="bar-value">5</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Multi-file Changes</div>
-        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#16a34a"></div></div>
-        <div class="bar-value">2</div>
+        <div class="bar-track"><div class="bar-fill" style="width:60%;background:#16a34a"></div></div>
+        <div class="bar-value">3</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Fast/Accurate Search</div>
-        <div class="bar-track"><div class="bar-fill" style="width:25%;background:#16a34a"></div></div>
-        <div class="bar-value">1</div>
+        <div class="bar-track"><div class="bar-fill" style="width:40%;background:#16a34a"></div></div>
+        <div class="bar-value">2</div>
       </div>
 <div class="bar-row">
-        <div class="bar-label">Proactive Help</div>
-        <div class="bar-track"><div class="bar-fill" style="width:25%;background:#16a34a"></div></div>
+        <div class="bar-label">Correct Code Edits</div>
+        <div class="bar-track"><div class="bar-fill" style="width:20%;background:#16a34a"></div></div>
         <div class="bar-value">1</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Good Explanations</div>
-        <div class="bar-track"><div class="bar-fill" style="width:25%;background:#16a34a"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:20%;background:#16a34a"></div></div>
         <div class="bar-value">1</div>
       </div>
       </div>
@@ -515,48 +525,48 @@
         <div class="chart-title">Outcomes</div>
         <div class="bar-row">
         <div class="bar-label">Not Achieved</div>
-        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#8b5cf6"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:62.5%;background:#8b5cf6"></div></div>
         <div class="bar-value">5</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Partially Achieved</div>
-        <div class="bar-track"><div class="bar-fill" style="width:60%;background:#8b5cf6"></div></div>
-        <div class="bar-value">3</div>
+        <div class="bar-track"><div class="bar-fill" style="width:62.5%;background:#8b5cf6"></div></div>
+        <div class="bar-value">5</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Mostly Achieved</div>
-        <div class="bar-track"><div class="bar-fill" style="width:80%;background:#8b5cf6"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#8b5cf6"></div></div>
         <div class="bar-value">4</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Fully Achieved</div>
-        <div class="bar-track"><div class="bar-fill" style="width:40%;background:#8b5cf6"></div></div>
-        <div class="bar-value">2</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#8b5cf6"></div></div>
+        <div class="bar-value">8</div>
       </div>
       </div>
     </div>
 
     
     <h2 id="section-friction">Where Things Go Wrong</h2>
-    <p class="section-intro">Your sessions are heavily dominated by recurring infrastructure failures and Claude pursuing wrong approaches, resulting in frequent frustration and a majority of goals going unachieved or only partially achieved.</p>
+    <p class="section-intro">Your sessions are heavily dominated by recurring infrastructure failures and Claude taking wrong approaches, with 17 wrong-approach friction events and only 3 commits across 16 hours of work.</p>
     <div class="friction-categories">
       
         <div class="friction-category">
-          <div class="friction-title">Recurring Infrastructure Failures Consuming Entire Sessions</div>
-          <div class="friction-desc">You repeatedly hit the same Dolt/beads database corruption and initialization issues across multiple sessions, with Claude spending entire sessions attempting repairs instead of completing your actual patrol tasks. Consider stabilizing this infrastructure layer independently (or building in automated self-healing) so that routine patrol operations don't get blocked by the same class of failure every time.</div>
-          <ul class="friction-examples"><li>At least 5 separate sessions were derailed by Dolt database corruption or beads initialization failures, with Claude cycling through different fix attempts (bd init --force, config changes, killing processes) that conflicted with each other and never stabilized the environment</li><li>In one session Claude even created a local .beads directory that conflicted with your intended architecture, compounding the infrastructure problems rather than resolving them</li></ul>
+          <div class="friction-title">Persistent Infrastructure Fragility Draining Entire Sessions</div>
+          <div class="friction-desc">You're losing entire sessions to Dolt database corruption, uninitialized beads databases, and process conflicts — the same class of infrastructure issue appears across at least 6 sessions. Investing in a robust initialization/health-check script that runs before patrol tasks could prevent Claude from spending full sessions on repair loops instead of actual work.</div>
+          <ul class="friction-examples"><li>At least 5 sessions where Dolt corruption or uninitialized beads databases consumed the entire session, with Claude attempting repeated fix attempts (bd init --force, config changes, killing processes) that conflicted with each other and never stabilized the environment</li><li>Patrol tasks repeatedly failed at the wisp-creation step because the beads database wasn't initialized, and this same failure mode recurred across multiple days without a permanent fix being put in place</li></ul>
         </div>
       
         <div class="friction-category">
-          <div class="friction-title">Wrong Approaches and Architectural Assumptions Requiring Repeated Correction</div>
-          <div class="friction-desc">Claude frequently charged ahead with incorrect assumptions—writing vault passwords to plaintext, using venvs instead of uv tools, brute-force exploring files instead of thinking first—forcing you to intervene and redirect multiple times per session. You could mitigate this by providing explicit architectural constraints in your CLAUDE.md or system instructions so Claude has guardrails before it starts acting.</div>
-          <ul class="friction-examples"><li>During the bootstrap simplification, Claude repeatedly made wrong architectural decisions (plaintext vault passwords, global become=true, skipping git credential helper setup) requiring you to correct course multiple times with increasing frustration</li><li>When you asked Claude to plan a ~/.claude/ to ~/claude/ migration, it immediately started brute-force exploring files without consulting context or thinking first, and you had to interrupt and redirect the entire approach</li></ul>
+          <div class="friction-title">Claude Making Wrong Architectural Assumptions Instead of Asking</div>
+          <div class="friction-desc">Claude repeatedly jumped to incorrect approaches — writing vault passwords to plaintext, using venvs instead of uv tools, assuming commands work from any directory — forcing you to correct course multiple times per session. You could reduce this by front-loading constraints in your prompts or a CLAUDE.md file so Claude doesn't default to bad assumptions.</div>
+          <ul class="friction-examples"><li>During the bootstrap simplification, Claude repeatedly made wrong architectural decisions (plaintext vault passwords, venvs instead of uv tools, skipping git credential helper) requiring you to correct course with increasing frustration across many rounds</li><li>Claude confidently gave a wrong explanation about gt commands working from anywhere, then even after being corrected still didn't re-run from the correct directory until you explicitly demanded it</li></ul>
         </div>
       
         <div class="friction-category">
-          <div class="friction-title">Tool Overuse Instead of Direct Reasoning and Answers</div>
-          <div class="friction-desc">With 442 Bash invocations across only 147 messages, Claude leans heavily on executing commands rather than reasoning from available context, which leads to long debugging loops and delays in answering straightforward questions. When you have a direct question, consider prompting Claude to reason and answer first before running any tools.</div>
-          <ul class="friction-examples"><li>You asked a direct question about sync mechanisms and version requirements, but Claude kept running tools and exploring code instead of synthesizing an answer from information it already had, leading to significant frustration and session exit</li><li>Claude gave a confidently wrong explanation about gt commands working from any directory, and even after you corrected it, Claude still didn't re-run the hook from the correct directory until you explicitly demanded it—prioritizing tool execution over listening to your feedback</li></ul>
+          <div class="friction-title">Tool Overuse Instead of Direct Reasoning</div>
+          <div class="friction-desc">With 637 Bash invocations across 22 sessions, Claude frequently resorted to running commands and exploring files rather than reasoning from context it already had, which wasted your time and frustrated you. Prompting Claude to think first and explain its plan before executing could cut down on these exploratory spirals.</div>
+          <ul class="friction-examples"><li>You asked a direct question about sync/version requirements but Claude kept running tools and exploring code instead of answering with information it already had, leading you to express significant frustration and exit the session</li><li>During the file migration planning session, Claude immediately started brute-force exploring files without consulting available context first, and you had to interrupt and redirect it to actually think before acting</li></ul>
         </div>
       
     </div>
@@ -568,31 +578,31 @@
         <div class="bar-row">
         <div class="bar-label">Wrong Approach</div>
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:#dc2626"></div></div>
-        <div class="bar-value">15</div>
+        <div class="bar-value">17</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Buggy Code</div>
-        <div class="bar-track"><div class="bar-fill" style="width:53.333333333333336%;background:#dc2626"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:47.05882352941176%;background:#dc2626"></div></div>
         <div class="bar-value">8</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Misunderstood Request</div>
-        <div class="bar-track"><div class="bar-fill" style="width:33.33333333333333%;background:#dc2626"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:29.411764705882355%;background:#dc2626"></div></div>
         <div class="bar-value">5</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Excessive Changes</div>
-        <div class="bar-track"><div class="bar-fill" style="width:20%;background:#dc2626"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:17.647058823529413%;background:#dc2626"></div></div>
         <div class="bar-value">3</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Tool Failure</div>
-        <div class="bar-track"><div class="bar-fill" style="width:13.333333333333334%;background:#dc2626"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:11.76470588235294%;background:#dc2626"></div></div>
         <div class="bar-value">2</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Authentication Error</div>
-        <div class="bar-track"><div class="bar-fill" style="width:6.666666666666667%;background:#dc2626"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:5.88235294117647%;background:#dc2626"></div></div>
         <div class="bar-value">1</div>
       </div>
       </div>
@@ -600,23 +610,28 @@
         <div class="chart-title">Inferred Satisfaction (model-estimated)</div>
         <div class="bar-row">
         <div class="bar-label">Frustrated</div>
-        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#eab308"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:57.14285714285714%;background:#eab308"></div></div>
         <div class="bar-value">12</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Dissatisfied</div>
-        <div class="bar-track"><div class="bar-fill" style="width:25%;background:#eab308"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:14.285714285714285%;background:#eab308"></div></div>
         <div class="bar-value">3</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Likely Satisfied</div>
-        <div class="bar-track"><div class="bar-fill" style="width:75%;background:#eab308"></div></div>
-        <div class="bar-value">9</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#eab308"></div></div>
+        <div class="bar-value">21</div>
       </div>
 <div class="bar-row">
         <div class="bar-label">Satisfied</div>
-        <div class="bar-track"><div class="bar-fill" style="width:25%;background:#eab308"></div></div>
+        <div class="bar-track"><div class="bar-fill" style="width:14.285714285714285%;background:#eab308"></div></div>
         <div class="bar-value">3</div>
+      </div>
+<div class="bar-row">
+        <div class="bar-label">Happy</div>
+        <div class="bar-track"><div class="bar-fill" style="width:4.761904761904762%;background:#eab308"></div></div>
+        <div class="bar-value">1</div>
       </div>
       </div>
     </div>
@@ -632,73 +647,84 @@
       </div>
       
         <div class="claude-md-item">
-          <input type="checkbox" id="cmd-0" class="cmd-checkbox" checked data-text="Add as a new top-level section ## Beads/Dolt Database near the top of CLAUDE.md so it's seen early in every session.\n\n## Beads/Dolt Database
-- The beads database (`bd`) must be initialized before any patrol wisp creation or hook checks.
-- If `bd` commands fail, check: 1) Is the Dolt server running? 2) Does repo_state.json exist? 3) Are there conflicting Dolt processes?
-- NEVER create a local `.beads` directory - it conflicts with the intended architecture. Always use the configured beads path.
-- If the database is corrupted, inform the user and STOP rather than attempting repeated repair loops.">
+          <input type="checkbox" id="cmd-0" class="cmd-checkbox" checked data-text="Add as a new top-level section ## Beads Database near infrastructure documentation\n\n## Beads Database
+- The beads database (bd) must be initialized before any patrol or wisp operations. If `bd` commands fail, check: 1) Dolt server is running, 2) database is initialized (`bd init`), 3) no conflicting `.beads` directories exist in local paths. Do NOT create local .beads directories — use the centralized architecture.
+- Never run `bd init --force` without explicit user approval.">
           <label for="cmd-0">
-            <code class="cmd-code">## Beads/Dolt Database
-- The beads database (`bd`) must be initialized before any patrol wisp creation or hook checks.
-- If `bd` commands fail, check: 1) Is the Dolt server running? 2) Does repo_state.json exist? 3) Are there conflicting Dolt processes?
-- NEVER create a local `.beads` directory - it conflicts with the intended architecture. Always use the configured beads path.
-- If the database is corrupted, inform the user and STOP rather than attempting repeated repair loops.</code>
+            <code class="cmd-code">## Beads Database
+- The beads database (bd) must be initialized before any patrol or wisp operations. If `bd` commands fail, check: 1) Dolt server is running, 2) database is initialized (`bd init`), 3) no conflicting `.beads` directories exist in local paths. Do NOT create local .beads directories — use the centralized architecture.
+- Never run `bd init --force` without explicit user approval.</code>
             <button class="copy-btn" onclick="copyCmdItem(0)">Copy</button>
           </label>
-          <div class="cmd-why">Beads/Dolt database initialization failures caused at least 5 sessions to fail or stall, making this the single biggest source of friction across all sessions.</div>
+          <div class="cmd-why">Beads database initialization failures blocked at least 5 sessions, with Claude repeatedly trying conflicting fixes that made things worse.</div>
         </div>
       
         <div class="claude-md-item">
-          <input type="checkbox" id="cmd-1" class="cmd-checkbox" checked data-text="Add as a new section ## Working Directory Rules, placed right after the Beads/Dolt Database section.\n\n## Working Directory Rules
-- Gas Town (`gt`) commands MUST be run from the correct directory. Do not assume gt commands work from anywhere.
-- Always `cd` to the appropriate project directory before running `gt` or `bd` commands.
-- When in doubt about which directory to be in, ASK rather than guessing.">
+          <input type="checkbox" id="cmd-1" class="cmd-checkbox" checked data-text="Add as a new section ## Patrol Routine Checklist above any patrol/deacon workflow documentation\n\n## Patrol Routine Checklist
+Before starting patrol loops, verify prerequisites:
+1. Dolt server is running and responsive
+2. Beads database is initialized and accessible
+3. gt commands are run from the correct Gas Town directory (NOT from arbitrary paths)
+4. bd/gt tool versions are compatible
+If any prerequisite fails, STOP and report the blocker — do not spend the session debugging infrastructure.">
           <label for="cmd-1">
-            <code class="cmd-code">## Working Directory Rules
-- Gas Town (`gt`) commands MUST be run from the correct directory. Do not assume gt commands work from anywhere.
-- Always `cd` to the appropriate project directory before running `gt` or `bd` commands.
-- When in doubt about which directory to be in, ASK rather than guessing.</code>
+            <code class="cmd-code">## Patrol Routine Checklist
+Before starting patrol loops, verify prerequisites:
+1. Dolt server is running and responsive
+2. Beads database is initialized and accessible
+3. gt commands are run from the correct Gas Town directory (NOT from arbitrary paths)
+4. bd/gt tool versions are compatible
+If any prerequisite fails, STOP and report the blocker — do not spend the session debugging infrastructure.</code>
             <button class="copy-btn" onclick="copyCmdItem(1)">Copy</button>
           </label>
-          <div class="cmd-why">Claude gave confidently wrong explanations about directory behavior and ran commands from wrong directories in multiple sessions, frustrating the user.</div>
+          <div class="cmd-why">Multiple patrol sessions (5+) were consumed by infrastructure debugging instead of completing the actual patrol task, frustrating the user repeatedly.</div>
         </div>
       
         <div class="claude-md-item">
-          <input type="checkbox" id="cmd-2" class="cmd-checkbox" checked data-text="Add as a top-level section ## Approach &amp; Communication near the very top of CLAUDE.md so it governs all interactions.\n\n## Approach &amp; Communication
-- THINK before acting. Consult CLAUDE.md and available context BEFORE exploring files or running tools.
-- When the user asks a direct question, ANSWER IT with available knowledge first. Do not reflexively run tools to explore.
-- If you're unsure about architecture decisions (file paths, config locations, tool usage patterns), ASK the user rather than making assumptions.
-- NEVER make more than 2 attempts to fix the same infrastructure issue. If stuck, summarize the problem and ask the user how to proceed.
-- Do not write secrets/passwords to plaintext files. Do not create venvs when uv tools is the intended approach.">
+          <input type="checkbox" id="cmd-2" class="cmd-checkbox" checked data-text="Add as a new top-level section ## Working Style Rules near the top of CLAUDE.md\n\n## Working Style Rules
+- When the user asks a direct question, ANSWER IT with available knowledge first. Do not run exploratory tools before giving your best answer.
+- Think and consult CLAUDE.md/context BEFORE exploring files. Never start brute-force file exploration without a plan.
+- When corrected, immediately act on the correction — do not re-explain or justify the wrong approach.">
           <label for="cmd-2">
-            <code class="cmd-code">## Approach &amp; Communication
-- THINK before acting. Consult CLAUDE.md and available context BEFORE exploring files or running tools.
-- When the user asks a direct question, ANSWER IT with available knowledge first. Do not reflexively run tools to explore.
-- If you're unsure about architecture decisions (file paths, config locations, tool usage patterns), ASK the user rather than making assumptions.
-- NEVER make more than 2 attempts to fix the same infrastructure issue. If stuck, summarize the problem and ask the user how to proceed.
-- Do not write secrets/passwords to plaintext files. Do not create venvs when uv tools is the intended approach.</code>
+            <code class="cmd-code">## Working Style Rules
+- When the user asks a direct question, ANSWER IT with available knowledge first. Do not run exploratory tools before giving your best answer.
+- Think and consult CLAUDE.md/context BEFORE exploring files. Never start brute-force file exploration without a plan.
+- When corrected, immediately act on the correction — do not re-explain or justify the wrong approach.</code>
             <button class="copy-btn" onclick="copyCmdItem(2)">Copy</button>
           </label>
-          <div class="cmd-why">Claude repeatedly made wrong assumptions (15 'wrong_approach' events), ran tools instead of answering questions, and got stuck in long debugging loops - the user had to correct course many times across multiple sessions.</div>
+          <div class="cmd-why">In multiple sessions Claude ran tools instead of answering questions, started brute-force exploration without thinking, and resisted corrections — all explicitly called out as friction by the user.</div>
         </div>
       
         <div class="claude-md-item">
-          <input type="checkbox" id="cmd-3" class="cmd-checkbox" checked data-text="Add under a new section ## Bootstrap &amp; Ansible Conventions or append to an existing Ansible/setup section.\n\n## Bootstrap &amp; Ansible Conventions
-- Bootstrap flow is: pacman → ansible → gh (minimal approach)
-- Use `uv tools` instead of venvs
-- Configure git credential helper during bootstrap
-- Never set global `become=true` in Ansible
-- Never write vault passwords to plaintext files">
+          <input type="checkbox" id="cmd-3" class="cmd-checkbox" checked data-text="Add under infrastructure or tooling section of CLAUDE.md\n\n## gt (Gas Town) Commands
+- gt hook and gt commands must be run from the correct Gas Town project directory, not from arbitrary paths.
+- Do not claim gt commands work from anywhere — they require proper directory context.">
           <label for="cmd-3">
-            <code class="cmd-code">## Bootstrap &amp; Ansible Conventions
-- Bootstrap flow is: pacman → ansible → gh (minimal approach)
-- Use `uv tools` instead of venvs
-- Configure git credential helper during bootstrap
-- Never set global `become=true` in Ansible
-- Never write vault passwords to plaintext files</code>
+            <code class="cmd-code">## gt (Gas Town) Commands
+- gt hook and gt commands must be run from the correct Gas Town project directory, not from arbitrary paths.
+- Do not claim gt commands work from anywhere — they require proper directory context.</code>
             <button class="copy-btn" onclick="copyCmdItem(3)">Copy</button>
           </label>
-          <div class="cmd-why">The bootstrap simplification session had repeated architectural mistakes that the user had to manually correct, indicating these conventions need to be documented.</div>
+          <div class="cmd-why">Claude gave confidently wrong explanations about gt working from anywhere, then resisted correction, causing user frustration in at least 2 sessions.</div>
+        </div>
+      
+        <div class="claude-md-item">
+          <input type="checkbox" id="cmd-4" class="cmd-checkbox" checked data-text="Add as a new section ## Bootstrap / Ansible Conventions\n\n## Bootstrap / Ansible Conventions
+- Never write vault passwords to plaintext files
+- Use `uv tools` — do not create venvs unless explicitly asked
+- Do not set global `become=true` in Ansible
+- Configure git credential helper early in bootstrap
+- Keep bootstrap scripts minimal: pacman → ansible → gh flow">
+          <label for="cmd-4">
+            <code class="cmd-code">## Bootstrap / Ansible Conventions
+- Never write vault passwords to plaintext files
+- Use `uv tools` — do not create venvs unless explicitly asked
+- Do not set global `become=true` in Ansible
+- Configure git credential helper early in bootstrap
+- Keep bootstrap scripts minimal: pacman → ansible → gh flow</code>
+            <button class="copy-btn" onclick="copyCmdItem(4)">Copy</button>
+          </label>
+          <div class="cmd-why">Claude repeatedly made wrong architectural decisions during bootstrap work that the user had to correct multiple times with increasing frustration.</div>
         </div>
       
     </div>
@@ -709,25 +735,21 @@
       
         <div class="feature-card">
           <div class="feature-title">Hooks</div>
-          <div class="feature-oneliner">Shell commands that auto-run at specific lifecycle events like pre-tool or post-tool execution.</div>
-          <div class="feature-why"><strong>Why for you:</strong> You're already using hooks (session-start hook verification was a session goal). You could add a pre-tool hook that validates the working directory before running gt/bd commands, preventing the repeated wrong-directory errors that caused friction in multiple sessions.</div>
+          <div class="feature-oneliner">Shell commands that auto-run at specific lifecycle events like session start or before tool use.</div>
+          <div class="feature-why"><strong>Why for you:</strong> You already use session-start hooks and patrol routines. You could add a pre-session hook that automatically checks Dolt server status and beads DB health, preventing the 5+ sessions wasted on infrastructure debugging. You could also auto-verify gt directory context.</div>
           
           <div class="feature-examples">
             <div class="feature-example">
               <div class="example-code-row">
-                <code class="example-code">// In .claude/settings.json:
-&quot;hooks&quot;: {
-  &quot;PreToolUse&quot;: [
-    {
-      &quot;matcher&quot;: &quot;Bash&quot;,
-      &quot;hooks&quot;: [
-        {
-          &quot;type&quot;: &quot;command&quot;,
-          &quot;command&quot;: &quot;echo \&quot;Current directory: $(pwd)\&quot; &amp;&amp; if echo \&quot;$TOOL_INPUT\&quot; | grep -qE '\\b(gt |bd )' &amp;&amp; [[ \&quot;$(pwd)\&quot; != *\&quot;/gas-town\&quot;* ]]; then echo \&quot;WARNING: gt/bd command detected outside gas-town directory\&quot;; fi&quot;
-        }
-      ]
-    }
-  ]
+                <code class="example-code">// .claude/settings.json
+{
+  &quot;hooks&quot;: {
+    &quot;session_start&quot;: [
+      {
+        &quot;command&quot;: &quot;bash -c 'echo \&quot;=== Infra Check ===\&quot;; pgrep -f dolt &gt; /dev/null &amp;&amp; echo \&quot;Dolt: UP\&quot; || echo \&quot;Dolt: DOWN - run dolt sql-server first\&quot;; test -d ~/gas-town/.dolt &amp;&amp; echo \&quot;Beads DB: OK\&quot; || echo \&quot;Beads DB: NOT INITIALIZED\&quot;'&quot;
+      }
+    ]
+  }
 }</code>
                 <button class="copy-btn" onclick="copyText(this)">Copy</button>
               </div>
@@ -738,31 +760,30 @@
       
         <div class="feature-card">
           <div class="feature-title">Custom Skills</div>
-          <div class="feature-oneliner">Reusable prompts defined as markdown files that run with a single /command.</div>
-          <div class="feature-why"><strong>Why for you:</strong> Your 'patrol' routine (heartbeat, hook check, wisp creation) was attempted in 6+ sessions and failed most times due to the same issues. Encoding it as a /patrol skill with pre-checks would eliminate repeated failures and save you from re-explaining the workflow every session.</div>
+          <div class="feature-oneliner">Reusable prompts as markdown files that run with a single /command.</div>
+          <div class="feature-why"><strong>Why for you:</strong> Your patrol routine (heartbeat, hook check, wisp creation) runs across many sessions but frequently fails due to missed prerequisites. A /patrol skill would encode the exact checklist and stop-on-failure logic so Claude follows it consistently every time instead of improvising.</div>
           
           <div class="feature-examples">
             <div class="feature-example">
               <div class="example-code-row">
-                <code class="example-code"># Create .claude/skills/patrol/SKILL.md with:
-
+                <code class="example-code"># .claude/skills/patrol/SKILL.md
 ## Patrol Routine
 
-### Pre-flight Checks (do ALL before proceeding):
-1. Verify working directory is correct for gt/bd commands
-2. Check if Dolt server is running: `ps aux | grep dolt`
-3. Check if beads database is initialized: `bd status`
-4. If any check fails, REPORT and STOP. Do not attempt repairs.
+### Prerequisites (STOP if any fail)
+1. Verify Dolt server: `pgrep -f dolt` — if down, report and STOP
+2. Verify beads DB: `bd status` from ~/gas-town — if not initialized, report and STOP
+3. Verify gt directory context: `cd ~/gas-town &amp;&amp; gt hook`
 
-### Patrol Steps (only if all checks pass):
+### Patrol Steps
 1. Run heartbeat check
 2. Check gt hook for pending work
-3. If hook has work, process it
-4. Create and execute patrol wisp if needed
+3. Check mail
+4. If work found, create and execute wisp
+5. Report summary
 
-### On Failure:
-- Do NOT attempt more than 1 retry on any step
-- Report what failed and exit cleanly</code>
+### Rules
+- Do NOT spend more than 2 minutes debugging infrastructure. Report blocker and stop.
+- Do NOT create local .beads directories.</code>
                 <button class="copy-btn" onclick="copyText(this)">Copy</button>
               </div>
             </div>
@@ -771,24 +792,14 @@
         </div>
       
         <div class="feature-card">
-          <div class="feature-title">Headless Mode</div>
-          <div class="feature-oneliner">Run Claude non-interactively from scripts and CI/CD pipelines.</div>
-          <div class="feature-why"><strong>Why for you:</strong> Your patrol routine is a recurring automated check that could run on a schedule without interactive babysitting. Given that 6+ sessions were spent trying to run patrol interactively (often failing), a headless script with strict allowed tools would keep it focused and prevent runaway debugging loops.</div>
+          <div class="feature-title">Task Agents</div>
+          <div class="feature-oneliner">Claude spawns focused sub-agents for parallel or isolated exploration work.</div>
+          <div class="feature-why"><strong>Why for you:</strong> You already use Task 5 times, but several sessions show Claude going down rabbit holes debugging infrastructure when it should be doing patrol work. Spawning a sub-agent to diagnose Dolt/beads issues while the main agent continues the patrol (or reports cleanly) would prevent sessions from being entirely consumed by side-quests.</div>
           
           <div class="feature-examples">
             <div class="feature-example">
               <div class="example-code-row">
-                <code class="example-code"># Create a patrol.sh script:
-#!/bin/bash
-# Pre-check infrastructure before invoking Claude
-if ! pgrep -x dolt &gt; /dev/null; then
-  echo &quot;ERROR: Dolt server not running. Start it first.&quot;
-  exit 1
-fi
-
-claude -p &quot;Run patrol: check heartbeat, check gt hook, report findings. Do NOT attempt to fix infrastructure issues - just report them.&quot; \
-  --allowedTools &quot;Bash,Read&quot; \
-  --max-turns 10</code>
+                <code class="example-code">Prompt: &quot;Use a task agent to diagnose why the beads database is not responding, while you continue checking the gt hook and mail for pending work. If the agent finds the DB is unrecoverable, just report that and stop.&quot;</code>
                 <button class="copy-btn" onclick="copyText(this)">Copy</button>
               </div>
             </div>
@@ -804,14 +815,14 @@ claude -p &quot;Run patrol: check heartbeat, check gt hook, report findings. Do 
     <div class="patterns-section">
       
         <div class="pattern-card">
-          <div class="pattern-title">Break the Debugging Death Spiral</div>
-          <div class="pattern-summary">Set explicit guardrails in your prompts to prevent Claude from spending entire sessions debugging infrastructure instead of doing the actual task.</div>
-          <div class="pattern-detail">In at least 5 of 14 sessions, Claude got stuck in long loops trying to fix Dolt/beads database issues, never completing the actual patrol task. Your 'wrong_approach' friction count of 15 is extremely high relative to 14 sessions. By front-loading infrastructure checks and giving Claude explicit 'stop and report' instructions, you can fail fast and preserve session time for actual work.</div>
+          <div class="pattern-title">Infrastructure pre-flight before patrol</div>
+          <div class="pattern-summary">Run a 30-second infrastructure health check before every patrol session to avoid wasting entire sessions on Dolt/beads debugging.</div>
+          <div class="pattern-detail">At least 5 of your 22 sessions were entirely or mostly consumed by Dolt database corruption, beads initialization failures, or process conflicts. In most cases, a simple check at session start (is Dolt running? is the DB initialized? are versions compatible?) would have surfaced the problem in seconds instead of 20+ minutes of debugging. This is your single biggest source of wasted time. Consider making this an automated hook or the first line of a /patrol skill.</div>
           
           <div class="copyable-prompt-section">
             <div class="prompt-label">Paste into Claude Code:</div>
             <div class="copyable-prompt-row">
-              <code class="copyable-prompt">Before starting the patrol, run these checks: 1) Is Dolt running? 2) Can you run `bd status` successfully? 3) Are we in the correct directory? If ANY check fails, tell me what failed and STOP. Do not try to fix infrastructure. Only proceed with patrol if all checks pass.</code>
+              <code class="copyable-prompt">Before doing anything else: check if Dolt server is running (pgrep -f dolt), verify beads database is initialized (bd status from ~/gas-town), and confirm gt/bd versions are compatible. If ANY of these fail, tell me the exact problem and stop. Do not attempt to fix infrastructure unless I explicitly ask.</code>
               <button class="copy-btn" onclick="copyText(this)">Copy</button>
             </div>
           </div>
@@ -819,14 +830,14 @@ claude -p &quot;Run patrol: check heartbeat, check gt hook, report findings. Do 
         </div>
       
         <div class="pattern-card">
-          <div class="pattern-title">Answer First, Explore Later</div>
-          <div class="pattern-summary">When asking Claude conceptual or diagnostic questions, explicitly tell it to reason from existing knowledge before running tools.</div>
-          <div class="pattern-detail">Multiple sessions showed Claude reflexively running Bash commands and exploring files when the user wanted a direct answer (e.g., the sync/version mismatch question). This wasted turns and frustrated you. Claude's 'misunderstood_request' count of 5 and the low satisfaction scores (12 frustrated vs 3 satisfied) suggest a communication pattern mismatch. Being explicit about answer format helps.</div>
+          <div class="pattern-title">Set a debugging time-box</div>
+          <div class="pattern-summary">Tell Claude to stop debugging after 2 failed attempts and report the problem instead of spiraling.</div>
+          <div class="pattern-detail">The 'wrong_approach' friction appeared 17 times across your sessions — by far the highest friction category. In many cases, Claude tried fix after fix (bd init --force, config changes, port switches, creating local directories) that conflicted with each other and made things worse. The user frequently had to interrupt to stop the spiral. A CLAUDE.md instruction to limit debugging attempts would save significant time and frustration.</div>
           
           <div class="copyable-prompt-section">
             <div class="prompt-label">Paste into Claude Code:</div>
             <div class="copyable-prompt-row">
-              <code class="copyable-prompt">I have a question - answer it directly from what you already know. Do NOT run any tools until I ask you to. Here's my question: [your question]</code>
+              <code class="copyable-prompt">When you encounter an infrastructure or tooling error, try at most 2 different approaches to fix it. If neither works, stop and give me: 1) what you tried, 2) the exact error output, 3) your best guess at root cause. Do not keep trying variations without my approval.</code>
               <button class="copy-btn" onclick="copyText(this)">Copy</button>
             </div>
           </div>
@@ -834,14 +845,14 @@ claude -p &quot;Run patrol: check heartbeat, check gt hook, report findings. Do 
         </div>
       
         <div class="pattern-card">
-          <div class="pattern-title">Checkpoint Before Major Changes</div>
-          <div class="pattern-summary">For multi-step tasks like the bootstrap rewrite, ask Claude to present its plan and assumptions before writing any code.</div>
-          <div class="pattern-detail">The bootstrap simplification session and the file migration session both suffered from Claude making wrong architectural assumptions (venvs instead of uv tools, plaintext vault passwords, brute-force exploring instead of thinking). With only 1 commit across 14 sessions and a high 'excessive_changes' friction count, forcing a plan-first approach would catch wrong assumptions before they waste your time.</div>
+          <div class="pattern-title">Answer first, explore second</div>
+          <div class="pattern-summary">Instruct Claude to give its best answer from existing knowledge before running tools for exploratory questions.</div>
+          <div class="pattern-detail">Multiple sessions show frustration where the user asked direct questions (about sync mechanisms, version requirements, directory behavior) and Claude launched into tool exploration instead of answering. For your infrastructure/DevOps work, Claude often has enough context from CLAUDE.md and prior conversation to give a useful first answer. Tool exploration should supplement, not replace, direct answers. This pattern appeared in at least 3 sessions.</div>
           
           <div class="copyable-prompt-section">
             <div class="prompt-label">Paste into Claude Code:</div>
             <div class="copyable-prompt-row">
-              <code class="copyable-prompt">I want to [describe task]. Before writing ANY code or running ANY commands, outline your plan including: 1) What assumptions you're making 2) What files you'll change 3) What approach you'll take. Wait for my approval before proceeding.</code>
+              <code class="copyable-prompt">When I ask you a question about how something works, give me your best answer immediately from what you already know. Then if needed, say 'I can verify this by checking X' and wait for my go-ahead before running tools.</code>
               <button class="copy-btn" onclick="copyText(this)">Copy</button>
             </div>
           </div>
@@ -854,28 +865,67 @@ claude -p &quot;Run patrol: check heartbeat, check gt hook, report findings. Do 
 
     
     <h2 id="section-horizon">On the Horizon</h2>
-    <p class="section-intro">Your infrastructure automation work with Claude Code reveals a pattern where persistent database and tooling issues are consuming most of your session time—shifting to self-healing, pre-validated workflows could dramatically multiply your effectiveness.</p>
+    <p class="section-intro">Your data reveals a powerful multi-agent infrastructure (mayor, deacon, wisps) running on Claude Code, but persistent database corruption and wrong-approach friction are consuming nearly half your sessions—automating resilience and pre-flight checks can unlock the autonomous patrol loops you're building toward.</p>
     <div class="horizon-section">
       
         <div class="horizon-card">
-          <div class="horizon-title">Self-Healing Patrol with Pre-Flight Validation</div>
-          <div class="horizon-possible">Instead of Claude discovering broken Dolt databases and beads configs mid-patrol, an autonomous pre-flight agent could validate all infrastructure dependencies before executing any patrol logic. This eliminates the recurring pattern where 80% of your session is spent debugging corrupted state rather than doing actual work. A parallel agent architecture could continuously monitor and auto-repair infrastructure while the main agent runs patrols uninterrupted.</div>
-          <div class="horizon-tip"><strong>Getting started:</strong> Use Claude Code's Task tool to spawn a dedicated infrastructure-validation subtask before every patrol cycle, failing fast with actionable diagnostics instead of entering repair loops.</div>
-          <div class="pattern-prompt"><div class="prompt-label">Paste into Claude Code:</div><code>Before running any patrol routine, execute a pre-flight validation sequence as a subtask: 1) Check if Dolt server is running and responsive (dolt sql-server status or equivalent), 2) Verify beads database is initialized (bd status) and .beads config points to correct location, 3) Verify gt commands work from the correct working directory, 4) Check all required binaries are on PATH and version-compatible. If ANY check fails, stop immediately and output a structured diagnostic report with exact fix commands—do NOT attempt automatic repair unless I explicitly ask. Only after all checks pass, proceed with the patrol routine (heartbeat, hook check, wisp creation/execution). Format the pre-flight results as a checklist before continuing.</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+          <div class="horizon-title">Self-Healing Infrastructure with Pre-Flight Validation</div>
+          <div class="horizon-possible">17 of your friction events stem from wrong approaches and 5 sessions were blocked by Dolt/Beads corruption—your agents should never spend an entire session on repair. An autonomous pre-flight agent can validate database integrity, Dolt server health, and beads initialization before any patrol begins, auto-remediating known failure modes and only escalating truly novel issues.</div>
+          <div class="horizon-tip"><strong>Getting started:</strong> Use Claude Code's Task tool to spawn a dedicated health-check sub-agent before each patrol cycle. Encode your known failure modes (missing repo_state.json, empty journals, uninitialized beads) as a runbook it executes first.</div>
+          <div class="pattern-prompt"><div class="prompt-label">Paste into Claude Code:</div><code>You are a pre-flight validation agent. Before any patrol work begins, execute these checks in order and auto-remediate if possible:
+
+1. Verify Dolt server is running (`dolt sql-server` process exists, correct port responding)
+2. Validate database integrity: check for repo_state.json, non-empty journal files, run `dolt status` in each database dir
+3. Verify beads database is initialized: run `bd status`, confirm .beads config points to correct global location (not local), run `bd init` only if truly uninitialized
+4. Confirm gt hook responds from the correct working directory (cd to repo root first)
+5. Check PATH includes all required tool locations
+
+For each check: if it fails with a KNOWN pattern (corruption, missing files, wrong directory), fix it silently and log the fix. If it fails with an UNKNOWN pattern, stop and report the issue—do NOT enter a debugging loop. Output a green/red status summary. Only proceed to patrol if all checks pass.</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
         </div>
       
         <div class="horizon-card">
-          <div class="horizon-title">Bootstrap Scripts Validated Against Idempotent Tests</div>
-          <div class="horizon-possible">Your Arch Linux bootstrap simplification involved many rounds of Claude making wrong architectural assumptions (plaintext vault passwords, unnecessary venvs, missing git credential helpers). An autonomous test-driven approach could have Claude write the bootstrap, then iteratively run it in a clean container or chroot, catching every failure automatically. Claude could maintain a test manifest of postconditions and loop until all pass—no human correction needed for obvious errors.</div>
-          <div class="horizon-tip"><strong>Getting started:</strong> Use Claude Code with a CLAUDE.md that defines your bootstrap invariants (no plaintext secrets, uv-only Python tooling, ansible-pull flow), then have Claude iterate the script against those constraints using Bash validation checks.</div>
-          <div class="pattern-prompt"><div class="prompt-label">Paste into Claude Code:</div><code>I'm building a minimal Arch Linux bootstrap script (~50 lines) that does: pacman base packages → install uv → uv tool install ansible → gh auth → ansible-pull from my repo. Here are my hard constraints that must NEVER be violated: 1) No plaintext vault passwords anywhere—use ansible-vault with interactive prompt or env var only, 2) Python tooling via uv tools only—no venvs, no pip, 3) Git credential helper must be configured for gh CLI, 4) All ansible become/sudo must be per-task not global, 5) Script must be idempotent—safe to run twice. Write the bootstrap script, then write a validation script that checks ALL 5 constraints plus verifies each tool is actually callable. Run the validation script against the bootstrap output and iterate until every check passes. Show me the results of each validation pass.</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+          <div class="horizon-title">Parallel Agent Patrol with Coordinated Handoffs</div>
+          <div class="horizon-possible">You're running 22 sessions across mayor, deacon, and witness roles but they frequently collide (conflicting Dolt processes, contradictory health checks, external package removals mid-session). Parallel sub-agents with proper locking and a shared state protocol can run hook checks, mail processing, and wisp execution simultaneously without stepping on each other, turning your 16 hours of serial work into dramatically shorter coordinated sweeps.</div>
+          <div class="horizon-tip"><strong>Getting started:</strong> Use the Task tool to launch parallel sub-agents for each patrol responsibility, with a coordinator agent that holds a simple file-based lock on shared resources (Dolt server, beads database) and merges results before acting.</div>
+          <div class="pattern-prompt"><div class="prompt-label">Paste into Claude Code:</div><code>You are the patrol coordinator. Launch three parallel sub-agents using the Task tool:
+
+Task 1 - Hook Agent: cd to the Gas Town repo root, run the gt hook check, return any hooked work items as structured JSON.
+
+Task 2 - Mail Agent: Check the mayor's mail queue, return any pending messages as structured JSON.
+
+Task 3 - Health Agent: Run the pre-flight checks (Dolt server, beads DB, deacon process), return a health status object.
+
+COORDINATION RULES:
+- Before any agent writes to Dolt or beads, it must create a lockfile at /tmp/gt-resource.lock and remove it when done
+- If a lock exists, wait 5 seconds and retry (max 3 retries), then report contention
+- Collect all three TaskOutput results before deciding next action
+- If Health Agent reports red, do NOT act on Hook or Mail results—report the blocker
+- If all green, prioritize hooked work over mail, create wisps for any actionable items
+- Output a single patrol summary with: health status, items found, actions taken, items deferred</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
         </div>
       
         <div class="horizon-card">
-          <div class="horizon-title">Context-First Agent with Mandatory Think Step</div>
-          <div class="horizon-possible">Your biggest friction pattern is Claude diving into brute-force exploration or running tools instead of reasoning first—15 'wrong approach' incidents in one week. By enforcing a mandatory think-then-plan protocol, Claude would consult existing context (CLAUDE.md, project structure, previous session learnings) before touching any file or running any command. This could cut your frustrated sessions from 12 to near zero and eliminate the pattern of confidently wrong explanations followed by user corrections.</div>
-          <div class="horizon-tip"><strong>Getting started:</strong> Create a CLAUDE.md with explicit behavioral rules and use the mcp__skogai-think__think tool (which you already have installed) as a mandatory first step in every session to force structured reasoning before action.</div>
-          <div class="pattern-prompt"><div class="prompt-label">Paste into Claude Code:</div><code>IMPORTANT: Before doing ANYTHING in this session, follow this exact protocol: 1) Use the think tool to reason about what I'm asking, what could go wrong, and what context you need. 2) Read CLAUDE.md and any .beads or .gt config files in the project root to understand the architecture. 3) State your understanding of the task and your planned approach in 3-5 bullet points. 4) Ask me to confirm before executing any commands. NEVER give confident explanations about how tools work unless you've verified by reading their actual config or help output in this session. If I ask a direct question, answer it from what you know first before running exploratory commands. If you're unsure, say so. Apply this protocol now—I want to [INSERT TASK HERE].</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
+          <div class="horizon-title">Bootstrap Testing with Iterative Validation Loops</div>
+          <div class="horizon-possible">Your bootstrap simplification took many painful rounds because Claude made wrong architectural assumptions (plaintext vault passwords, unnecessary venvs, missing git credential helpers) that you had to catch manually. An autonomous test-driven bootstrap agent can spin up validation in a container or chroot, run the bootstrap, assert expected outcomes, and iterate against failures—catching architectural mistakes before you ever see them.</div>
+          <div class="horizon-tip"><strong>Getting started:</strong> Write a bootstrap acceptance test script that asserts your requirements (pacman packages installed, ansible via uv tools not venv, gh authenticated, git credential helper configured, no plaintext secrets), then have Claude iterate the bootstrap against those tests.</div>
+          <div class="pattern-prompt"><div class="prompt-label">Paste into Claude Code:</div><code>I want to validate and harden my Arch Linux bootstrap script using a test-driven approach. Here's how to proceed:
+
+1. First, Read my current bootstrap script and CLAUDE.md for architectural context
+2. Create a file called `test_bootstrap.sh` with these acceptance tests (each should exit non-zero on failure):
+   - Assert: pacman packages include base-devel, git, uv, ansible (installed via pacman, not pip)
+   - Assert: `uv tool list` shows expected tools, NO venv directories exist in the project
+   - Assert: `gh auth status` succeeds (git credential helper configured, not plaintext tokens)
+   - Assert: ansible.cfg does NOT set `become=true` globally
+   - Assert: no plaintext vault passwords exist anywhere in the repo (grep recursively)
+   - Assert: ~/.claude/settings.json has correct PATH in all hook definitions
+   - Assert: dolt is installed and `dolt version` succeeds
+   - Assert: bootstrap completes in under 60 seconds on a warm system
+3. Run the bootstrap script, then run test_bootstrap.sh
+4. For EACH failing test: fix the bootstrap script (not the test), re-run only the failing tests
+5. Iterate until all tests pass. Do NOT modify tests without asking me first.
+6. Show me a before/after diff of the bootstrap and the green test output.
+
+Key constraints: uv tools is the package strategy (no venvs), ansible runs via uv, secrets go through Bitwarden CLI only, the bootstrap should stay under 50 lines.</code><button class="copy-btn" onclick="copyText(this)">Copy</button></div>
         </div>
       
     </div>
@@ -883,8 +933,8 @@ claude -p &quot;Run patrol: check heartbeat, check gt hook, report findings. Do 
 
     
     <div class="fun-ending">
-      <div class="fun-headline">"Deacon the patrol daemon kept tripping over its own corrupted database like a guard dog tangled in its leash"</div>
-      <div class="fun-detail">Across at least 5 separate sessions, a Claude agent named 'Deacon' was asked to run a simple patrol routine (heartbeat, hook check, wisp creation), but every single time it got stuck in an endless loop trying to fix a corrupted Dolt/beads database — reinitializing, killing processes, trying --force flags — never once actually completing the patrol. The user kept coming back hoping this time would be different. It wasn't.</div>
+      <div class="fun-headline">"Claude's patrol daemon detected its own tools being uninstalled mid-shift and escalated like a digital fire alarm"</div>
+      <div class="fun-detail">During a routine patrol loop, Claude was dutifully cycling through heartbeat and hook checks when — mid-cycle 3 — it discovered that the beads-git package had been externally removed from the system, breaking all its bd operations. It recognized the extraordinary event and escalated appropriately before halting, essentially catching someone pulling the rug out from under it in real time.</div>
     </div>
     
 
@@ -930,7 +980,7 @@ claude -p &quot;Run patrol: check heartbeat, check gt hook, report findings. Do 
       }
     }
     // Timezone selector for time of day chart (data is from our own analytics, not user input)
-    const rawHourCounts = {"0":32,"2":1,"3":46,"4":9,"9":17,"20":3,"21":22,"22":6,"23":11};
+    const rawHourCounts = {"0":32,"2":7,"3":46,"4":20,"9":17,"20":40,"21":41,"22":35,"23":16};
     function updateHourHistogram(offsetFromPT) {
       const periods = [
         { label: "Morning (6-12)", range: [6,7,8,9,10,11] },

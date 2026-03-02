@@ -16,3 +16,4 @@ done
 git add -A
 git commit -m "auto-sync $TS" --no-verify || true
 git push
+claude-dotfiles push

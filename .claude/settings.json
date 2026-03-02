@@ -1,14 +1,6 @@
 {
-  "enabledMcpjsonServers": [
-    "skogai-think",
-    "skogai-arch-linux",
-    "skogai-tools"
-  ],
-  "disabledMcpjsonServers": [
-    "skogai-claude-ssh",
-    "skogai-nushell",
-    "skogai-mcp"
-  ],
+  "enabledMcpjsonServers": [],
+  "disabledMcpjsonServers": [],
   "permissions": {
     "allow": [
       "Bash(git *)",

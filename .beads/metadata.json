@@ -1,6 +1,0 @@
-{
-  "backend": "dolt",
-  "database": "dolt",
-  "dolt_database": "beads_claude",
-  "dolt_mode": "server"
-}

@@ -15,3 +15,4 @@ done
 # home repo
 git add -A
 git commit -m "auto-sync $TS" --no-verify || true
+git push

@@ -36,32 +36,61 @@
 
 **Design principle for SkogAI:** Stale context is worse than no context. Context that was true once but isn't anymore generates confident wrong answers. This is the core motivation for the fresh rebuild — no way to audit what's real vs cached ghost data in the old setup.
 
-## Next: Cache-Reality Sync Check Script
+## Fix: clog.sh readable output
 
-**Goal:** Reusable script that compares what Claude's cache "sees" vs what's actually on disk. Uses git as the trusted channel.
+**Problem:** clog.sh output is unreadable because the bare repo section is 6500+ lines of noise. Debug logs, conversation transcripts (.jsonl), tool-results, and .zsh_history dominate the `--stat` output. Single jsonl lines can be 25k+ tokens, making even the /tmp/clog.txt file impossible for Claude to read.
 
-**Approach:**
-1. User-side: generate filesystem snapshot (git ls-files + find for untracked) → commit to repo as known-good ground truth
-2. Claude-side: run same commands from cache, produce comparison output
-3. Diff the two → surface cache/reality mismatches
+**What's noise in bare repo:**
+- `.claude/debug/` — internal debug logs (thousands of lines per sync)
+- `.claude/projects/*/*.jsonl` — conversation transcripts (huge single lines)
+- `.claude/projects/*/tool-results/` — tool output blobs
+- `.claude/projects/*/subagents/` — subagent transcripts
+- `.zsh_history` — shell history
+- `snapshot-zsh-*.sh` — shell snapshots
 
-**Location:** `scripts/csync-check.sh` (or similar, fits with existing csync/cgit/clog naming)
+**What's signal in bare repo:**
+- `.claude/plans/` — plan files
+- `.claude/settings.json` — settings changes
+- `.claude/commands/` — custom commands
+- `.claude/.claude.json` — config changes
+- `.claude/plugins/` — plugin state
+- `.claude/CLAUDE.md` — instructions
 
-**Decisions:**
-- Scope: both repos (local git + bare claude-dotfiles)
-- Output: plain diff
-- Naming: `scripts/csync-check.sh` (fits csync/cgit/clog pattern)
+**Fix:** Exclude noise paths from bare repo log using git pathspec exclusions.
 
-**Implementation plan:**
-1. Script takes no args by default (checks both), optional `--local` or `--bare` flags
-2. For each repo:
-   - Run `git ls-files | sort` to get tracked file list
-   - Commit output as `projects/claude-welcome-tour/snapshots/<repo>-<timestamp>.txt`
-3. Claude runs same commands from cache, pipes to temp file
-4. Diff the committed snapshot vs cached output → plain unified diff
-5. Exit 0 if identical, exit 1 if divergent
+**File:** `scripts/clog.sh`
 
-**Verification:** Run the script, confirm it produces a diff showing any known cache/reality mismatches (like the deleted skills directories).
+**New content:**
+```bash
+#!/usr/bin/env bash
+# Show recent commits from both claude repos
+
+claude-dotfiles log --oneline --stat -20 \
+  -- ':!.claude/debug' ':!.claude/projects' ':!.zsh_history' ':!snapshot-zsh-*' \
+  >/tmp/clog.txt
+echo "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" >>/tmp/clog.txt
+git log --oneline --stat -20 >>/tmp/clog.txt
+```
+
+This keeps plan/settings/command/config changes visible while filtering out the debug/transcript/history noise. The local repo section stays unchanged since it's already clean.
+
+**Verification:** Run `./scripts/clog.sh` then read `/tmp/clog.txt` — should be well under 256KB and show meaningful changes only.
+
+## Fix: csync.sh — use `claude-dotfiles` wrapper
+
+**Context:** csync.sh still uses `./scripts/cgit.sh` for bare repo operations. Should use `claude-dotfiles` to match clog.sh and the rest of the setup. Also rsyncs `skills` dir which no longer exists.
+
+**Changes to `scripts/csync.sh`:**
+- Lines 12-14: replace `./scripts/cgit.sh` → `claude-dotfiles`
+- Line 7: remove `skills` from the rsync dir list
+
+**Verification:** Run `claude-dotfiles status` and `git status` — both clean after sync.
+
+## Update tour CLAUDE.md
+
+Record what was done, new insights about cache pollution, and updated script documentation.
+
+**File:** `projects/claude-welcome-tour/CLAUDE.md`
 
 ## Still To Explore
 

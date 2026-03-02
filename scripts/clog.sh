@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Show recent commits from both claude repos
 
-./scripts/cgit.sh log --oneline --stat -20
-git log --oneline --stat -20
+claude-dotfiles log --oneline --stat -20 >/tmp/clog.txt
+echo "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" >>/tmp/clog.txt
+git log --oneline --stat -20 >>/tmp/clog.txt

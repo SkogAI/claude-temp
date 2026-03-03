@@ -1,47 +1,67 @@
-# Plan: New Auto-Sync System
+# Plan: inotifywait → rsync → git auto-sync
 
 ## Context
 
-The current `scripts/` directory has three beta scripts (`csync.sh`, `cgit.sh`, `clog.sh`) that were proof-of-concepts. They use relative paths, chain through each other, and aren't wired to any hooks. `claude-dotfiles` in `~/.local/bin/` is another temporary wrapper.
+Claude Code holds FDs on files in `~/.claude/`, deletes+rewrites them constantly, and spawns `.backup.N` files. This means:
+- `~/.claude/` can't be a normal git repo (FD conflicts)
+- Symlinks break (delete+rewrite destroys them)
+- rsync is the only reliable snapshot mechanism
 
-We need a **new, permanent solution**: self-contained scripts that do the actual work directly (no wrapper chains), are wired into Claude Code hooks, and work from any CWD.
+Two independent repos need syncing:
+- **Bare repo** (`/mnt/sda1/claude-global.git`, work-tree: `$HOME`) — tracks raw `~/.claude/` state
+- **Normal repo** (`~/claude/`) — projects, scripts, docs + rsynced copies of some `~/.claude/` subdirs in `global/`
+
+These are NOT the same data. The bare repo is the authoritative record of `~/.claude/`. The normal repo is the project workspace.
 
 ## Architecture
 
+Three scripts, one service:
+
 ```
-~/claude/scripts/
-  csync.sh     — THE sync script. rsync + bare git + local git + push. Self-contained.
-  clog.sh      — view recent commits from both repos
-  fetch-docs.sh — download Claude Code docs for offline reference
+scripts/
+  csync-rsync.sh   — rsync ~/.claude/ → ~/claude/global/
+  csync-git.sh     — git add + commit + push for both repos
+  csync-watch.sh   — inotifywait loop, calls the above
+
+systemd/
+  csync.service    — systemd user service running csync-watch.sh
 ```
 
-Each script:
-- Uses absolute paths and inline git flags — no wrappers, no dependencies on other scripts
-- Works from any CWD
-- Is suitable as a hook target, cron job, or manual call
+## Scripts
 
-## Step 1: Create `scripts/csync.sh` (replace existing)
+### `scripts/csync-rsync.sh`
+
+Snapshots `~/.claude/` subdirs into `~/claude/global/`. Nothing else.
 
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
 
-LOCK="/tmp/csync.lock"
-exec 9>"$LOCK"
-flock -n 9 || exit 0
-
-TS=$(date +%H:%M:%S)
-
-# rsync ~/.claude/ state into ~/claude/global/
 for d in cache plans memories teams tasks projects transcripts session-env usage-data commands agents skills hooks; do
   [ -d "$HOME/.claude/$d" ] && rsync -a "$HOME/.claude/$d/" "$HOME/claude/global/$d/"
 done
+```
 
-# bare repo — tracks ~/.claude/ via /mnt/sda1/claude-global.git
-git --git-dir=/mnt/sda1/claude-global.git --work-tree="$HOME" add "$HOME/.claude/"
-git --git-dir=/mnt/sda1/claude-global.git --work-tree="$HOME" add -u
-git --git-dir=/mnt/sda1/claude-global.git --work-tree="$HOME" commit -m "auto-sync $TS" --no-verify || true
-git --git-dir=/mnt/sda1/claude-global.git --work-tree="$HOME" push || true
+### `scripts/csync-git.sh`
+
+Commits and pushes both repos. Uses flock so concurrent calls serialize.
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+LOCK="/tmp/csync-git.lock"
+exec 9>"$LOCK"
+flock 9
+
+TS=$(date +%H:%M:%S)
+BARE=/mnt/sda1/claude-global.git
+
+# bare repo — tracks ~/.claude/
+git --git-dir="$BARE" --work-tree="$HOME" add "$HOME/.claude/"
+git --git-dir="$BARE" --work-tree="$HOME" add -u
+git --git-dir="$BARE" --work-tree="$HOME" commit -m "auto-sync $TS" --no-verify || true
+git --git-dir="$BARE" --work-tree="$HOME" push || true
 
 # local repo — tracks ~/claude/
 git -C "$HOME/claude" add -A
@@ -49,104 +69,57 @@ git -C "$HOME/claude" commit -m "auto-sync $TS" --no-verify || true
 git -C "$HOME/claude" push || true
 ```
 
-No wrappers. Direct `git --git-dir=... --work-tree=...` for the bare repo. `git -C` for the local repo. `flock` prevents concurrent runs.
+Note: blocking flock (not `-n`). Concurrent calls wait instead of being dropped — every change gets versioned.
 
-## Step 2: Create `scripts/clog.sh` (replace existing)
+### `scripts/csync-watch.sh`
 
-```bash
-#!/usr/bin/env bash
-echo "=== bare repo ==="
-git --git-dir=/mnt/sda1/claude-global.git --work-tree="$HOME" log --oneline -20
-
-echo ""
-echo "=== local repo ==="
-git -C "$HOME/claude" log --oneline -20
-```
-
-## Step 3: Delete `scripts/cgit.sh`
-
-Dead script. The bare repo ops are now inline in csync.sh and clog.sh.
-
-## Step 4: Wire hooks in `.claude/settings.json`
-
-Add `hooks` key to existing project settings at `~/claude/.claude/settings.json`:
-
-```json
-"hooks": {
-  "Stop": [
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "/home/skogix/claude/scripts/csync.sh",
-          "timeout": 30
-        }
-      ]
-    }
-  ],
-  "UserPromptSubmit": [
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "/home/skogix/claude/scripts/csync.sh",
-          "timeout": 30
-        }
-      ]
-    }
-  ],
-  "SessionEnd": [
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "/home/skogix/claude/scripts/csync.sh",
-          "timeout": 30
-        }
-      ]
-    }
-  ]
-}
-```
-
-## Step 5: Create `scripts/fetch-docs.sh`
-
-Downloads all Claude Code docs from code.claude.com for offline reference:
+The watcher. Runs inotifywait in monitor mode, calls rsync then git on every event.
 
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
 
-DIR="$HOME/claude/docs/claude-code"
-mkdir -p "$DIR"
-BASE="https://code.claude.com/docs/en"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-for page in \
-  agent-teams amazon-bedrock analytics authentication best-practices \
-  changelog checkpointing chrome claude-code-on-the-web cli-reference \
-  common-workflows costs data-usage desktop desktop-quickstart \
-  devcontainer discover-plugins fast-mode features-overview \
-  github-actions gitlab-ci-cd google-vertex-ai headless hooks \
-  hooks-guide how-claude-code-works interactive-mode jetbrains \
-  keybindings legal-and-compliance llm-gateway mcp memory \
-  microsoft-foundry model-config monitoring-usage network-config \
-  output-styles overview permissions plugin-marketplaces plugins \
-  plugins-reference quickstart remote-control sandboxing security \
-  server-managed-settings settings setup skills slack statusline \
-  sub-agents terminal-config third-party-integrations troubleshooting \
-  vs-code zero-data-retention; do
-  curl -sL "$BASE/${page}.md" -o "$DIR/${page}.html"
+inotifywait -m -r -e modify,create,delete,move "$HOME/.claude/" |
+while read -r; do
+  "$SCRIPT_DIR/csync-rsync.sh"
+  "$SCRIPT_DIR/csync-git.sh"
 done
 ```
 
-## Step 6: Update `CLAUDE.md`
+### `systemd/csync.service`
 
-Update scripts and hooks sections to reflect the new setup. Remove `cgit.sh` reference.
+```ini
+[Unit]
+Description=Claude auto-sync watcher
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/skogix/claude/scripts/csync-watch.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+```
+
+Install: `systemctl --user enable --now csync.service`
+
+## Files
+
+| File | Action |
+|------|--------|
+| `scripts/csync-rsync.sh` | Create |
+| `scripts/csync-git.sh` | Create |
+| `scripts/csync-watch.sh` | Create |
+| `systemd/csync.service` | Create |
+| `scripts/fetch-docs.sh` | Already exists |
 
 ## Verification
 
-1. Run `csync.sh` from `/tmp/` — must work (absolute paths)
-2. Run `csync.sh & csync.sh` — second should exit silently (flock)
-3. Start a session — verify hooks fire on Stop and UserPromptSubmit
-4. Run `fetch-docs.sh` — verify docs land in `docs/claude-code/`
-5. Run `clog.sh` from anywhere — verify output
+1. Run `csync-rsync.sh` — check `~/claude/global/` has fresh copies
+2. Run `csync-git.sh` — check both repos have new commits
+3. Run `csync-watch.sh` — touch a file in `~/.claude/`, verify commit appears
+4. `systemctl --user start csync.service` — verify it stays running and syncs on changes

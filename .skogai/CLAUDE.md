@@ -11,12 +11,15 @@ one place to see everything, remember everything, plan everything.
 
 <structure>
 
-@knowledge/ # documented decisions, learnings, patterns
-@memory/ # session context, decision log
-@projects/ # other project tracking and overview
-@inbox/ # quick capture
-@templates/ # starter templates for new content
-@scripts/ # argc-powered bash scripts
+@knowledge/  # documented decisions, learnings, patterns
+@memory/     # session context, decision log, current work
+@plan/       # planning docs and roadmaps
+@projects/   # project tracking and overview
+@scripts/    # argc-powered bash scripts
+@tasks/      # task tracking
+@templates/  # starter templates for new content
+@tools/      # tool configs and wrappers
+@workflows/  # repeatable step-by-step procedures
 
 </structure>
 
@@ -33,18 +36,6 @@ source "$(dirname "$0")/skogai-helper-functions.sh"
 </commands>
 
 <architecture>
-
-**Modes of Operation:**
-
-- **Dogfooding**: symlink `.skogai -> /home/skogix/.skogai` with `.git/info/exclude`
-- **Consumer**: git submodule on project-specific branch
-
-**Detection:**
-
-```bash
-file .skogai  # symbolic link = dogfooding, directory = submodule
-file .git     # directory = real repo, ASCII text = submodule
-```
 
 **Script Framework:** Uses argc for declarative CLI definition:
 
@@ -74,15 +65,20 @@ See @knowledge/learnings/2026-01-20-at-file-reference.md for details.
 
 <where_to_look>
 
-| task                          | location             |
-| ----------------------------- | -------------------- |
-| log a decision                | memory/decisions.md  |
-| document a learning           | knowledge/learnings/ |
-| record architectural decision | knowledge/decisions/ |
-| capture reusable pattern      | knowledge/patterns/  |
-| track project status          | projects/overview.md |
-| quick capture                 | inbox/               |
-| create new content            | templates/           |
+| task                          | location              |
+| ----------------------------- | --------------------- |
+| what are we working on now    | memory/context/current.md |
+| log a decision                | memory/decisions.md   |
+| document a learning           | knowledge/learnings/  |
+| record architectural decision | knowledge/decisions/  |
+| capture reusable pattern      | knowledge/patterns/   |
+| track project status          | projects/overview.md  |
+| track tasks                   | tasks/                |
+| plan something                | plan/                 |
+| quick capture                 | inbox/                |
+| create new content            | templates/            |
+| reusable procedures           | workflows/            |
+| tool configs / wrappers       | tools/                |
 
 </where_to_look>
 

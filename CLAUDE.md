@@ -24,5 +24,5 @@ This is where SkogAI builds itself.
 <rules>
 - This repo tracks Claude's own development — treat it as first-class
 - Changes here affect every future session — think before writing
-- The .skogai/ symlink points to the global knowledge base — use it
+- .skogai/ is the project knowledge base — see @.skogai/CLAUDE.md
 </rules>

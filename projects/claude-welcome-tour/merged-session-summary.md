@@ -39,18 +39,17 @@ User gave six numbered directives:
 - User created `.gitignore` (adding `/tmp` and `/.claude/settings.local.json`)
 
 ### Phase 6: Dual-git architecture exploration
-- User introduced git wrappers: `claude-dotfiles` for bare repo, regular `git` for local, `skogai-dotfiles` exists but unexplored
-- Claude explored both repos using proper wrappers:
-  - **Local repo** (`git`): ~7,365 tracked files, curated content, auto-sync commits
-  - **Bare repo** (`claude-dotfiles`): tracks debug telemetry, every user message verbatim, full conversation transcripts (including thinking blocks with crypto signatures), shell history, screen dimensions, API handshakes, permission decisions, plugins, settings, plans
-- Both synced via `csync.sh` on every `UserPromptSubmit` hook
+- Claude explored both repos:
+  - **Local repo** (`git` in `~/claude/`): ~7,365 tracked files, curated content, auto-sync commits
+  - **Bare repo** (`/mnt/sda1/claude-global.git`, work-tree `$HOME`): tracks debug telemetry, every user message verbatim, full conversation transcripts (including thinking blocks with crypto signatures), shell history, screen dimensions, API handshakes, permission decisions, plugins, settings, plans
+- Both synced via csync scripts on every `UserPromptSubmit` hook
 
 ### Phase 7: Script fix planning
 - User had made changes to the plan file and to `clog.sh` during a break
-- Claude noticed `csync.sh` still uses `cgit.sh` instead of `claude-dotfiles`
+- Claude noticed `csync.sh` still uses `cgit.sh` instead of `bare repo`
 - Three implementation tasks were planned in the plan file:
   1. Fix `clog.sh` — add pathspec exclusions to filter bare repo noise
-  2. Fix `csync.sh` — switch from `cgit.sh` to `claude-dotfiles`, remove stale `skills` from rsync
+  2. Fix `csync.sh` — switch from `cgit.sh` to `bare repo`, remove stale `skills` from rsync
   3. Update tour CLAUDE.md with progress
 
 ### Phase 8: Blocked on git sync
@@ -62,16 +61,15 @@ User gave six numbered directives:
 - Claude created a 97-line `csync-check.sh` script with flags/subcommands when user asked for a simple diff — user denied rewrites multiple times
 - A 7736-line tool-results file (`bisf9iew9.txt`) from the failed script was synced into local repo, making `/diff` choke. Located at `global/projects/-home-skogix-claude/7879c7bc-abb6-4432-8022-25a59da10510/tool-results/bisf9iew9.txt` — still needs deleting
 - Discovered git diff format details: `i/`/`w/` prefixes (not `a/`/`b/`) come from `diff.mnemonicPrefix = true`. `i/` = index, `w/` = working tree
-- In `claude-dotfiles diff` output, `[32m` (green) = new since last csync, uncolored = already committed
+- In `bare repo diff` output, `[32m` (green) = new since last csync, uncolored = already committed
 
 ---
 
 ## 2. Key Technical Concepts
 
-- **Dual-git architecture**: Local repo (`git` in `~/claude/`) for curated content + bare repo (`claude-dotfiles`, git-dir `/mnt/sda1/claude-global.git`, work-tree `$HOME`) for raw CLI runtime observability
+- **Dual-git architecture**: Local repo (`git` in `~/claude/`) for curated content + bare repo (git-dir `/mnt/sda1/claude-global.git`, work-tree `$HOME`) for raw CLI runtime observability
 - **Cache pollution**: Claude's Anthropic-side cache serves deleted files as current. Only way to verify: explicit `rm` + Read tool. User cannot see the cache — only Claude can
-- **Git wrappers**: `claude-dotfiles` (bare repo), `git` (local repo), `skogai-dotfiles` (~/skogai/, not yet explored)
-- **csync.sh**: Auto-commits both repos on every `UserPromptSubmit` hook. Rsyncs `~/.claude/` dirs to `./global/`
+- **csync scripts**: Auto-commit both repos on every `UserPromptSubmit` hook. Rsyncs `~/.claude/` dirs to `./global/`
 - **Context routing philosophy**: "Routing over dumping" — minimal boot that detects session type and loads on demand (~10k right tokens vs 50k dump). "Stale context is worse than no context"
 - **Plan mode**: Read-only from user's side, lets Claude make changes that only flow to disk on exit
 - **Conventions**: `@path` notation (read this file), `.list` files (append-only), no confirmation-seeking questions, orchestrator role, archaeology before generation, ~500 token explanation limit
@@ -97,36 +95,8 @@ User gave six numbered directives:
 | `~/claude/projects/skogai-core/` | Plugin scaffold |
 | Failed `csync-check.sh` and its artifacts (snapshots/, /tmp files) | Overengineered script |
 
-### Scripts (need fixes)
-```bash
-# scripts/csync.sh — NEEDS: cgit.sh → claude-dotfiles, remove "skills" from dir list
-#!/usr/bin/env bash
-TS="$(date +%H:%M:%S)"
-for dir in cache plans memories teams tasks projects transcripts session-env usage-data commands agents skills hooks; do
-  [ -d ~/.claude/$dir ] && rsync -a ~/.claude/$dir/ ./global/$dir/
-done
-./scripts/cgit.sh add ~/.claude/
-./scripts/cgit.sh add -u
-./scripts/cgit.sh commit -m "auto-sync $TS" --no-verify || true
-git add -A
-git commit -m "auto-sync $TS" --no-verify || true
-git push
-claude-dotfiles push
-```
-
-```bash
-# scripts/clog.sh — user partially updated, needs pathspec exclusions
-#!/usr/bin/env bash
-claude-dotfiles log --oneline --stat -20 >/tmp/clog.txt
-echo "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" >>/tmp/clog.txt
-git log --oneline --stat -20 >>/tmp/clog.txt
-```
-
-```bash
-# scripts/cgit.sh — being replaced by claude-dotfiles wrapper
-#!/usr/bin/env bash
-exec git --git-dir="/mnt/sda1/claude-global.git" --work-tree="/home/skogix" "$@"
-```
+### Scripts (refactored by user)
+Scripts were refactored into `csync-rsync.sh`, `csync-git.sh`, `csync-watch.sh`. Old `csync.sh`, `clog.sh`, `cgit.sh` deleted.
 
 ### Bloating file (still needs deleting)
 `global/projects/-home-skogix-claude/7879c7bc-abb6-4432-8022-25a59da10510/tool-results/bisf9iew9.txt` — 7736-line tool-results file from the failed csync-check script
@@ -148,7 +118,7 @@ exec git --git-dir="/mnt/sda1/claude-global.git" --work-tree="/home/skogix" "$@"
 | Overengineered csync-check.sh | 97 lines with flags/subcommands when a simple diff was asked for | User denied rewrites multiple times; script eventually deleted |
 | Plan file edit conflict | "File has been modified since read" — user edited between reads | Re-read and re-applied the edit |
 | ExitPlanMode rejected twice | User needed git sync first | Waited; user exited session |
-| `claude-dotfiles ls-files` returned 0 | Bare repo index behavior — not a real error | Used `log --name-only` instead |
+| Bare repo `ls-files` returned 0 | Bare repo index behavior — not a real error | Used `log --name-only` instead |
 | Patronizing explanations | Explained things the user built | User feedback: stop doing this |
 | `tree ~ > /tmp/a` literally | Ran expensive command when user was explaining a concept | User frustration |
 | Brevity failure | User was on mobile — needed short responses | Learned: context matters |
@@ -170,12 +140,8 @@ exec git --git-dir="/mnt/sda1/claude-global.git" --work-tree="/home/skogix" "$@"
 
 ## 6. Still To Do
 
-- [ ] Implement clog.sh fix (add pathspec exclusions: `:!.claude/debug` `:!.claude/projects` `:!.zsh_history` `:!snapshot-zsh-*`)
-- [ ] Fix csync.sh (cgit.sh → claude-dotfiles, remove `skills` from rsync dir list)
 - [ ] Delete the bloating tool-results file (`bisf9iew9.txt`)
-- [ ] Update root CLAUDE.md to remove references to deleted skills/skogai-core
-- [ ] Update projects/claude-welcome-tour/CLAUDE.md with current state
-- [ ] Set up ~/skogai/ and explore skogai-dotfiles
+- [ ] Set up ~/skogai/
 - [ ] Clarify or remove rtk/beads/br references
 - [ ] Explore .skogai/todo/ (archived project docs, bin scripts)
 - [ ] Check skogapi/ status

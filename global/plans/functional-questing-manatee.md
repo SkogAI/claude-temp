@@ -7,19 +7,18 @@
 - Projects, global/ symlinks, scripts, .skogai/ context
 - Bulk comes from global/projects/ (conversation transcripts) and global/usage-data/
 
-**Bare repo** (`claude-dotfiles`, git-dir `/mnt/sda1/claude-global.git`, work-tree `$HOME`):
+**Bare repo** (git-dir `/mnt/sda1/claude-global.git`, work-tree `$HOME`):
 - Raw observability of everything Claude CLI writes at runtime
 - Tracks: .claude/debug/, history.jsonl, projects/*.jsonl, plugins/, settings, plans, shell-snapshots
 - Also tracks .zsh_history
-- csync.sh auto-commits both repos on every message (UserPromptSubmit hook)
+- csync scripts auto-commit both repos on every message (UserPromptSubmit hook)
 
 **Key insight**: local repo = curated, bare repo = raw runtime. Both stay in lockstep via csync.
 
-## Git Wrappers
+## Git Repos
 
-- `claude-dotfiles` — use for bare repo operations (replaces cgit.sh)
-- `git` — use for local ~/claude/ repo
-- `skogai-dotfiles` — exists but not yet explored (for ~/skogai/ presumably)
+- **Bare repo** — accessed via inline `git --git-dir=... --work-tree=...` in `csync-git.sh`
+- **Local repo** (`~/claude/`) — regular `git`
 
 ## Cleanup Done
 
@@ -58,33 +57,9 @@
 
 **Fix:** Exclude noise paths from bare repo log using git pathspec exclusions.
 
-**File:** `scripts/clog.sh`
+**Status:** Scripts have been refactored by user into `csync-rsync.sh`, `csync-git.sh`, `csync-watch.sh`. Old `csync.sh`, `clog.sh`, `cgit.sh` deleted. The `csync-git.sh` uses inline `git --git-dir=... --work-tree=...` for bare repo operations.
 
-**New content:**
-```bash
-#!/usr/bin/env bash
-# Show recent commits from both claude repos
-
-claude-dotfiles log --oneline --stat -20 \
-  -- ':!.claude/debug' ':!.claude/projects' ':!.zsh_history' ':!snapshot-zsh-*' \
-  >/tmp/clog.txt
-echo "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" >>/tmp/clog.txt
-git log --oneline --stat -20 >>/tmp/clog.txt
-```
-
-This keeps plan/settings/command/config changes visible while filtering out the debug/transcript/history noise. The local repo section stays unchanged since it's already clean.
-
-**Verification:** Run `./scripts/clog.sh` then read `/tmp/clog.txt` — should be well under 256KB and show meaningful changes only.
-
-## Fix: csync.sh — use `claude-dotfiles` wrapper
-
-**Context:** csync.sh still uses `./scripts/cgit.sh` for bare repo operations. Should use `claude-dotfiles` to match clog.sh and the rest of the setup. Also rsyncs `skills` dir which no longer exists.
-
-**Changes to `scripts/csync.sh`:**
-- Lines 12-14: replace `./scripts/cgit.sh` → `claude-dotfiles`
-- Line 7: remove `skills` from the rsync dir list
-
-**Verification:** Run `claude-dotfiles status` and `git status` — both clean after sync.
+**Remaining:** `csync-rsync.sh` still lists `skills` in the rsync dir list (harmless — guarded by `[ -d ]` check, but stale).
 
 ## Update tour CLAUDE.md
 
@@ -94,7 +69,7 @@ Record what was done, new insights about cache pollution, and updated script doc
 
 ## Still To Explore
 
-- ~/skogai/ and skogai-dotfiles — will set up together
+- ~/skogai/ — will set up together
 - rtk, beads/br — clarify or remove references
 - .skogai/ contents — "probably doesn't make sense yet"
 - skogapi/ — FastAPI service, status unknown

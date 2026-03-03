@@ -8,10 +8,10 @@ Intelligent context routing for Claude Code sessions — get the *right* context
 
 ## What Exists Now
 
-- `scripts/csync.sh` — auto-commit hook (needs fix: still uses `cgit.sh`, should use `claude-dotfiles`)
-- `scripts/clog.sh` — log viewer (partially updated by user, needs pathspec exclusions)
-- `scripts/cgit.sh` — legacy bare repo wrapper (replaced by `claude-dotfiles`)
-- `global/` — symlinks into ~/.claude/ (settings, projects, plans, todos, plugins, exclude)
+- `scripts/csync-rsync.sh` — snapshots `~/.claude/` → `~/claude/global/`
+- `scripts/csync-git.sh` — commits and pushes both repos (blocking flock)
+- `scripts/csync-watch.sh` — inotifywait loop calling rsync then git
+- `global/` — rsynced copies of `~/.claude/` subdirs
 - `projects/skogapi/` — FastAPI service (routing data, agents, config). Status unknown.
 - `projects/skogai-context/` — planning docs for the context routing system. Not implemented.
 - `projects/newinstall/` — post-archinstall setup docs.
@@ -28,9 +28,9 @@ Intelligent context routing for Claude Code sessions — get the *right* context
 
 **Cache pollution is the core problem.** Anthropic's cache serves deleted files as current. Skills deleted weeks ago were read as real during /init. Only Claude can see the cache — user cannot audit it. Fix: explicit delete + Read tool verification.
 
-**Bare repo is live and thorough.** `claude-dotfiles diff` revealed Claude Code records: debug telemetry, every user message verbatim, full conversation transcripts (including thinking blocks with crypto signatures), shell history, screen dimensions, API handshakes, permission decisions. All committed by csync on every message.
+**Bare repo is live and thorough.** The bare repo (`/mnt/sda1/claude-global.git`, work-tree `$HOME`) records: debug telemetry, every user message verbatim, full conversation transcripts (including thinking blocks with crypto signatures), shell history, screen dimensions, API handshakes, permission decisions. All committed by csync on every message.
 
-**Bare repo log is noisy.** Raw `claude-dotfiles log --stat` produces 6500+ lines of noise (debug, transcripts, tool-results, zsh_history). Needs pathspec exclusions.
+**Bare repo log is noisy.** Raw bare repo `git log --stat` produces 6500+ lines of noise (debug, transcripts, tool-results, zsh_history). Needs pathspec exclusions.
 
 **Bloating file still exists.** `global/projects/-home-skogix-claude/7879c7bc-abb6-4432-8022-25a59da10510/tool-results/bisf9iew9.txt` — 7736-line tool-results file from the overengineered csync-check script. Makes `/diff` choke.
 
@@ -40,7 +40,7 @@ Intelligent context routing for Claude Code sessions — get the *right* context
 
 - **rtk** — command rewrite hook (`global/hooks/rtk-rewrite.sh`). What is it?
 - **beads/br** — issue tracking referenced in /wrapup command. What is it?
-- **~/skogai/** — external repo, managed via `skogai-dotfiles`. Will set up together.
+- **~/skogai/** — external repo. Will set up together.
 - **soul document** — identity layer referenced in skogai-context planning.
 
 ## Design Principles
@@ -59,7 +59,7 @@ Intelligent context routing for Claude Code sessions — get the *right* context
 3. [x] Cleanup — deleted stale skills, skogai-core, ~/.claude/skills/
 4. [x] Dual-git exploration — mapped both repos via proper wrappers
 5. [x] Root CLAUDE.md updated — removed stale skills/skogai-core refs, added git wrappers, cache warning
-6. [ ] Fix scripts — clog.sh (pathspec exclusions), csync.sh (cgit.sh → claude-dotfiles, remove skills from rsync)
+6. [x] Fix scripts — user refactored into csync-rsync.sh, csync-git.sh, csync-watch.sh
 7. [ ] Delete bloating tool-results file (bisf9iew9.txt)
 8. [ ] Set up ~/skogai and explore skogai-dotfiles
 9. [ ] Clarify or remove stale references (rtk, beads/br, soul document)

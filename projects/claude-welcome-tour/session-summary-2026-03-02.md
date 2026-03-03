@@ -18,37 +18,31 @@ Fresh rebuild of SkogAI. User and Claude exploring the dual-git architecture tog
 
 **Cache pollution is the core problem.** Claude's Anthropic-side cache serves deleted files as current. Skills deleted weeks ago were read as real during /init. No way to audit cache vs reality from user's side — only Claude can see the cache.
 
-**Bare repo observability is thorough.** `claude-dotfiles diff` revealed that Claude Code records: debug telemetry, every user message verbatim, full conversation transcripts (including thinking blocks with crypto signatures), shell history, screen dimensions, API handshakes, permission decisions. All committed by csync on every message.
+**Bare repo observability is thorough.** The bare repo records: debug telemetry, every user message verbatim, full conversation transcripts (including thinking blocks with crypto signatures), shell history, screen dimensions, API handshakes, permission decisions. All committed by csync on every message.
 
 **The `/diff` size problem.** A 7736-line tool-results file (`bisf9iew9.txt`) from the failed csync-check script was being synced into the local repo, making Claude Code's `/diff` command choke. File lives at `global/projects/-home-skogix-claude/7879c7bc-abb6-4432-8022-25a59da10510/tool-results/bisf9iew9.txt` — still needs deleting.
 
 **Git diff format details.** The `i/` and `w/` prefixes (instead of `a/`/`b/`) come from `diff.mnemonicPrefix = true` in git config. `i/` = index (committed state), `w/` = working tree (current disk). The funcname heuristic in `@@` headers grabs random nearby lines for non-code files like zsh_history.
 
-**Color codes as provenance.** In `claude-dotfiles diff` output, `[32m` (green) lines = new since last csync. Uncolored = already committed/on Anthropic's side.
+**Color codes as provenance.** In bare repo diff output, `[32m` (green) lines = new since last csync. Uncolored = already committed/on Anthropic's side.
 
-### Plan: Fix clog.sh
+### Plan: Filter bare repo log noise
 
-**Problem:** Bare repo section of clog.sh output is 6500+ lines of noise (debug, transcripts, tool-results, zsh_history).
+**Problem:** Bare repo log output is 6500+ lines of noise (debug, transcripts, tool-results, zsh_history).
 
-**Fix:** Add git pathspec exclusions to bare repo log:
-```bash
-claude-dotfiles log --oneline --stat -20 \
-  -- ':!.claude/debug' ':!.claude/projects' ':!.zsh_history' ':!snapshot-zsh-*' \
-  >/tmp/clog.txt
+**Fix:** Add git pathspec exclusions to bare repo log commands:
 ```
-This was planned and approved but not yet implemented.
+-- ':!.claude/debug' ':!.claude/projects' ':!.zsh_history' ':!snapshot-zsh-*'
+```
+Scripts have since been refactored into `csync-rsync.sh`, `csync-git.sh`, `csync-watch.sh`.
 
-## Git Wrappers (use these, not raw commands)
-- `claude-dotfiles` — bare repo (`/mnt/sda1/claude-global.git`, work-tree `$HOME`)
-- `git` — local repo (`~/claude/`)
-- `skogai-dotfiles` — exists, not yet explored
+## Git Repos
+- **Bare repo** (`/mnt/sda1/claude-global.git`, work-tree `$HOME`) — accessed via inline `git --git-dir=... --work-tree=...` in `csync-git.sh`
+- **Local repo** (`~/claude/`) — regular `git`
 
 ## Still To Do
-- [ ] Implement clog.sh fix (approved plan, not yet written)
 - [ ] Delete the bloating tool-results file (`bisf9iew9.txt`)
-- [ ] Update root CLAUDE.md to remove references to deleted skills/skogai-core
-- [ ] Update projects/claude-welcome-tour/CLAUDE.md with current state
-- [ ] Set up ~/skogai/ and explore skogai-dotfiles
+- [ ] Set up ~/skogai/
 - [ ] Clarify or remove rtk/beads/br references
 - [ ] Explore .skogai/todo/ (archived project docs, bin scripts)
 - [ ] Check skogapi/ status

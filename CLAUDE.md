@@ -1,36 +1,5 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-## What This Repo Is
-
-Meta-system for Claude Code collaboration and observability. Tracks `~/.claude/` runtime state, houses projects, and codifies working conventions between Skogix and Claude.
-
-## Architecture
-
-**Dual git repos:**
-- **Home repo** (this repo, `~/claude/`) — projects, docs, scripts, rsynced `~/.claude/` copies in `global/`
-- **Bare repo** (`/mnt/sda1/claude-global.git`, work tree: `$HOME`) — tracks raw `~/.claude/` state. NOT the same data as home repo.
-
-**`global/`** — rsynced copies of `~/.claude/` subdirs (NOT symlinks — Claude Code deletes+rewrites files, destroying symlinks). Updated by `csync-rsync.sh`.
-
-**`projects/`** — active project source:
-- `skogapi/` — FastAPI service exposing routing data, agents, config, services (`uvicorn projects.skogapi.main:app`)
-- `skogai-context/` — context management planning docs (not yet implemented)
-- `newinstall/` — post-archinstall setup documentation
-
-**`scripts/`:**
-- `csync-rsync.sh` — snapshots `~/.claude/` → `~/claude/global/`
-- `csync-git.sh` — commits and pushes both repos (blocking flock)
-- `csync-watch.sh` — inotifywait loop calling rsync then git
-- `fetch-docs.sh` — downloads Claude Code docs to `docs/claude-code/`
-
-**Auto-sync:** `systemctl --user status skogai-git-inotify` — inotifywait watches `~/.claude/`, triggers rsync → git on every file change. No debouncing — every change is a commit.
-
-**Why rsync, not symlinks or direct git:** Claude Code holds FDs on `~/.claude/` files, deletes+rewrites them constantly, and spawns `.backup.N` files. rsync snapshots to a clean location for safe git operations.
-
-**`.skogai/`** — local context: RULES.md, DECISIONS.md, email system, journal entries, todo archive
-
 ## Conventions
 
 - **Cache pollution:** Anthropic's cache can serve deleted files as current. Always verify file existence with Read tool before documenting or referencing. If a file was recently deleted, re-read it to confirm.

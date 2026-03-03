@@ -84,17 +84,18 @@ export CLAUDE_CONFIG_DIR="/home/skogix/.claude"
 # --resume="claude-code-settings-and-envs" \
 # --system-prompt="" \
 claude \
-  --worktree="claude-code-settings-and-envs" \
+  --worktree="claude-worktree-1" \
   --setting-sources="project" \
   --settings="/home/skogix/.claude/settings.json" \
   --plugin-dir="/home/skogix/.local/src/marketplace" \
-  --permission-mode="plan" \
+  --permission-mode="bypassPermissions" \
   --mcp-config="/home/skogix/skogai/config/mcp.json" \
-  --effort="high" \
+  --effort="low" \
   --disallowed-tools="NotebookEdit Computer WebSearch WebFetch" \
   --append-system-prompt='[$claude]hi claude![$/claude]' \
   --add-dir="/home/skogix/skogai" \
-  --model="claude-opus-4-6" \
+  --model="sonnet" \
+  --dangerously-skip-permissions \
   --strict-mcp-config \
   --no-chrome \
   --tmux

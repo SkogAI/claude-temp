@@ -6,15 +6,14 @@ exec 9>"$LOCK"
 flock 9
 
 TS=$(date +%H:%M:%S)
-BARE=/mnt/sda1/claude-global.git
 
 # bare repo — tracks ~/.claude/
-git --git-dir="$BARE" --work-tree="$HOME" add "$HOME/.claude/"
-git --git-dir="$BARE" --work-tree="$HOME" add -u
-git --git-dir="$BARE" --work-tree="$HOME" commit -m "auto-sync $TS" --no-verify || true
-git --git-dir="$BARE" --work-tree="$HOME" push || true
+git --git-dir="/mnt/sda1/claude-global.git" --work-tree="/home/skogix" add "$HOME/.claude/"
+git --git-dir="/mnt/sda1/claude-global.git" --work-tree="/home/skogix" add -u
+git --git-dir="/mnt/sda1/claude-global.git" --work-tree="/home/skogix" commit -m "auto-sync $TS" --no-verify
+git --git-dir="/mnt/sda1/claude-global.git" --work-tree="/home/skogix" push
 
 # local repo — tracks ~/claude/
-git -C "$HOME/claude" add -A
-git -C "$HOME/claude" commit -m "auto-sync $TS" --no-verify || true
-git -C "$HOME/claude" push || true
+git -C "/home/skogix/claude" add -A
+git -C "/home/skogix/claude" commit -m "auto-sync $TS" --no-verify || true
+git -C "/home/skogix/claude" push || true

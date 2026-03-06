@@ -24,8 +24,9 @@ docs/
   claude-code/    # gitignored fetched docs (run fetch-docs.sh to populate)
 .skogai/
   knowledge/      # decisions/, learnings/, patterns/style/ — accumulated conventions
-  context/        # current.md — generated from journal + decisions (not manually edited)
-  decisions.md    # append-only quick decision log
+  memory/
+    context/current.md  # generated from journal + decisions
+    decisions.md        # append-only quick decision log
 projects/         # planning overviews for active workstreams
 .claude/
   settings.schema.example.json  # reference for settings.json structure

@@ -158,6 +158,13 @@
         "source": "directory",
         "path": "/home/skogix/claude/marketplaces/worktrunk"
       }
+    },
+    "skogai-marketplace": {
+      "source": {
+        "source": "git",
+        "url": "git@github.com:SkogAI/marketplace.git"
+      },
+      "autoUpdate": true
     }
   },
   "spinnerTipsEnabled": true,

@@ -20,5 +20,5 @@ for page in \
   sub-agents terminal-config third-party-integrations troubleshooting \
   vs-code zero-data-retention; do
   echo "$page"
-  curl -sL "$BASE/${page}.md" -o "$DIR/$page.html"
+  curl -sL "$BASE/${page}.md" -o "$DIR/$page.md"
 done

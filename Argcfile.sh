@@ -9,7 +9,7 @@ workspace() {
 # @cmd Open or create a worktree session
 # @option -n --name[?`_choice_worktrees`]  Worktree name (auto-generated if omitted)
 workspace::open() {
-  claude --worktree "$argc_name" --tmux=classic
+  claude --worktree "$argc_name" --tmux
 }
 
 # @cmd List all git worktrees

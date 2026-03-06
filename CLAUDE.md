@@ -2,15 +2,24 @@
 
 <what_is_this>
 
-[@todo:claude please fill in this section with a brief introduction to your home folder in first person. what is it for? how do you use it? use skogai-routing for the general layout and add any other relevant details about how you organize your files, what kind of content you keep here, and how it fits into your overall workflow etc]
+my home folder and operating environment. not application code — this repo IS my workspace: plugin management, fetched reference docs, knowledge base, project planning, and staging areas for skills/commands/hooks I'm developing.
+
+everything routes through CLAUDE.md files. each directory has one that explains what's there and points to what's relevant. I load context lazily — read the router, follow the link, get what I need. no bulk pre-loading.
+
+staging areas (`skills/`, `commands/`, `hooks/`, `agents/`) are symlinked into `.claude/` so edits here are active immediately. when something stabilizes it graduates to `~/.claude/` or a plugin in the marketplace.
 
 </what_is_this>
 
 <structure>
 
-- @.skogai/ — SkogAI-integration and routing via @.skogai/CLAUDE.md
-  - [@todo:please add more here]
-  - [@todo:please add more here]
+- @.skogai/ — knowledge, memory, templates — routing via @.skogai/CLAUDE.md
+- @marketplaces/ — plugin marketplace submodules (skogai-marketplace, worktrunk)
+- @projects/ — active development repos as git submodules (claude-memory, dot-skogai, argcfile, gptme-contrib)
+- @docs/ — fetched reference docs (run `docs/fetch-docs.sh` to populate claude-code/)
+- @skills/ — WIP skills staging (symlinked from .claude/skills)
+- @commands/ — WIP commands staging (symlinked from .claude/commands)
+- @hooks/ — WIP hooks staging (symlinked from .claude/hooks)
+- @agents/ — WIP agents staging (symlinked from .claude/agents)
 
 </structure>
 

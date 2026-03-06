@@ -121,6 +121,7 @@ Follow this style: type(scope): brief description, then detailed explanation.
   </when_to_use>
   </examples_pattern>
 
+<consistent_terminology>
 <principle>
 Choose one term and use it throughout the skill. Inconsistent terminology confuses Claude and reduces execution quality.
 </principle>

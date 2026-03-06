@@ -54,7 +54,7 @@ Currently installed: `superpowers@superpowers-dev` v4.3.1.
 | need to know about... | read |
 |---|---|
 | plugins, skills, hooks, MCP tools | @marketplaces/CLAUDE.md |
-| style conventions, naming, XML tags | @.skogai/knowledge/patterns/style/SKOGAI.md |
+| style conventions, naming, XML tags | @.skogai/knowledge/patterns/style/CLAUDE.md |
 | commit format and git rules | @.skogai/knowledge/patterns/style/commit-conventions.md |
 | current work state | @.skogai/memory/context/current.md (generated — run `skogai context refresh`) |
 | quick decisions log | @.skogai/memory/decisions.md |

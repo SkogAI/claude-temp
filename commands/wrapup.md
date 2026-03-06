@@ -15,26 +15,26 @@ consolidated report at the end.
 
 **task sync:**
 
-1. run `GPTODO_TASKS_DIR=/home/skogix/claude/.skogai/tasks gptodo fetch --all`
+1. run !`gptodo fetch --all`
    to refresh external issue states
-2. run `GPTODO_TASKS_DIR=/home/skogix/claude/.skogai/tasks gptodo list` to
+2. run !`gptodo list` to
    check for stale in-progress tasks — update completed ones with
    `gptodo edit <task> --state done`
 
 **commit:**
 
-3. run `git status` in each repo directory that was touched during the session
-4. if uncommitted changes exist, auto-commit with a descriptive message
-5. push to remote
+1. run !`git status` in each repo directory that was touched during the session
+2. if uncommitted changes exist, auto-commit with a descriptive message
+3. push to remote
 
 **worktree cleanup:**
 
-6. run `wt list` to check for worktrees that are done — merge completed ones
+1. run !`wt list` to check for worktrees that are done — merge completed ones
    with `wt merge` and remove with `wt remove`
 
 **file placement check:**
 
-7. if any files were created or saved during this session:
+1. if any files were created or saved during this session:
    - verify they follow the project naming convention
    - auto-fix naming violations (rename the file)
    - could this file be merged into an existing one instead?
@@ -131,7 +131,7 @@ findings (applied):
 
 no action needed:
 
-4. knowledge: discovered x works this way
+1. knowledge: discovered x works this way
    already documented in claude.md
 
 ## phase 4: journal it
@@ -146,14 +146,14 @@ worth preserving. look for:
 
 **if journal-worthy material exists:**
 
-draft the entry and save to `!`echo $SKOGAI_CLAUDE_HOME`/journal/yyyy-mm-dd/<description>.md`
+draft the entry and save to `!`echo $SKOGAI_CLAUDE_HOME`/.skogai/journal/yyyy-mm-dd/<description>.md`
 
 present the draft location in the report:
 
 all wrap-up steps complete. journal entry saved:
 
 1. "title" — 1-2 sentence description.
-   saved to: journal/2026-02-20/sniffing-claudes-context-window.md
+   saved to: .skogai/journal/2026-02-20/sniffing-claudes-context-window.md
 
 **if nothing journal-worthy:**
 

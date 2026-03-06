@@ -151,13 +151,14 @@
     "claude-code-setup@claude-plugins-official": false,
     "github@claude-plugins-official": true,
     "worktrunk@worktrunk": true,
-    "claude-memory@skogai-marketplace": true,
-    "core@skogai-marketplace": false,
     "feature-dev@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
     "plugin-dev@claude-plugins-official": false,
-    "skill-creator@claude-plugins-official": false
+    "skill-creator@claude-plugins-official": false,
+    "core@skogai-marketplace": true,
+    "dreamers@skogai-marketplace": true,
+    "claude-memory@skogai-marketplace": true
   },
   "extraKnownMarketplaces": {
     "worktrunk": {
@@ -170,8 +171,7 @@
       "source": {
         "source": "git",
         "url": "git@github.com:SkogAI/marketplace.git"
-      },
-      "autoUpdate": true
+      }
     }
   },
   "spinnerTipsEnabled": true,

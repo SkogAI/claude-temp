@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 name: skogai-routing
 description: Use when creating or modifying Claude Code skills. Especially when building router patterns, writing workflows for subagents, or using @-references to pass context across agent boundaries.
@@ -221,9 +220,11 @@ A well-structured routing skill:
   </success_criteria>
 ||||||| d49ae0a
 =======
+
 ---
+
 name: skogai-routing
-description: Use when creating or modifying Claude Code skills. Especially when building router patterns, writing workflows for subagents, or using @-references to pass context across agent boundaries.
+description: Use when creating or modifying Claude Code skills. Especially when building router patterns, writing workflows for subagents, or using @-references to pass context across agent boundaries
 ---
 
 <essential_principles>
@@ -440,5 +441,4 @@ A well-structured routing skill:
 - Has been tested with real usage and actually helps
 - Grows organically as new patterns emerge
 - Improves over time by naturally showing the most used paths
-  </success_criteria>
->>>>>>> master
+</success_criteria>

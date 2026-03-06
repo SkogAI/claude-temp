@@ -3,7 +3,7 @@
 <what_is_this>
 
 tool-agnostic AI integration layer. not application code.
-knowledge base, memory, templates, and session notes for AI-augmented development.
+knowledge base, memory, templates, tasks, session journal, and inbox for AI-augmented development.
 
 </what_is_this>
 
@@ -26,6 +26,9 @@ knowledge base, memory, templates, and session notes for AI-augmented developmen
 | record a learning / insight | @knowledge/learnings/ + @templates/knowledge-entry.md |
 | style, naming, commit format | @knowledge/patterns/style/CLAUDE.md |
 | session notes | @journal/YYYY-MM-DD/<topic>.md |
+| tasks (gptodo) | @tasks/ — synced from GitHub issues via `gptodo import` |
+| quick inbox / scratch items | @inbox.list |
+| cached state (issue-cache etc) | @state/ |
 | start from a template | @templates/CLAUDE.md |
 | how does memory work? | @memory/CLAUDE.md |
 | how does knowledge work? | @knowledge/CLAUDE.md |

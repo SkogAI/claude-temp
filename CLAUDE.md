@@ -12,7 +12,7 @@ staging areas (`skills/`, `commands/`, `hooks/`, `agents/`) are symlinked into `
 
 <structure>
 
-- @.skogai/ — knowledge, memory, templates — routing via @.skogai/CLAUDE.md
+- @.skogai/ — knowledge, memory, templates, tasks, journal — routing via @.skogai/CLAUDE.md
 - @marketplaces/ — plugin marketplace submodules (skogai-marketplace, worktrunk)
 - @projects/ — active development repos as git submodules (claude-memory, dot-skogai, argcfile, gptme-contrib)
 - @docs/ — fetched reference docs (run `docs/fetch-docs.sh` to populate claude-code/)

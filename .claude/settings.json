@@ -19,6 +19,7 @@
       "Bash(skogcli *)",
       "Bash(npm *)",
       "Bash(npx *)",
+      "Bash(bats *)",
       "Bash(pnpm *)",
       "Bash(yarn *)",
       "Bash(node *)",

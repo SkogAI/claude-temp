@@ -1,7 +1,8 @@
 ---
-state: new
-created: "2026-03-06"
-tracking: ["https://github.com/SkogAI/claude/issues/31"]
+created: '2026-03-06'
+state: done
+tracking:
+- https://github.com/SkogAI/claude/issues/31
 ---
 
 # [TEST] GitHub management mode integration test

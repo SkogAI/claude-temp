@@ -24,6 +24,25 @@ persistent knowledge that accumulates over time.
 
 </when_to_use>
 
+<frontmatter>
+
+all entries in learnings/ and decisions/ MUST include frontmatter:
+
+```yaml
+---
+title: [Descriptive Title]
+date: [YYYY-MM-DD]
+project: [project-name or "SkogAI"]
+tags: [tag1, tag2, tag3]
+source: [where this came from — session, PR, experiment, etc.]
+status: active
+---
+```
+
+fields are mandatory. use @templates/knowledge-entry.md as starting point.
+
+</frontmatter>
+
 <file_naming>
 
 use date prefix for chronological sorting:
@@ -33,9 +52,3 @@ use date prefix for chronological sorting:
 - patterns/yaml-frontmatter.md (no date - patterns are timeless)
 
 </file_naming>
-
-<template>
-
-use @templates/knowledge-entry.md for new entries.
-
-</template>

@@ -24,7 +24,7 @@ docs/
   claude-code/    # gitignored fetched docs (run fetch-docs.sh to populate)
 .skogai/
   knowledge/      # decisions/, learnings/, patterns/style/ — accumulated conventions
-  context/        # current.md — active work state across sessions
+  context/        # current.md — generated from journal + decisions (not manually edited)
   decisions.md    # append-only quick decision log
 projects/         # planning overviews for active workstreams
 .claude/
@@ -56,8 +56,8 @@ Currently installed: `superpowers@superpowers-dev` v4.3.1.
 | plugins, skills, hooks, MCP tools | @marketplaces/CLAUDE.md |
 | style conventions, naming, XML tags | @.skogai/knowledge/patterns/style/SKOGAI.md |
 | commit format and git rules | @.skogai/knowledge/patterns/style/commit-conventions.md |
-| current work state | @.skogai/context/current.md |
-| quick decisions log | @.skogai/decisions.md |
+| current work state | @.skogai/memory/context/current.md (generated — run `skogai context refresh`) |
+| quick decisions log | @.skogai/memory/decisions.md |
 | @-reference system | @.skogai/knowledge/patterns/style/at-references.md |
 
 </routing>

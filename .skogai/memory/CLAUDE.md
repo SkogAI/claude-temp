@@ -9,17 +9,16 @@ short-term and medium-term memory for continuity across sessions.
 
 <structure>
 
-@context/ # persistent context files
-@context/current.md # what i'm actively working on
-@decisions.md # append-only quick decision log
+@context/current.md  # generated — do not edit manually
+@decisions.md        # append-only quick decision log
 
 </structure>
 
 <when_to_use>
 
-- update what you're working on -> context/current.md
 - quick decision record -> decisions.md (append)
 - detailed decision -> knowledge/decisions/ (full adr)
+- read current state -> context/current.md (generated from journal + decisions)
 
 </when_to_use>
 

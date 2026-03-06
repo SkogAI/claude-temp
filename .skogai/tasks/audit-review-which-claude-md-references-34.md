@@ -3,6 +3,8 @@ state: new
 created: 2026-03-06
 tracking: ["https://github.com/SkogAI/claude/issues/34"]
 tags: ["enhancement", "github"]
+spawned_tasks: [audit-measure-token-cost-per-file, audit-remove-template-refs-from-chain, audit-remove-redundant-router-refs]
+coordination_mode: sequential
 ---
 
 # audit: review which CLAUDE.md @-references should be auto-loaded

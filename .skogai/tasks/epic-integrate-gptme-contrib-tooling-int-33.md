@@ -3,6 +3,8 @@ state: new
 created: 2026-03-06
 tracking: ["https://github.com/SkogAI/claude/issues/33"]
 tags: ["enhancement", "epic", "github"]
+spawned_tasks: [session-lifecycle-post-session-hook, session-lifecycle-signals-integration, session-lifecycle-summarize-cron, task-mgmt-spawn-from-cc, task-mgmt-worktree-spawn-pattern, runloops-test-autonomous-cc, runloops-test-team-cc, analytics-discover-stats-setup, analytics-dashboard-generation, plugin-bridge-evaluate-cc-plugin]
+coordination_mode: parallel
 ---
 
 # epic: integrate gptme-contrib tooling into ~/claude workflow

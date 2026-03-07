@@ -156,7 +156,7 @@
     "typescript-lsp@claude-plugins-official": true,
     "plugin-dev@claude-plugins-official": false,
     "skill-creator@claude-plugins-official": false,
-    "core@skogai-marketplace": false,
+    "core@skogai-marketplace": true,
     "dreamers@skogai-marketplace": false,
     "claude-memory@skogai-marketplace": true,
     "frontend-design@claude-plugins-official": false,

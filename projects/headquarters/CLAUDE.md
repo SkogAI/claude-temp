@@ -86,6 +86,24 @@ arch linux docker dev container. full toolchain matching claude code sandbox.
 
 </decisions>
 
+<development>
+
+### local test environment
+a bare `archlinux:latest` container named `soft-serve` simulates a fresh archinstall VM. bootstrap is mounted read-only at `/bootstrap/`, copied to `~/bootstrap/` at runtime for ansible to write to.
+
+| file | purpose |
+|------|---------|
+| Dockerfile | bare arch + base-devel + sudo + openssh + skogix user in wheel |
+| docker-compose.yml | runs container with bootstrap/ mounted read-only |
+| run-bootstrap.sh | copies bootstrap, installs collections, patches ansible.cfg (removes password file refs), runs playbook with users+packages tags |
+| test-bootstrap.sh | validates each bootstrap step (container state, base deps, ansible, collections, users role, packages) |
+
+### known issues
+- `ansible.cfg` in bootstrap/ hardcodes `~/.ssh/ansible-become-password` and `~/.ssh/ansible-vault-password` — run-bootstrap.sh patches these out for container use
+- secrets/bitwarden/dolt roles skipped in container (need gh auth / PAT)
+
+</development>
+
 <routing>
 
 | need | go to |
@@ -96,6 +114,8 @@ arch linux docker dev container. full toolchain matching claude code sandbox.
 | ansible roles | bootstrap/roles/ |
 | package lists | bootstrap/vars/packages.yml |
 | container services | container/scripts/ (21 service definitions) |
+| run bootstrap in container | run-bootstrap.sh |
+| verify bootstrap results | test-bootstrap.sh |
 
 </routing>
 

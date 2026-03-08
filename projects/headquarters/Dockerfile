@@ -10,6 +10,7 @@ RUN pacman -Syu --noconfirm && \
         openssh \
         curl \
         git \
+        python \
         which \
     && pacman -Scc --noconfirm
 

@@ -30,6 +30,7 @@ knowledge base, memory, templates, tasks, session journal, and inbox for AI-augm
 | quick inbox / scratch items | @inbox.list |
 | cached state (issue-cache etc) | @state/ |
 | start from a template | @templates/CLAUDE.md |
+| project plans (task, findings, progress) | @plan/<project>/ |
 | how does memory work? | @memory/CLAUDE.md |
 | how does knowledge work? | @knowledge/CLAUDE.md |
 

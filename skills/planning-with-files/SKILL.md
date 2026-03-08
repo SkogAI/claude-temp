@@ -27,15 +27,16 @@ Filesystem = Disk (persistent, unlimited)
 
 ## The 3-File Pattern
 
-For every complex task, create THREE files in your project directory:
+For every complex task, create THREE files in `.skogai/plan/<project>/`:
 
 ```
-task_plan.md      → Track phases and progress
-findings.md       → Store research and findings
-progress.md       → Session log and test results
+.skogai/plan/<project>/
+  task_plan.md      → Track phases and progress
+  findings.md       → Store research and findings
+  progress.md       → Session log and test results
 ```
 
-**Templates are available at:** `.claude/templates/planning/`
+**Templates are available at:** `.skogai/templates/`
 
 ## When to Use This Pattern
 
@@ -61,9 +62,9 @@ These rules simulate hooks to ensure proper workflow:
 
 **MUST** create all three files FIRST before any other work:
 
-1. Create `task_plan.md` using the template
-2. Create `findings.md` using the template
-3. Create `progress.md` using the template
+1. Create `.skogai/plan/<project>/task_plan.md` using the template
+2. Create `.skogai/plan/<project>/findings.md` using the template
+3. Create `.skogai/plan/<project>/progress.md` using the template
 4. Fill in the Goal section in task_plan.md
 
 **Why:** Without planning files, you'll forget goals after 50+ tool calls.
@@ -240,148 +241,12 @@ If you can answer these, your context management is solid:
 
 ## Template Structure
 
-### task_plan.md Template
+Templates are in `.skogai/templates/`:
+- `task_plan.md` — phases, progress, decisions
+- `findings.md` — research, discoveries, resources
+- `progress.md` — session log, test results, error log
 
-```markdown
-# Task Plan: [Brief Description]
-
-## Goal
-
-[One sentence describing the end state]
-
-## Current Phase
-
-Phase 1
-
-## Phases
-
-### Phase 1: Requirements & Discovery
-
-- [ ] Understand user intent
-- [ ] Identify constraints and requirements
-- [ ] Document findings in findings.md
-- **Status:** in_progress
-
-### Phase 2: Planning & Structure
-
-- [ ] Define technical approach
-- [ ] Create project structure if needed
-- [ ] Document decisions with rationale
-- **Status:** pending
-
-### Phase 3: Implementation
-
-- [ ] Execute the plan step by step
-- [ ] Write code to files before executing
-- [ ] Test incrementally
-- **Status:** pending
-
-### Phase 4: Testing & Verification
-
-- [ ] Verify all requirements met
-- [ ] Document test results in progress.md
-- [ ] Fix any issues found
-- **Status:** pending
-
-### Phase 5: Delivery
-
-- [ ] Review all output files
-- [ ] Ensure deliverables are complete
-- [ ] Deliver to user
-- **Status:** pending
-
-## Key Questions
-
-1. [Question to answer]
-2. [Question to answer]
-
-## Decisions Made
-
-| Decision | Rationale |
-| -------- | --------- |
-|          |           |
-
-## Errors Encountered
-
-| Error | Attempt | Resolution |
-| ----- | ------- | ---------- |
-|       | 1       |            |
-```
-
-### findings.md Template
-
-```markdown
-# Findings & Decisions
-
-## Requirements
-
-_Add requirements captured from user request here._
-
-## Research Findings
-
-_Document key discoveries during exploration here._
-
-## Technical Decisions
-
-_Record decisions made with rationale._
-
-| Decision | Rationale |
-| -------- | --------- |
-|          |           |
-
-## Issues Encountered
-
-_Document errors and how they were resolved._
-
-| Issue | Resolution |
-| ----- | ---------- |
-|       |            |
-
-## Resources
-
-_Add URLs, file paths, and API references here._
-
-## Visual/Browser Findings
-
-_CRITICAL: Update after every 2 view/browser operations._
-```
-
-### progress.md Template
-
-```markdown
-# Progress Log
-
-## Session: [DATE]
-
-### Phase 1: [Title]
-
-- **Status:** in_progress
-- **Started:** [timestamp]
-- Actions taken:
-- Files created/modified:
-
-## Test Results
-
-| Test | Input | Expected | Actual | Status |
-| ---- | ----- | -------- | ------ | ------ |
-|      |       |          |        |        |
-
-## Error Log
-
-| Timestamp | Error | Attempt | Resolution |
-| --------- | ----- | ------- | ---------- |
-|           |       | 1       |            |
-
-## 5-Question Reboot Check
-
-| Question             | Answer           |
-| -------------------- | ---------------- |
-| Where am I?          | Phase X          |
-| Where am I going?    | Remaining phases |
-| What's the goal?     | [goal statement] |
-| What have I learned? | See findings.md  |
-| What have I done?    | See above        |
-```
+Copy to `.skogai/plan/<project>/` and fill in.
 
 ## Iron Laws
 

@@ -159,7 +159,7 @@
     "frontend-design@claude-plugins-official": false,
     "playwright@claude-plugins-official": false,
     "worktrunk@worktrunk": true,
-    "core@skogai-marketplace": false,
+    "core@skogai-marketplace": true,
     "dreamers@skogai-marketplace": false,
     "claude-memory@skogai-marketplace": true
   },

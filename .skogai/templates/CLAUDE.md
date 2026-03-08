@@ -13,6 +13,9 @@ reusable templates for creating new content. copy-paste ready with placeholder t
 | knowledge-entry.md | new learning, pattern, or general knowledge |
 | project-status.md  | per-project status tracking file            |
 | decision-record.md | architectural decision record (adr)         |
+| task_plan.md       | planning-with-files: phases and progress    |
+| findings.md        | planning-with-files: research and decisions |
+| progress.md        | planning-with-files: session log and tests  |
 
 </available_templates>
 

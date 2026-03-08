@@ -16,3 +16,6 @@
 [submodule "projects/headquarters/bootstrap"]
 	path = projects/headquarters/bootstrap
 	url = git@github.com:SkogAI/bootstrap.git
+[submodule "projects/headquarters/container"]
+	path = projects/headquarters/container
+	url = git@github.com:SkogAI/container.git

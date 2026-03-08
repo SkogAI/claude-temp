@@ -159,8 +159,8 @@
     "frontend-design@claude-plugins-official": false,
     "playwright@claude-plugins-official": false,
     "worktrunk@worktrunk": true,
-    "core@skogai-marketplace": true,
-    "dreamers@skogai-marketplace": true,
+    "core@skogai-marketplace": false,
+    "dreamers@skogai-marketplace": false,
     "claude-memory@skogai-marketplace": true
   },
   "extraKnownMarketplaces": {

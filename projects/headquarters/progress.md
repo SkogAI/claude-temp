@@ -38,8 +38,12 @@
 ### Phase 1: Continuing
 
 - **Status:** in_progress
-- Planning files created
-- Next: determine immediate next step
+- Planning files created (task_plan.md, findings.md, progress.md)
+- Created `roles/claude/` ansible role:
+  - `defaults/main.yml` — claude_user, claude_shell (zsh), claude_groups (wheel)
+  - `tasks/main.yml` — create user, passwordless sudo, home dirs (.claude, .config, projects)
+- Added claude role to `playbooks/bootstrap.yml` (runs after dolt, tagged `claude`)
+- Next: test in container, push to github, run via run.sh
 
 ## 5-Question Reboot Check
 

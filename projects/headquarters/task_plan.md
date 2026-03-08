@@ -21,7 +21,7 @@ Phase 1 (finishing)
 - [x] Yay clone + build (OOM in container, works on real HW)
 - [ ] Verify AUR packages install on real hardware
 - [ ] Test secrets/bitwarden/dolt roles
-- [ ] Create **claude user role** (currently only provisions `skogix`)
+- [x] Create **claude user role** (basic: user + sudo + home dirs)
 - **Status:** in_progress
 
 ### Phase 2: Ansible Provisioning
@@ -43,7 +43,7 @@ Phase 1 (finishing)
 
 ## Key Questions
 
-1. Should claude user role be a new ansible role or extend users role?
+1. ~~Should claude user role be a new ansible role or extend users role?~~ → New role `roles/claude/`
 2. What packages does claude need beyond skogix's list?
 3. How to handle yay OOM in container testing? (skip for now, works on real HW)
 
@@ -56,6 +56,8 @@ Phase 1 (finishing)
 | `run.sh` is single entry point | No wrapper scripts, every run from scratch |
 | Disk/RAM expandable on request | Not a constraint |
 | Mirror skogix workstation | Tool parity for claude user |
+| Separate `claude` role, not extending `users` | Users role = system-level (wheel, aur_builder, packages). Claude role = user-specific provisioning |
+| Passwordless sudo for claude | Same as skogix — mirrors workstation pattern |
 | `uv tool install` over system python | Cleaner, no system pollution |
 
 ## Errors Encountered

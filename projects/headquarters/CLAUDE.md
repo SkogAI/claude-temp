@@ -110,6 +110,17 @@ arch linux docker dev container + podman service management (21 service scripts)
 
 </routing>
 
+<environment>
+
+- `docker` is podman on this system — stale pods/networks need cleanup between runs
+- podman rootless UID mapping breaks file permissions on bind mounts — clone from github instead
+- `run.sh` is the single entry point — don't create wrapper scripts
+- always push bootstrap changes before running `run.sh` (container clones from github)
+- prefer `uv tool install` over system python/pacman for tooling
+- every run is from scratch — no cached state, no shortcuts
+
+</environment>
+
 <conventions>
 
 follows @.skogai/knowledge/patterns/style/CLAUDE.md conventions.

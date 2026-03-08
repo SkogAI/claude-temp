@@ -148,8 +148,8 @@
     "command": "wt list statusline --format=claude-code"
   },
   "enabledPlugins": {
-    "claude-md-management@claude-plugins-official": false,
-    "claude-code-setup@claude-plugins-official": false,
+    "claude-md-management@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
     "github@claude-plugins-official": false,
     "feature-dev@claude-plugins-official": false,
     "code-simplifier@claude-plugins-official": false,
@@ -166,7 +166,6 @@
     "skogai-marketplace": {
       "source": {
         "source": "directory",
-        "url": "git@github.com:SkogAI/marketplace.git",
         "path": "/home/skogix/claude/projects/claude-memory"
       }
     },

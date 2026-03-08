@@ -9,6 +9,7 @@ RUN pacman -Syu --noconfirm && \
         sudo \
         openssh \
         curl \
+        git \
         which \
     && pacman -Scc --noconfirm
 

@@ -19,9 +19,9 @@ run "sudo pacman -S --needed --noconfirm github-cli uv git"
 log "Step 2: ansible via uv..."
 run "uv tool install ansible-core 2>&1 || true"
 
-# step 3: clone bootstrap
-log "Step 3: clone bootstrap..."
-run "rm -rf ~/bootstrap && git clone https://github.com/SkogAI/bootstrap.git ~/bootstrap"
+# step 3: copy bootstrap from mount
+log "Step 3: copy bootstrap..."
+run "rm -rf ~/bootstrap && cp -r /bootstrap ~/bootstrap"
 
 # step 4: gh auth via vault-decrypted PAT
 log "Step 4: gh auth..."

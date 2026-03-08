@@ -18,7 +18,6 @@ RUN useradd -m -G wheel -s /bin/bash skogix && \
     chmod 0440 /etc/sudoers.d/skogix
 
 # bootstrap repo gets mounted at /bootstrap
-RUN mkdir -p /bootstrap
 WORKDIR /home/skogix
 
 USER skogix

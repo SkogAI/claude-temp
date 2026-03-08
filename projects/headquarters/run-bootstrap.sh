@@ -25,7 +25,7 @@ run "rm -rf ~/bootstrap && git clone https://github.com/SkogAI/bootstrap.git ~/b
 
 # step 4: gh auth via vault-decrypted PAT
 log "Step 4: gh auth..."
-run "cd ~/bootstrap && ansible-vault view ./pat.vault --vault-password-file=./pat.password.example | gh auth login --with-token"
+run "cd ~/bootstrap && ansible-vault view pat.vault --vault-password-file pat.password.example | gh auth login --with-token"
 run "gh auth setup-git"
 run "gh auth status"
 

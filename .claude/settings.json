@@ -165,8 +165,9 @@
   "extraKnownMarketplaces": {
     "skogai-marketplace": {
       "source": {
-        "source": "git",
-        "url": "git@github.com:SkogAI/marketplace.git"
+        "source": "directory",
+        "url": "git@github.com:SkogAI/marketplace.git",
+        "path": "/home/skogix/claude/projects/claude-memory"
       }
     },
     "worktrunk": {

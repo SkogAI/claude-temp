@@ -3,133 +3,135 @@ name: gita
 description: Multi-repo git management with the gita CLI. Use when checking status across multiple repositories, fetching/pulling all repos at once, running git commands across repo groups, or when the user mentions gita, repo groups, or wants a bird's-eye view of their git repositories. Also use when working with repos in ~/claude/ or ~/.local/src/ and you need to understand what's there or operate on them in bulk.
 ---
 
-# Gita — Multi-Repo Git Manager
+<what_is_this>
 
-Gita manages multiple git repos from any working directory. Two core capabilities:
+gita manages multiple git repos from any working directory. two core capabilities:
 
-1. **Dashboard** — see status of all repos (or a group) side by side
-2. **Delegation** — run git commands against specific repos without cd-ing
+1. **dashboard** — see status of all repos (or a group) side by side
+2. **delegation** — run git commands against specific repos without cd-ing
 
-## Groups
+all repos live in `~/.local/src/`. symlinks in `~/claude/` point there. gita tracks 18 repos total.
 
-Groups are the primary way to scope operations. The user's current setup:
+</what_is_this>
 
-| Group | What | Repos |
-|-------|------|-------|
-| `skogai` | Everything | All repos below combined (~19) |
-| `claude-home` | `~/claude/` workspace | claude, skogai-marketplace, worktrunk, claude-memory, gptme-contrib |
-| `src` | `~/.local/src/` | aichat, argc, argc-completions, cli, docs, dot-skogai, episodic-memory, everything-claude-code, get-shit-done, gita, nelson, skogterm, src/claude-memory, src/gptme-contrib |
-| `web` | skogai-web sites | skogai-intro, supabase, sassy-skogai-tales + blog repos |
+<groups>
 
-Note: `src/claude-memory` and `src/gptme-contrib` are the `~/.local/src/` copies — auto-prefixed by gita to avoid collision with `~/claude/projects/` copies.
+groups scope operations. current setup:
 
-## Commands
+| group | repos | notes |
+|-------|-------|-------|
+| `src` | all 17 repos in `~/.local/src/` | aichat, argc, argc-completions, claude-memory, cli, docs, dot-skogai, episodic-memory, everything-claude-code, get-shit-done, gita, gptme-contrib, marketplace, nelson, skogterm, small-hours, worktrunk |
+| `develop` | skogix/claude | the `~/claude/` workspace repo |
 
-### Status and overview
+context is currently set to `src` (stored in `~/.config/gita/src.context`).
+
+`skogix/claude` is the auto-prefixed name for `~/claude/` — gita prefixes with the parent dir to avoid collision with any repo named `claude`.
+
+</groups>
+
+<commands>
+
+## status and overview
 
 ```bash
-gita ll                    # all repos
-gita ll claude-home        # just claude workspace
-gita ll skogai             # everything
-gita st                    # short status (all)
-gita st claude-home        # short status (group)
+gita ll                    # all repos (or context group)
+gita ll src                # just ~/.local/src/ repos
+gita st                    # short status
 ```
 
-The `ll` output shows: repo name, branch, dirty state indicators, last commit message, commit age, path, and tracking branch.
+`ll` output shows: repo name, branch, dirty indicators, last commit, age, path, tracking branch.
 
-Dirty state indicators:
-- `*` — unstaged changes
-- `+` — staged changes
-- `$` — stashed changes
-- `?` — untracked files
-- `↑` — ahead of remote
-- `↓` — behind remote
+dirty indicators: `*` unstaged, `+` staged, `$` stashed, `?` untracked, `↑` ahead, `↓` behind.
 
-### Running git commands on specific repos
+## targeted git commands
 
 ```bash
-gita super <repo> <git-command>     # run git command on one repo
-gita super claude-memory pull       # pull a specific repo
-gita super docs push                # push a specific repo
-gita super nelson log --oneline -5  # recent commits for nelson
+gita super <repo> <git-command>
+gita super claude-memory pull
+gita super nelson log --oneline -5
 ```
 
-### Bulk operations
+## bulk operations
 
 ```bash
-gita fetch                   # fetch all repos
-gita fetch claude-home       # fetch just claude workspace
-gita pull skogai             # pull all skogai repos
-gita push src                # push all src repos
+gita fetch                   # fetch all (or context group)
+gita fetch src               # fetch src group
+gita pull src                # pull all src repos
 ```
 
-### Running shell commands
+## shell commands
 
 ```bash
-gita shell <repo> <shell-command>   # run arbitrary shell command in repo dir
-gita shell docs "ls -la"            # list files in docs repo
+gita shell <repo> <shell-command>
+gita shell docs "ls -la"
 ```
 
-### Context (default group)
+## context (default group)
 
 ```bash
-gita context claude-home     # set default — all commands scope to this group
+gita context src             # set default — all commands scope to this
 gita context none            # clear context
 ```
 
-When context is set, `gita ll` shows only that group's repos.
-
-### Repo management
+## repo management
 
 ```bash
 gita ls                      # list all repo names
 gita ls <repo>               # show repo path
-gita add /path/to/repo       # register a repo
-gita rm <repo>               # unregister a repo
-gita group ls                # list all groups
-gita group add -n <name> <repo1> <repo2> ...   # create group
-gita group rm <name>         # remove group
-gita rename <old> <new>      # rename a repo
+gita add /path/to/repo       # register
+gita rm <repo>               # unregister
+gita group ls                # list groups
+gita group add -n <name> <repo1> <repo2> ...
+gita group rm <name>
+gita rename <old> <new>
 ```
 
-### Other useful commands
+group names cannot collide with repo names.
+
+## freeze and restore
 
 ```bash
-gita br                      # show branches for all repos
-gita br claude-home          # branches for a group
-gita freeze                  # print all repo info (for backup/restore)
-gita clone --from <freeze-output>  # restore repos from freeze
+gita freeze                           # capture full state (URLs, paths, branches)
+gita freeze > freeze.csv              # save to file
+gita clone -f freeze.csv -p           # restore from freeze
 ```
 
-## Common Workflows
+`-p` (preserve-path) is required to clone into original paths. without it, repos clone into cwd.
 
-**Morning check** — see what's dirty or behind:
+</commands>
+
+<workflows>
+
+**morning check** — fetch and see what's dirty or behind:
 ```bash
-gita fetch skogai && gita ll skogai
+gita fetch && gita ll
 ```
 
-**Before starting work** — pull everything:
+**find uncommitted work** — look for `*`, `+`, `?` indicators:
 ```bash
-gita pull claude-home
+gita ll
 ```
 
-**Find uncommitted work** — look for `*`, `+`, or `?` indicators:
+**add a new project repo:**
 ```bash
-gita ll skogai
+gita add ~/.local/src/new-repo
+gita group add -n src <all-existing-src-repos> new-repo
 ```
 
-**Add a new project repo:**
-```bash
-gita add /path/to/new/repo
-gita group add -n <group> <existing-repos...> <new-repo>
-```
+</workflows>
 
-Note: group names cannot collide with repo names (e.g., can't name a group `claude` if there's a repo called `claude`).
+<config>
 
-## Config
+config at `~/.config/gita/` — version-controlled copy at `skills/gita/config/`:
 
-Config lives at `~/.config/gita/`:
-- `repos.csv` — registered repos (path, name, flags)
-- `groups.csv` — group definitions
-- `info.csv` — display column config
-- `web.context` — current context setting
+| file | purpose |
+|------|---------|
+| `repos.csv` | registered repos (path, name, flags) |
+| `groups.csv` | group definitions |
+| `info.csv` | display column config |
+| `src.context` | current context setting |
+| `freeze.csv` | full state snapshot for backup/restore |
+
+the `skills/gita/config/` directory is the version-controlled source. sync to `~/.config/gita/` as needed.
+
+</config>

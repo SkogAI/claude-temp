@@ -2,22 +2,22 @@
 # Hooks for worktree lifecycle. Checked into git.
 
 # Verify .claude/ symlinks resolve after worktree creation
-[post-create]
-verify-symlinks = """
-for link in .claude/skills .claude/commands .claude/hooks .claude/agents; do
-  if [ -L "$link" ] && ! [ -e "$link" ]; then
-    echo "BROKEN: $link -> $(readlink "$link")"
-    exit 1
-  fi
-done
-echo "symlinks ok"
-"""
-
-# Push to set up remote tracking branch
-setup-tracking = "git push -u origin HEAD"
-
-# Rename tmux window to branch name on switch
-post-switch = "if [ -n \"$TMUX\" ]; then tmux rename-window {{ branch | sanitize }}; fi"
-
+# [post-create]
+# verify-symlinks = """
+# for link in .claude/skills .claude/commands .claude/hooks .claude/agents; do
+#   if [ -L "$link" ] && ! [ -e "$link" ]; then
+#     echo "BROKEN: $link -> $(readlink "$link")"
+#     exit 1
+#   fi
+# done
+# echo "symlinks ok"
+# """
 #
-direnv-allow = "direnv allow"
+# # Push to set up remote tracking branch
+# setup-tracking = "git push -u origin HEAD"
+#
+# # Rename tmux window to branch name on switch
+# post-switch = "if [ -n \"$TMUX\" ]; then tmux rename-window {{ branch | sanitize }}; fi"
+#
+# #
+# direnv-allow = "direnv allow"

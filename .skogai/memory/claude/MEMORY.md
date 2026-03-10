@@ -3,12 +3,22 @@
 ## Git Branching Model
 
 See [git-branching-model.md](git-branching-model.md) for full details. Summary:
-- `master` = only branch that talks to origin. `refs/heads/master` → `git push` → `refs/remotes/origin/master`
-- `develop` = permanent local worktree at `~/claude`. Integration branch. Feature branches merge here. No remote tracking needed.
-- Feature branches = temporary worktrees. `wt merge` into develop (worktrunk `default-branch = develop`). Never pushed to origin.
-- develop → master = separate promotion step (merge + push).
-- `FETCH_HEAD` marks only `master` as merge-eligible. Everything else is `not-for-merge`.
-- Only way to "real change": push from local master or PR on GitHub.
+- `master` = only branch that talks to origin. All PRs target master.
+- Feature branches = temporary worktrees. Push branch, PR against master. Clean up after merge.
+- No develop branch. Worktrees go directly to master via PR.
+- `wt merge` for trivial local fast-forwards into master, then `git push`.
+- `wt config state default-branch set master`.
+
+## Claude Worktree Launch (standard method)
+
+`claude --worktree <name> --tmux=classic` — the standard way to start a Claude Code session. Creates a git worktree + tmux session in one command. Worktree lands in `~/.claude/worktrees/<name>/`, branch becomes `worktree-<name>`. Use this for all new work sessions. If a worktree with the same name already exists, it reuses it (no error, no duplicate).
+
+**Workflow from worktree to shipped code:**
+1. Pick an issue
+2. `claude --worktree <name> --tmux=classic` — start session
+3. Work + commit in worktree branch
+4. `git push -u origin HEAD` + `gh pr create --base master`
+5. After PR merges, clean up worktree (`wt remove` or `git worktree remove`)
 
 ## Claude Worktree Launch (standard method)
 
@@ -34,7 +44,7 @@ See [git-branching-model.md](git-branching-model.md) for full details. Summary:
 - **gptme-sessions**: `signals <trajectory>` extracts tool calls/commits/grade/tokens from CC `.jsonl`. `post-session --harness claude-code` records. `discover` finds all trajectories in `~/.claude/projects/`.
 - **gptme-runloops**: `autonomous --backend claude-code` for solo loops, `team --backend claude-code` for coordinator pattern. CC backend can't restrict tools (TeamRun limitation).
 - **Claude Code Agent Teams**: TeamCreate + Agent tool spawns teammates in tmux. TaskCreate for shared task list. SendMessage for coordination. TeamDelete to clean up. Agents go idle between turns (normal). Always shutdown teammates when done.
-- **gita**: Multi-repo git manager. `~/.local/src/` is the single source of truth for all repos. `gita ll` for overview, `gita fetch` across all, `gita super <repo> <cmd>` for targeted git ops, `gita ll <group>` for group status. Groups: `src` (all 17 repos in ~/.local/src/). Config at `~/.config/gita/` → symlinked from `skills/gita/config/` (version-controlled). `gita freeze` captures full state (URLs, paths, branches); restore with `gita clone -f -p freeze.csv`. Note: `-p` (preserve-path) is required to clone into original paths. Clone errors on existing dirs but still registers them (not fully idempotent).
+- **gita**: Multi-repo git manager. `~/.local/src/` is the single source of truth for all repos. `gita ll` for overview, `gita fetch` across all, `gita super <repo> <cmd>` for targeted git ops, `gita ll <group>` for group status. Groups: `src` (all 17 repos in ~/.local/src/). Config at `~/.config/gita/` → symlinked from `skills/gita/config/` (version-controlled). `gita freeze` captures full state (URLs, paths, branches); restore with `gita clone -f -p freeze.csv`. Note: `-p` (preserve-path) is required to clone into original paths.
 
 ## Plugin System
 

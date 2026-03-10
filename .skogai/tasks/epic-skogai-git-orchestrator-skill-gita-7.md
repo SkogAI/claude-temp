@@ -1,6 +1,6 @@
 ---
 state: new
-created: 2026-03-10
+created: "2026-03-10"
 tracking: ["https://github.com/SkogAI/dot-skogai/issues/7"]
 tags: ["epic", "github"]
 ---
@@ -23,7 +23,7 @@ Epic for creating a `skogai-git` skill that orchestrates three specialized sub-s
 
 - [ ] #8 — create worktrunk specialist skill
 - [ ] #9 — extract gptodo specialist skill from gptme
-- [ ] #10 — create skogai-git orchestrator 
+- [ ] #10 — create skogai-git orchestrator
 
 ## Notes
 

@@ -1,6 +1,6 @@
 ---
 state: new
-created: 2026-03-10
+created: "2026-03-10"
 tracking: ["https://github.com/SkogAI/dot-skogai/issues/6"]
 tags: ["bug", "github"]
 ---

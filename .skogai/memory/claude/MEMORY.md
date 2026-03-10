@@ -62,6 +62,17 @@ See [git-branching-model.md](git-branching-model.md) for full details. Summary:
 - `skills/gptme/` — gptme-contrib domain expertise skill (SKILL.md + 14 reference files)
 - `skills/gita/` — gita multi-repo management skill (SKILL.md + symlinked config/)
 
+## argc-completions as Claude Code Commands
+
+Pattern for giving Claude Code validated, sandboxed CLI access via argc-completions:
+- Completion scripts at `$ARGC_COMPLETIONS_ROOT/completions/<command>.sh` define valid subcommands/args/flags
+- Run via `bash $ARGC_COMPLETIONS_ROOT/completions/<command>.sh <subcommand> [args]`
+- `argc --argc-eval` validates input BEFORE execution — invalid input gets `exit 1` before any code runs
+- Goal: wrap these as PATH commands so Claude calls `gptodo import` instead of raw bash
+- Pipeline: `argc --argc-eval script.sh <args> | bash` — eval generates code, pipe executes only if valid
+- TODO: create wrapper shims in PATH that strip `.sh`, route through argc eval. New worktree needed.
+- Session context: `0638df4d-1216-4823-a61f-4552879d6c31`
+
 ## User Preferences
 
 - No submodules — all repos live in ~/.local/src/, symlinked into ~/claude/ where needed

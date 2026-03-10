@@ -25,6 +25,31 @@ workspace::remove() {
   git worktree remove "$(_worktree_path "$argc_name")"
 }
 
+# @cmd Push worktree branch and create PR against master
+# @option -t --title  PR title
+# @option -b --body   PR body
+workspace::ship() {
+  local branch
+  branch=$(git branch --show-current)
+
+  if [[ "$branch" == "master" ]]; then
+    echo "error: already on master, nothing to ship" >&2
+    return 1
+  fi
+
+  git push -u origin HEAD
+  if [[ -n "$argc_title" ]]; then
+    gh pr create --base master --title "$argc_title" --body "${argc_body:-}"
+  else
+    gh pr create --base master
+  fi
+}
+
+# @cmd Merge current worktree into master (for trivial changes)
+workspace::merge() {
+  wt merge
+}
+
 # @cmd Prune stale worktree references
 workspace::prune() {
   git worktree prune

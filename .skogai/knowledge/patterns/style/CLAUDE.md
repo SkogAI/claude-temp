@@ -1,4 +1,4 @@
-# @knowledge/patterns/style/ - skogai style conventions
+# knowledge/patterns/style/ - skogai style conventions
 
 <what_is_this>
 

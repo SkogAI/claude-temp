@@ -1,4 +1,4 @@
-# @knowledge/ - knowledge base
+# knowledge/ - knowledge base
 
 <what_is_this>
 
@@ -11,10 +11,10 @@ persistent knowledge that accumulates over time.
 
 | intent | go to |
 |--------|-------|
-| style, naming, XML, commits | @patterns/style/CLAUDE.md |
-| architectural decision (full) | @decisions/ |
-| insight, learning, gotcha | @learnings/ |
-| reusable pattern | @patterns/ |
+| style, naming, XML, commits | patterns/style/CLAUDE.md |
+| architectural decision (full) | decisions/ |
+| insight, learning, gotcha | learnings/ |
+| reusable pattern | patterns/ |
 
 </routing>
 
@@ -33,7 +33,7 @@ status: active
 ---
 ```
 
-use @../templates/knowledge-entry.md as starting point.
+use ../templates/knowledge-entry.md as starting point.
 
 </frontmatter>
 

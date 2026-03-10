@@ -1,4 +1,4 @@
-# @memory/ - memory system
+# memory/ - memory system
 
 <what_is_this>
 
@@ -11,17 +11,17 @@ short-term and medium-term memory for continuity across sessions.
 
 | intent | go to |
 |--------|-------|
-| read current state | @context/current.md (generated — do not edit) |
-| record a decision | @decisions.md (append) |
-| promote decision to full ADR | @../knowledge/decisions/ |
+| read current state | context/current.md (generated — do not edit) |
+| record a decision | decisions.md (append) |
+| promote decision to full ADR | ../knowledge/decisions/ |
 
 </routing>
 
 <workflow>
 
-1. start session: read @context/current.md
-2. during work: append to @decisions.md
+1. start session: read context/current.md
+2. during work: append to decisions.md
 3. end session: add journal entry — current.md regenerates from journal + decisions
-4. significant decision: promote to @../knowledge/decisions/
+4. significant decision: promote to ../knowledge/decisions/
 
 </workflow>

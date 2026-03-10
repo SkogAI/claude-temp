@@ -150,18 +150,21 @@
   "enabledPlugins": {
     "claude-md-management@claude-plugins-official": true,
     "claude-code-setup@claude-plugins-official": true,
-    "github@claude-plugins-official": false,
+    "github@claude-plugins-official": true,
     "feature-dev@claude-plugins-official": false,
     "code-simplifier@claude-plugins-official": false,
     "typescript-lsp@claude-plugins-official": true,
     "plugin-dev@claude-plugins-official": false,
     "skill-creator@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": false,
-    "playwright@claude-plugins-official": false,
+    "frontend-design@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
     "worktrunk@worktrunk": true,
     "core@skogai-marketplace": true,
     "dreamers@skogai-marketplace": false,
-    "claude-memory@skogai-marketplace": true
+    "claude-memory@skogai-marketplace": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "linear@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "worktrunk": {
@@ -174,7 +177,8 @@
       "source": {
         "source": "git",
         "url": "git@github.com:SkogAI/marketplace.git"
-      }
+      },
+      "autoUpdate": true
     }
   },
   "spinnerTipsEnabled": true,

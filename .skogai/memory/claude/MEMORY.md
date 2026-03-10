@@ -3,6 +3,7 @@
 ## Git Branching Model
 
 See [git-branching-model.md](git-branching-model.md) for full details. Summary:
+
 - `master` = only branch that talks to origin. All PRs target master.
 - Feature branches = temporary worktrees. Push branch, PR against master. Clean up after merge.
 - No develop branch. Worktrees go directly to master via PR.
@@ -14,6 +15,7 @@ See [git-branching-model.md](git-branching-model.md) for full details. Summary:
 `claude --worktree <name> --tmux=classic` — the standard way to start a Claude Code session. Creates a git worktree + tmux session in one command. Worktree lands in `~/.claude/worktrees/<name>/`, branch becomes `worktree-<name>`. Use this for all new work sessions. If a worktree with the same name already exists, it reuses it (no error, no duplicate).
 
 **Workflow from worktree to shipped code:**
+
 1. Pick an issue
 2. `claude --worktree <name> --tmux=classic` — start session
 3. Work + commit in worktree branch
@@ -25,12 +27,13 @@ See [git-branching-model.md](git-branching-model.md) for full details. Summary:
 `claude --worktree <name> --tmux=classic` — the standard way to start a Claude Code session. Creates a git worktree + tmux session in one command. Worktree lands in `~/.claude/worktrees/<name>/`, branch becomes `worktree-<name>`. Use this for all new work sessions. If a worktree with the same name already exists, it reuses it (no error, no duplicate).
 
 **Workflow from worktree to shipped code:**
+
 1. Pick an issue
 2. `claude --worktree <name> --tmux=classic` — start session
 3. Work + commit in worktree branch
 4. `wt merge` — merges worktree branch into develop, auto-removes worktree+branch (verify with `git log -1`)
-6. Develop accumulates changes from multiple worktrees
-7. PR from develop → master when ready to ship a batch (`gh pr create`)
+5. Develop accumulates changes from multiple worktrees
+6. PR from develop → master when ready to ship a batch (`gh pr create`)
 
 ## Tools & Workflows
 
@@ -62,16 +65,12 @@ See [git-branching-model.md](git-branching-model.md) for full details. Summary:
 - `skills/gptme/` — gptme-contrib domain expertise skill (SKILL.md + 14 reference files)
 - `skills/gita/` — gita multi-repo management skill (SKILL.md + symlinked config/)
 
-## argc-completions as Claude Code Commands
+## argc validated runner (WIP)
 
-Pattern for giving Claude Code validated, sandboxed CLI access via argc-completions:
-- Completion scripts at `$ARGC_COMPLETIONS_ROOT/completions/<command>.sh` define valid subcommands/args/flags
-- Run via `bash $ARGC_COMPLETIONS_ROOT/completions/<command>.sh <subcommand> [args]`
-- `argc --argc-eval` validates input BEFORE execution — invalid input gets `exit 1` before any code runs
-- Goal: wrap these as PATH commands so Claude calls `gptodo import` instead of raw bash
-- Pipeline: `argc --argc-eval script.sh <args> | bash` — eval generates code, pipe executes only if valid
-- TODO: create wrapper shims in PATH that strip `.sh`, route through argc eval. New worktree needed.
-- Session context: `0638df4d-1216-4823-a61f-4552879d6c31`
+Intent: single entry point for running CLI commands with runtime validation. Instead of running binaries directly, validate with argc first.
+
+- Read the `skogai-argc` skill docs BEFORE making changes — especially the eval/compgen/run distinctions
+- Journal: `.skogai/journal/2026-03-10/argc-validated-runner.md`
 
 ## User Preferences
 

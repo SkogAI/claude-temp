@@ -41,7 +41,7 @@ workspace::ship() {
   if [[ -n "$argc_title" ]]; then
     gh pr create --base master --title "$argc_title" --body "${argc_body:-}"
   else
-    gh pr create --base master
+    gh pr create --base master --fill
   fi
 }
 

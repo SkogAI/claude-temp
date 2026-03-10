@@ -1,3 +1,14 @@
 - [ ] this might be a problem: ```direnv: loading ~/claude/.claude/worktrees/skogai-marketplace-init/.envrc There is no tracking information for the current branch. Please specify which branch you want to rebase against. See git-pull(1) for details. git pull <remote> <branch> If you wish to set tracking information for this branch you can do so with: git branch --set-upstream-to=origin/<branch> skogai-marketplace-init```
 - [ ] direnv allow on branch creation via wt
 - [ ] what should be "done" on session end? decisions, learnings, journal? what else?
+- [ ] move ~/claude/ itself to ~/.local/src/claude + symlink from ~
+- [ ] SkogAI has 200-300 repos — need strategy for active (cloned) vs known (metadata only)
+- [ ] gita freeze only covers cloned repos, not the full SkogAI inventory — need a manifest?
+- [ ] gh repo list SkogAI --limit 300 could generate full repo manifest separate from gita
+- [ ] groups need rethinking for scale: active, reference, archive instead of flat src
+- [ ] bootstrap script: fresh machine from zero to working (freeze.csv + clone + symlinks)
+- [ ] non-SkogAI repos (forks, third-party) — same ~/.local/src/ or separate?
+- [ ] gita clone -f -p not idempotent — errors on existing dirs instead of skipping
+- [ ] update all CLAUDE.md docs that reference submodules (deep sweep needed)
+- [ ] update auto-memory references to submodules
+- [ ] update gita skill docs to reflect new src-as-truth pattern

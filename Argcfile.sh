@@ -11,9 +11,11 @@ workspace() {
 # @arg name![`_choice_worktrees`] Worktree to open
 # @flag --claude  Launch claude in the worktree
 workspace::open() {
-  wt switch "$argc_name"
+  # wt switch "$argc_name"
   if [[ "$argc_claude" == "1" ]]; then
     claude --worktree "$argc_name" --tmux=classic
+  else
+    echo "Not implemented yet, use 'wt switch $argc_name' to manually switch to the worktree"
   fi
 }
 

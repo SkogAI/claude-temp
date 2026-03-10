@@ -1,5 +1,5 @@
 ---
-name: gita
+name: skogai-gita
 description: Multi-repo git management with the gita CLI. Use when checking status across multiple repositories, fetching/pulling all repos at once, running git commands across repo groups, or when the user mentions gita, repo groups, or wants a bird's-eye view of their git repositories. Also use when working with repos in ~/claude/ or ~/.local/src/ and you need to understand what's there or operate on them in bulk.
 ---
 
@@ -103,16 +103,19 @@ gita clone -f freeze.csv -p           # restore from freeze
 <workflows>
 
 **morning check** — fetch and see what's dirty or behind:
+
 ```bash
 gita fetch && gita ll
 ```
 
 **find uncommitted work** — look for `*`, `+`, `?` indicators:
+
 ```bash
 gita ll
 ```
 
 **add a new project repo:**
+
 ```bash
 gita add ~/.local/src/new-repo
 gita group add -n src <all-existing-src-repos> new-repo

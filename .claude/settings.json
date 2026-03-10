@@ -38,28 +38,27 @@
     "skill-creator@claude-plugins-official": false,
     "frontend-design@claude-plugins-official": false,
     "playwright@claude-plugins-official": false,
-    "core@skogai-marketplace": false,
-    "dreamers@skogai-marketplace": false,
-    "claude-memory@skogai-marketplace": false,
     "pyright-lsp@claude-plugins-official": false,
     "linear@claude-plugins-official": false,
     "pr-review-toolkit@claude-plugins-official": false,
-    "worktrunk@worktrunk": false
+    "worktrunk@worktrunk": false,
+    "claude-memory@skogai-marketplace": true,
+    "core@skogai-marketplace": true,
+    "dreamers@skogai-marketplace": false
   },
   "extraKnownMarketplaces": {
-    "skogai-marketplace": {
-      "source": {
-        "source": "directory",
-        "path": "/home/skogix/.local/src/skogai-marketplace"
-      },
-      "autoUpdate": true
-    },
     "worktrunk": {
       "source": {
         "source": "directory",
         "path": "/home/skogix/.local/src/worktrunk"
       },
       "autoUpdate": true
+    },
+    "skogai-marketplace": {
+      "source": {
+        "source": "directory",
+        "path": "/home/skogix/.local/src/marketplace"
+      }
     }
   },
   "spinnerTipsEnabled": true,

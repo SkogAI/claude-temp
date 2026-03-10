@@ -12,7 +12,7 @@
 - **gptme-sessions**: `signals <trajectory>` extracts tool calls/commits/grade/tokens from CC `.jsonl`. `post-session --harness claude-code` records. `discover` finds all trajectories in `~/.claude/projects/`.
 - **gptme-runloops**: `autonomous --backend claude-code` for solo loops, `team --backend claude-code` for coordinator pattern. CC backend can't restrict tools (TeamRun limitation).
 - **Claude Code Agent Teams**: TeamCreate + Agent tool spawns teammates in tmux. TaskCreate for shared task list. SendMessage for coordination. TeamDelete to clean up. Agents go idle between turns (normal). Always shutdown teammates when done.
-- **gita**: Multi-repo git manager. `gita ll` for overview, `gita fetch` across all, `gita super <repo> <cmd>` for targeted git ops, `gita ll <group>` for group status. Groups: `web` (skogai-web repos), `claude-home` (5 claude workspace repos), `src` (14 ~/.local/src repos), `skogai` (all 19 — claude-home + src combined). Config at `~/.config/gita/`. Use `gita ll skogai` for full dashboard, `gita ll claude-home` for workspace only. Note: `src/claude-memory` and `src/gptme-contrib` are the ~/.local/src copies (auto-prefixed to avoid collision with ~/claude/projects/ copies).
+- **gita**: Multi-repo git manager. `~/.local/src/` is the single source of truth for all repos. `gita ll` for overview, `gita fetch` across all, `gita super <repo> <cmd>` for targeted git ops, `gita ll <group>` for group status. Groups: `src` (all 17 repos in ~/.local/src/). Config at `~/.config/gita/` → symlinked from `skills/gita/config/` (version-controlled). `gita freeze` captures full state (URLs, paths, branches); restore with `gita clone -f -p freeze.csv`. Note: `-p` (preserve-path) is required to clone into original paths. Clone errors on existing dirs but still registers them (not fully idempotent).
 
 ## Plugin System
 
@@ -22,8 +22,8 @@
 
 ## Project Structure
 
-- `projects/` — git submodules for active development repos (claude-memory, gptme-contrib)
-- `marketplaces/` — plugin marketplace submodules (skogai-marketplace, worktrunk)
+- `projects/` — symlinks to ~/.local/src/ (claude-memory, gptme-contrib, small-hours) + local dirs (argcfile, claude-persona, skogai-context)
+- `marketplaces/` — symlinks to ~/.local/src/ (skogai-marketplace → marketplace, worktrunk)
 - `.skogai/tasks/` — gptodo task files synced from GitHub issues
 - `.skogai/state/` — cached state (issue-cache.json, sessions/)
 - `.skogai/.worktrees` — symlink to `.claude/worktrees` (gptodo worktree target)
@@ -32,7 +32,8 @@
 
 ## User Preferences
 
-- Don't add submodules inside marketplace repos — marketplace manages its own plugin fetching
+- No submodules — all repos live in ~/.local/src/, symlinked into ~/claude/ where needed
+- Idempotency: every operation should be safe to run twice
 - Run commands as told — don't add `--help` checks before running user's exact command
 - Ship via `wt merge && git push`
 - GitHub issues first, then `gptodo import` to pull locally

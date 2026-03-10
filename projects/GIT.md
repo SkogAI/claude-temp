@@ -20,7 +20,7 @@
 
 ## setup
 
-- `wt config state default-branch set develop` — so `wt merge` targets develop
+- `wt config state default-branch set develop` — so `wt merge` targets develop (may need re-setting between sessions)
 - `wt merge` is configured: squash + commit + auto-remove worktree
 - commit messages generated via `claude -p` (worktrunk config)
 - worktrees land in `~/.claude/worktrees/<name>/`
@@ -49,9 +49,10 @@ claude --worktree <name> --tmux=classic
 wt merge
 ```
 
-- squashes commits into develop
-- generates commit message via `claude -p`
-- auto-removes the worktree (kills tmux/claude session)
+- works from inside or outside the worktree (auto-detects)
+- single commit: fast-forwards directly; multiple commits: squashes
+- generates commit message via `claude -p` (when squashing)
+- auto-removes the worktree + branch, switches cwd to `~/claude`
 - verify: `git log -1` from `~/claude`
 
 ### 4. ship
@@ -75,8 +76,40 @@ Ran `claude --worktree this-seems-to-work --tmux=classic` from `~/claude` (2026-
 - `wt list` shows all worktrees, `gita ll` shows the claude repo
 - `wt` initially warned about missing local master — fixed by setting default-branch to develop
 
-## open questions
+## observed: wt merge from inside worktree (2026-03-10)
 
-- does `wt merge` from inside the worktree work, or must it be run from outside?
-- after `wt merge` kills the session, how to cleanly resume in develop?
-- can `claude --worktree` reuse an existing worktree, or always creates new?
+tested running `wt merge` from inside `~/.worktrees/test-merge-from-inside/`:
+
+- **works.** merges commit(s) to develop, removes worktree+branch, switches cwd to `~/claude`
+- with 1 commit and no squash needed, output: `Merged to develop (1 commit, 1 file, +1)`
+- with 0 new commits: `Already up to date with develop` — still removes worktree cleanly
+- after merge, you're back in `~/claude` on develop — `git log -1` confirms the merge
+
+## observed: wt merge behavior details (2026-03-10)
+
+- single commit: fast-forwarded directly, no squash/rebase needed
+- zero commits: no-op merge, worktree still cleaned up
+- `wt merge` auto-detects which worktree you're in — no need to specify branch name
+- branch mismatch warning if worktree path doesn't match expected pattern (cosmetic, still works)
+
+## observed: claude --worktree reuse (2026-03-10)
+
+tested `claude --worktree test-reuse` when worktree `test-reuse` already existed:
+
+- **reuses the existing worktree.** does not error or create a duplicate
+- runs claude in the existing worktree directory
+- `git worktree list` shows same single entry before and after
+
+## observed: wt default-branch config (2026-03-10)
+
+- config can get cleared between sessions — `wt` warns `Configured default branch master does not exist locally`
+- fix: `wt config state default-branch set develop`
+- `wt switch --create <name>` creates branch from current HEAD (develop), not master
+
+## answered questions
+
+| question | answer |
+|----------|--------|
+| `wt merge` from inside worktree? | yes — auto-detects worktree, merges, removes, switches to develop |
+| resume after `wt merge` kills session? | you're back in `~/claude` on develop — just start a new session or continue working |
+| `claude --worktree` reuse existing? | yes — reuses existing worktree, doesn't create duplicate |

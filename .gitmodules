@@ -17,11 +17,3 @@
 	path = projects/small-hours
 	url = git@github.com:small-hours-games/small-hours.git
     branch = master
-[submodule "projects/headquarters/bootstrap"]
-	path = projects/headquarters/bootstrap
-	url = git@github.com:SkogAI/bootstrap.git
-    branch = master
-[submodule "projects/headquarters/container"]
-	path = projects/headquarters/container
-	url = git@github.com:SkogAI/container.git
-    branch = master

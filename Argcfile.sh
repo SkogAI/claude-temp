@@ -1,15 +1,31 @@
 #!/bin/bash
 # @describe Claude Code workspace manager
+# @env GPTODO_TASKS_DIR=/home/skogix/claude/.skogai/tasks  Tasks directory
 
 # @cmd Worktree management commands
 workspace() {
   :
 }
 
-# @cmd Open or create a worktree session
-# @option -n --name[?`_choice_worktrees`]  Worktree name (auto-generated if omitted)
+# @cmd Open an existing worktree session
+# @arg name![`_choice_worktrees`] Worktree to open
+# @flag --claude  Launch claude in the worktree
 workspace::open() {
-  claude --worktree "$argc_name" --tmux
+  wt switch "$argc_name"
+  if [[ "$argc_claude" == "1" ]]; then
+    claude --worktree "$argc_name" --tmux=classic
+  fi
+}
+
+# @cmd Create a worktree from a gptodo task
+# @arg task_id![`_choice_tasks`] Task to create worktree for
+# @flag --claude  Launch claude in the worktree
+workspace::create() {
+  gptodo worktree create "$argc_task_id"
+  wt switch "task-${argc_task_id}"
+  if [[ "$argc_claude" == "1" ]]; then
+    claude --worktree "task-${argc_task_id}" --tmux=classic
+  fi
 }
 
 # @cmd List all git worktrees
@@ -96,6 +112,11 @@ _choice_worktrees() {
   git worktree list 2>/dev/null |
     awk 'NR>1 {print $1}' |
     xargs -I{} basename {}
+}
+
+_choice_tasks() {
+  gptodo list --json 2>/dev/null |
+    jq -r '.tasks[].id'
 }
 
 eval "$(argc --argc-eval "$0" "$@")"

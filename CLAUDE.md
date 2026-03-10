@@ -13,8 +13,8 @@ staging areas (`skills/`, `commands/`, `hooks/`, `agents/`) are symlinked into `
 <structure>
 
 - @.skogai/ — knowledge, memory, templates, tasks, journal — routing via @.skogai/CLAUDE.md
-- @marketplaces/ — plugin marketplace submodules (skogai-marketplace, worktrunk)
-- @projects/ — active development repos as git submodules (claude-memory, dot-skogai, argcfile, gptme-contrib)
+- @marketplaces/ — plugin marketplaces (symlinks to ~/.local/src/)
+- @projects/ — active development repos (symlinks to ~/.local/src/, managed by gita)
 - @docs/ — fetched reference docs (run `docs/fetch-docs.sh` to populate claude-code/)
 - @skills/ — WIP skills staging (symlinked from .claude/skills)
 - @commands/ — WIP commands staging (symlinked from .claude/commands)
@@ -42,6 +42,8 @@ staging areas (`skills/`, `commands/`, `hooks/`, `agents/`) are symlinked into `
 **Commits:** `{type}({phase}-{plan}): {description}` — types: feat, fix, test, refactor, docs, chore. Stage files individually, never `git add .`.
 
 **@-references:** `@path/to/file` in prompts expands the real file at prompt-time (always current). Read tool may return cached content.
+
+**Idempotency:** every operation should be safe to run twice. scripts, syncs, and setup must skip what's done and fix what's missing — never fail on existing state.
 
 **Context philosophy:** routing over dumping. load the right thing at the right time. placeholders over pre-loading.
 

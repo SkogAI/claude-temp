@@ -10,11 +10,23 @@ See [git-branching-model.md](git-branching-model.md) for full details. Summary:
 - `FETCH_HEAD` marks only `master` as merge-eligible. Everything else is `not-for-merge`.
 - Only way to "real change": push from local master or PR on GitHub.
 
+## Claude Worktree Launch (standard method)
+
+`claude --worktree <name> --tmux=classic` — the standard way to start a Claude Code session. Creates a git worktree + tmux session in one command. Worktree lands in `~/.claude/worktrees/<name>/`, branch becomes `worktree-<name>`. Use this for all new work sessions. If a worktree with the same name already exists, it reuses it (no error, no duplicate).
+
+**Workflow from worktree to shipped code:**
+1. Pick an issue
+2. `claude --worktree <name> --tmux=classic` — start session
+3. Work + commit in worktree branch
+4. `wt merge` — merges worktree branch into develop, auto-removes worktree+branch (verify with `git log -1`)
+6. Develop accumulates changes from multiple worktrees
+7. PR from develop → master when ready to ship a batch (`gh pr create`)
+
 ## Tools & Workflows
 
 - **gptodo**: Task management CLI at `~/.local/bin/gptodo`. Tasks dir: `/home/skogix/claude/.skogai/tasks`. Always set `GPTODO_TASKS_DIR=/home/skogix/claude/.skogai/tasks` when running. Key commands: `import --source github --repo <owner/repo>`, `fetch --all`, `sync --update --use-cache`, `list`, `check`.
 - **gptodo import bug**: Writes unquoted YAML dates (`created: 2026-03-06`) — fix with `sed -i 's/^created: \([0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}\)$/created: "\1"/' tasks/*.md`. Tracked: SkogAI/dot-skogai#6.
-- **wt (worktrunk)**: Git worktree management. `wt list`, `wt merge`, `wt remove`. Note: `wt merge` produces no visible output on success — always verify with `git log -1` after. `wt remove <branch-name>` uses the full branch name (e.g. `worktree-swift-oak-dqkp`), not the short suffix. `wt switch <branch>` to switch to existing remote branch (creates local tracking + worktree). `wt switch --create <branch>` for new branch. `wt switch -x claude -- 'prompt'` to launch Claude in worktree. Worktrees land in `~/.claude/worktrees/`.
+- **wt (worktrunk)**: Git worktree management. `wt list`, `wt merge`, `wt remove`. `wt merge` works from inside or outside the worktree (auto-detects), shows output like `Merged to develop (1 commit, 1 file, +1)`, auto-removes worktree+branch, switches cwd to `~/claude`. Single commits fast-forward; multiple squash. Verify with `git log -1`. `wt remove <branch-name>` uses the full branch name (e.g. `worktree-swift-oak-dqkp`), not the short suffix. `wt switch <branch>` to switch to existing remote branch (creates local tracking + worktree). `wt switch --create <branch>` for new branch. `wt switch -x claude -- 'prompt'` to launch Claude in worktree. Worktrees land in `~/.claude/worktrees/`. `wt config state default-branch` may get cleared between sessions — re-set with `wt config state default-branch set develop`.
 - **wt + gptodo interop**: Both tools read git's native worktree tracking — no separate state. `wt` creates/switches/merges, `gptodo worktree` adds task-aware operations. `gptodo worktree list` and `gptodo worktree status <full-path>` work on wt-created worktrees automatically.
 - **claude-memory**: Plugin installed via skogai-marketplace. MCP server `episodic-memory` provides search. CLI: `claude-memory sync`, `claude-memory index`, `claude-memory stats`. Summaries show in search when >300 char limit was removed.
 - **queue**: Async job queue CLI. Jobs fail inside Claude Code sessions due to `CLAUDECODE` env var — bypass with `CLAUDECODE= <command>`.
@@ -45,5 +57,5 @@ See [git-branching-model.md](git-branching-model.md) for full details. Summary:
 - No submodules — all repos live in ~/.local/src/, symlinked into ~/claude/ where needed
 - Idempotency: every operation should be safe to run twice
 - Run commands as told — don't add `--help` checks before running user's exact command
-- Ship via `wt merge` into local master, then `git push` from master
+- Ship via `wt merge` into develop, then PR from develop → master (`gh pr create --base master`)
 - GitHub issues first, then `gptodo import` to pull locally

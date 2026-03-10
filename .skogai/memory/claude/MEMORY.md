@@ -10,6 +10,19 @@ See [git-branching-model.md](git-branching-model.md) for full details. Summary:
 - `FETCH_HEAD` marks only `master` as merge-eligible. Everything else is `not-for-merge`.
 - Only way to "real change": push from local master or PR on GitHub.
 
+## Claude Worktree Launch (standard method)
+
+`claude --worktree <name> --tmux=classic` — the standard way to start a Claude Code session. Creates a git worktree + tmux session in one command. Worktree lands in `~/.claude/worktrees/<name>/`, branch becomes `worktree-<name>`. Use this for all new work sessions.
+
+**Workflow from worktree to shipped code:**
+1. Pick an issue
+2. `claude --worktree <name> --tmux=classic` — start session
+3. Work + commit in worktree branch
+4. `wt merge` — merges worktree branch into develop (verify with `git log -1`)
+5. `wt remove <branch-name>` — clean up worktree
+6. Develop accumulates changes from multiple worktrees
+7. PR from develop → master when ready to ship a batch (`gh pr create`)
+
 ## Tools & Workflows
 
 - **gptodo**: Task management CLI at `~/.local/bin/gptodo`. Tasks dir: `/home/skogix/claude/.skogai/tasks`. Always set `GPTODO_TASKS_DIR=/home/skogix/claude/.skogai/tasks` when running. Key commands: `import --source github --repo <owner/repo>`, `fetch --all`, `sync --update --use-cache`, `list`, `check`.

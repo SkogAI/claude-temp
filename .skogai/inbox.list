@@ -1,14 +1,52 @@
-- [ ] this might be a problem: ```direnv: loading ~/claude/.claude/worktrees/skogai-marketplace-init/.envrc There is no tracking information for the current branch. Please specify which branch you want to rebase against. See git-pull(1) for details. git pull <remote> <branch> If you wish to set tracking information for this branch you can do so with: git branch --set-upstream-to=origin/<branch> skogai-marketplace-init```
+# inbox
+
+## git & worktree
+- [ ] direnv: no tracking info on wt branch creation — needs `git push -u` or auto-set upstream
 - [ ] direnv allow on branch creation via wt
-- [ ] what should be "done" on session end? decisions, learnings, journal? what else?
-- [ ] move ~/claude/ itself to ~/.local/src/claude + symlink from ~
-- [ ] SkogAI has 200-300 repos — need strategy for active (cloned) vs known (metadata only)
-- [ ] gita freeze only covers cloned repos, not the full SkogAI inventory — need a manifest?
-- [ ] gh repo list SkogAI --limit 300 could generate full repo manifest separate from gita
-- [ ] groups need rethinking for scale: active, reference, archive instead of flat src
-- [ ] bootstrap script: fresh machine from zero to working (freeze.csv + clone + symlinks)
-- [ ] non-SkogAI repos (forks, third-party) — same ~/.local/src/ or separate?
-- [ ] gita clone -f -p not idempotent — errors on existing dirs instead of skipping
-- [ ] update all CLAUDE.md docs that reference submodules (deep sweep needed)
+- [ ] git flow skill: branching strategy, PR workflow, worktree lifecycle (was GH#32)
+- [ ] git orchestrator skill: wt + gptodo + gita unified (was GH#40)
+- [ ] fix core:stop git-dirty hook — uses invalid flag (was GH#70)
+
+## gptodo & task mgmt
+- [ ] fix gptodo spawn --backend claude failing in CC sessions (was GH#36)
+- [ ] gptodo specialist skill for subagent use (was GH#41)
+- [ ] task spawn from CC: worktree + spawn pattern (was GH#30/31)
+
+## gptme-contrib integration
+- [ ] session lifecycle: post-session hook, signals integration, summarize cron
+- [ ] runloops: test autonomous + team CC backends
+- [ ] analytics: discover/stats setup, dashboard generation
+- [ ] plugin bridge: evaluate gptme-claude-code plugin
+- [ ] hook: auto-record CC sessions via gptme-sessions (was GH#35)
+
+## knowledge extraction pipeline
+- [ ] extraction pipeline: prompt templates, multi-pass queue, output routing, search (was GH#1-6)
+- [ ] backfill: process historical conversations (was GH#5)
+- [ ] queue improvements: CLAUDECODE env bypass, concurrency (was GH#7)
+
+## skills & tools
+- [ ] worktrunk specialist skill (was GH#43)
+- [ ] refine gita skill for subagent use (was GH#42)
+- [ ] wrapper scripts for CLI tools with validation (was GH#39)
+- [ ] agent team patterns and best practices skill (was GH#38)
+
+## docs & audit
+- [ ] audit which .skogai files should be checked into git vs generated
+- [ ] audit CLAUDE.md reference chain: measure token cost, remove template/redundant refs
+- [ ] docs: flesh out .skogai/ CLAUDE.md files (was GH#37)
+- [ ] update all docs that reference submodules (deep sweep)
 - [ ] update auto-memory references to submodules
-- [ ] update gita skill docs to reflect new src-as-truth pattern
+- [ ] update gita skill docs to reflect src-as-truth pattern
+
+## infra & bootstrap
+- [ ] move ~/claude/ to ~/.local/src/claude + symlink from ~
+- [ ] SkogAI has 200-300 repos — strategy for active vs known (metadata only)
+- [ ] gita freeze only covers cloned repos — need full manifest?
+- [ ] gh repo list SkogAI --limit 300 for full repo manifest
+- [ ] groups rethink: active, reference, archive instead of flat src
+- [ ] bootstrap script: fresh machine from zero to working
+- [ ] non-SkogAI repos (forks, third-party) — same ~/.local/src/ or separate?
+- [ ] gita clone -f -p not idempotent — errors on existing dirs
+
+## session workflow
+- [ ] what should be "done" on session end? decisions, learnings, journal? what else?
